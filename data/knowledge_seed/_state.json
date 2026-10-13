@@ -1,0 +1,86 @@
+{
+ "etags": {
+  "https://api.github.com/repos/alandtse/CrashLoggerSSE/releases?per_page=8": "W/\"eb8a39864509572a13d8dfbe85b2a1e7737aae75704bd321026f6589dc77e6d7\"",
+  "https://api.github.com/repos/community-shaders/skyrim-community-shaders/releases?per_page=8": "W/\"6ae816fbd6351d4e5d32a898b6540c1e631d38f1a688f8c34334b77f1c8f81dc\"",
+  "https://api.github.com/repos/powerof3/PapyrusExtenderSSE/releases?per_page=8": "W/\"8a7de97ddbb0e69d7b1383585f2674da66f7f996bf903398d60ce1ea75900e1d\"",
+  "https://api.github.com/repos/powerof3/BaseObjectSwapper/releases?per_page=8": "W/\"7345ab080f1d551b6c0f1493845949b1c0579105430c3ca66515132cf5fed3e3\"",
+  "https://api.github.com/repos/ianpatt/skse64/releases?per_page=8": "W/\"5ec60156a0374881830b86507b04f0d1ed25407a3a1c63179f9cf73b4643adfa\"",
+  "https://api.github.com/repos/loot/loot/releases?per_page=8": "W/\"b5d7b9f0591fff44db03931dc76b94889ea18e1792525779b1fe48fecc7137d5\"",
+  "https://api.github.com/repos/ModOrganizer2/modorganizer/releases?per_page=8": "W/\"f64f30b768807acc782a2658e7b89b211929c67a308da2aa0ae6f6da4698159e\"",
+  "https://api.github.com/repos/wabbajack-tools/wabbajack/releases?per_page=8": "W/\"055c71ec51931b2d41bb9bc54572fed64baf457e430f79e3316a7b60231d8371\"",
+  "https://skse.silverlock.org/": "\"1493-65a0963df86ea\""
+ },
+ "sources": {
+  "gh_crashlogger_releases": {
+   "ok": true,
+   "fetched": 1791580841.070312,
+   "count": 4
+  },
+  "gh_crashlogger_issues": {
+   "ok": true,
+   "fetched": 1791580841.5987399,
+   "count": 3
+  },
+  "gh_cs_releases": {
+   "ok": true,
+   "fetched": 1791580842.267311,
+   "count": 2
+  },
+  "gh_cs_issues": {
+   "ok": true,
+   "fetched": 1791580842.9612212,
+   "count": 8
+  },
+  "gh_papyrusextender": {
+   "ok": true,
+   "fetched": 1791580843.443229,
+   "count": 4
+  },
+  "gh_baseobjectswapper": {
+   "ok": true,
+   "fetched": 1791580844.018613,
+   "count": 4
+  },
+  "gh_skse": {
+   "ok": true,
+   "fetched": 1791580844.63147,
+   "count": 4
+  },
+  "gh_loot": {
+   "ok": true,
+   "fetched": 1791580845.146535,
+   "count": 4
+  },
+  "gh_mo2": {
+   "ok": true,
+   "fetched": 1791580845.66166,
+   "count": 4
+  },
+  "gh_mo2_issues": {
+   "ok": true,
+   "fetched": 1791580846.376491,
+   "count": 8
+  },
+  "gh_wabbajack": {
+   "ok": true,
+   "fetched": 1791580846.872915,
+   "count": 4
+  },
+  "steam_skyrim": {
+   "ok": true,
+   "fetched": 1791580847.504525,
+   "count": 6
+  },
+  "reddit_crash": {
+   "ok": true,
+   "fetched": 1791580849.127979,
+   "count": 8
+  },
+  "skse_site": {
+   "ok": true,
+   "fetched": 1791580850.016822,
+   "count": 6
+  }
+ },
+ "last_run": 1791580850.17109
+}

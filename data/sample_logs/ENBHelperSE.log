@@ -1,0 +1,4 @@
+src\main.cpp(274): [MESSAGE] ENBHelperSE v1.5.0.0
+src\main.cpp(298): [MESSAGE] Registering test console command
+src\main.cpp(316): [MESSAGE] [DEBUG] Registered console command: TestENBHelperSE (tehs)
+src\main.cpp(323): [MESSAGE] Done

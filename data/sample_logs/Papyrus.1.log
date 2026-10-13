@@ -1,0 +1,18 @@
+[10/08/2026 - 12:48:01AM] Papyrus log opened (PC)
+[10/08/2026 - 12:48:01AM] error: Native function SetContainerAllowStolenItems in empty state could find no matching function on linked type ObjectReference. Function will not be bound.
+[10/08/2026 - 12:48:01AM] error: Native function GetAllItemsCount in empty state could find no matching function on linked type ObjectReference. Function will not be bound.
+[10/08/2026 - 12:48:01AM] error: Native function IsContainerEmpty in empty state could find no matching function on linked type ObjectReference. Function will not be bound.
+[10/08/2026 - 12:48:01AM] error: Native function RemoveAllStolenItems in empty state could find no matching function on linked type ObjectReference. Function will not be bound.
+[10/08/2026 - 12:48:01AM] Update budget: 1.200000ms (Extra tasklet budget: 1.200000ms, Load screen budget: 500.000000ms)
+[10/08/2026 - 12:48:01AM] Memory page: 128 (min) 512 (max) 153600 (max total)
+[10/08/2026 - 12:48:01AM] Cannot open store for class "sethirelingrehire3dnpc", missing file?
+[10/08/2026 - 12:48:04AM] Cannot open store for class "ccBGS_ARPortcullisScript", missing file?
+[10/08/2026 - 12:48:04AM] Cannot open store for class "ccBGS_ARSpikeTrapScript", missing file?
+[10/08/2026 - 12:48:04AM] Cannot open store for class "ccBGS_ARPressurePlateScript", missing file?
+[10/08/2026 - 12:48:04AM] Cannot open store for class "ccBGS_ARFloorSmasherScript", missing file?
+[10/08/2026 - 12:48:04AM] Cannot open store for class "ccBGS_ARBladeTrapScript", missing file?
+[10/08/2026 - 12:48:04AM] Cannot open store for class "ccBGS_ARSwitchScript", missing file?
+[10/08/2026 - 12:48:04AM] Cannot open store for class "ccBGS_ARButtonScript", missing file?
+[10/08/2026 - 12:48:04AM] Cannot open store for class "CCHorseArmorChangeScript", missing file?
+[10/08/2026 - 12:48:04AM] Error: Script CCHorseArmorChangeScript cannot be bound to CCHorseArmorDialogueQuest (010030B5) because the script does not exist or is not currently loaded
+[10/08/2026 - 12:48:04AM] Cannot open store for class "MAG_BlessingStorageScript", missing file?

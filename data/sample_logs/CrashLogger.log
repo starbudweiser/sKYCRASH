@@ -1,0 +1,6 @@
+[2026-10-08 13:59:18.518] [Global] [info] [236] [main.cpp:58] Log Level: trace
+[2026-10-08 13:59:18.518] [Global] [info] [236] [main.cpp:223] NOTE: This is not a crashlog. Crashlogs have the name crash-[TIMESTAMP].log
+[2026-10-08 13:59:18.518] [Global] [info] [236] [main.cpp:224] CrashLogger 1.12.1.0 Dec 22 2023 02:46:23 is loading...
+[2026-10-08 13:59:18.519] [Global] [info] [236] [CrashHandler.cpp:561] installed crash handlers
+[2026-10-08 13:59:18.519] [Global] [info] [236] [CrashHandler.cpp:564] Crash Logs will be written to C:\users\crossover\Documents\My Games\Skyrim Special Edition\SKSE
+[2026-10-08 13:59:18.519] [Global] [info] [236] [main.cpp:231] CrashLogger has finished loading.

@@ -1,0 +1,131 @@
+main.cpp(116): [info] PayloadInterpreter v1-0-0-0
+PayloadInterpreter.cpp(10): [info] Loading predefined payload instructions...
+PayloadInterpreter.cpp(14): [info] Loading from Data/SKSE/PayloadInterpreter/Config\Ebony Warrior.ini
+PayloadInterpreter.cpp(58): [info] @CAST|0X00080F|UltimateEbonyWarrior.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(58): [info] ![58]@CAST|0X000810|UltimateEbonyWarrior.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(58): [info] ![59]@CAST|0X00080E|UltimateEbonyWarrior.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $BerserkerOFF
+PayloadInterpreter.cpp(14): [info] Loading from Data/SKSE/PayloadInterpreter/Config\For Honor In Skyrim.ini
+PayloadInterpreter.cpp(58): [info] @SETGHOST|1
+PayloadInterpreter.cpp(58): [info] ![0.5]@SETGHOST|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $FH_Dodge
+PayloadInterpreter.cpp(58): [info] @SETGHOST|1
+PayloadInterpreter.cpp(58): [info] ![1.5]@SETGHOST|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $FH_Iframe
+PayloadInterpreter.cpp(58): [info] @CAST|0X825|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $FMelee_Dust
+PayloadInterpreter.cpp(58): [info] @APPLYSPELL|0X868|For Honor in Skyrim.esp
+PayloadInterpreter.cpp(58): [info] ![3.0]@UNAPPLYSPELL|0X868|For Honor in Skyrim.esp
+PayloadInterpreter.cpp(61): [info] mapping loaded for $FMelee_GDust
+PayloadInterpreter.cpp(58): [info] @APPLYSPELL|0X86A|For Honor in Skyrim.esp
+PayloadInterpreter.cpp(58): [info] ![3.0]@UNAPPLYSPELL|0X86A|For Honor in Skyrim.esp
+PayloadInterpreter.cpp(61): [info] mapping loaded for $FMelee_GDust2
+PayloadInterpreter.cpp(58): [info] @CAST|0X82D|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $Fist_Hit
+PayloadInterpreter.cpp(58): [info] @CAST|0X82C|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $Shield_Hit
+PayloadInterpreter.cpp(58): [info] @CAST|0X803|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $Followup
+PayloadInterpreter.cpp(58): [info] @APPLYSPELL|0X826|For Honor in Skyrim.esp
+PayloadInterpreter.cpp(58): [info] ![0.36]@UNAPPLYSPELL|0X826|For Honor in Skyrim.esp
+PayloadInterpreter.cpp(61): [info] mapping loaded for $Layer_2
+PayloadInterpreter.cpp(58): [info] @CAST|0X807|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $FH_Ragdoll
+PayloadInterpreter.cpp(58): [info] @CAST|0X864|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $BodyStamp
+PayloadInterpreter.cpp(58): [info] @CAST|0X879|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $BodyStamp_Trigger
+PayloadInterpreter.cpp(58): [info] @CAST|0X852|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $FootStamp
+PayloadInterpreter.cpp(58): [info] @CAST|0X878|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $FootStamp_Trigger
+PayloadInterpreter.cpp(58): [info] @CAST|0X835|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $HitDown
+PayloadInterpreter.cpp(58): [info] @CAST|0X870|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $HitDown_Trigger
+PayloadInterpreter.cpp(58): [info] @CAST|0X837|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $HitLeft
+PayloadInterpreter.cpp(58): [info] @CAST|0X871|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $HitLeft_Trigger
+PayloadInterpreter.cpp(58): [info] @CAST|0X83F|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $HitPush
+PayloadInterpreter.cpp(58): [info] @CAST|0X875|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $HitPush_Trigger
+PayloadInterpreter.cpp(58): [info] @CAST|0X841|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $HitPushX2
+PayloadInterpreter.cpp(58): [info] @CAST|0X876|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $HitPushX2_Trigger
+PayloadInterpreter.cpp(58): [info] @CAST|0X84E|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $HitPushX3
+PayloadInterpreter.cpp(58): [info] @CAST|0X877|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $HitPushX3_Trigger
+PayloadInterpreter.cpp(58): [info] @CAST|0X839|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $HitRight
+PayloadInterpreter.cpp(58): [info] @CAST|0X872|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $HitRight_Trigger
+PayloadInterpreter.cpp(58): [info] @CAST|0X83B|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $HitStabIn
+PayloadInterpreter.cpp(58): [info] @CAST|0X83D|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $HitStabOut
+PayloadInterpreter.cpp(58): [info] @CAST|0X874|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $HitStabOut_Trigger
+PayloadInterpreter.cpp(58): [info] @CAST|0X833|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $HitUP
+PayloadInterpreter.cpp(58): [info] @CAST|0X86F|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $HitUP_Trigger
+PayloadInterpreter.cpp(58): [info] @CAST|0X820|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $KnockDown
+PayloadInterpreter.cpp(58): [info] @CAST|0X827|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $KnockDown_Trigger
+PayloadInterpreter.cpp(58): [info] @CAST|0X809|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $Parry_Stagger
+PayloadInterpreter.cpp(58): [info] @CAST|0X82F|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $Parry_Stagger_Trigger
+PayloadInterpreter.cpp(58): [info] @CAST|0X832|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $Shield Flip
+PayloadInterpreter.cpp(58): [info] @CAST|0X86E|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $Shield Flip_Trigger
+PayloadInterpreter.cpp(58): [info] @CAST|0X875|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $ShieldPush
+PayloadInterpreter.cpp(58): [info] @CAST|0X876|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $ShieldPushX2
+PayloadInterpreter.cpp(58): [info] @CAST|0X86B|For Honor in Skyrim.esp|1|1|0|0|0|0|30|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $h2h_Power
+PayloadInterpreter.cpp(58): [info] @CAST|0X831|For Honor in Skyrim.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $Taunt_Smooth
+PayloadInterpreter.cpp(58): [info] @UNAPPLYSPELL|0X86C|For Honor in Skyrim.esp
+PayloadInterpreter.cpp(61): [info] mapping loaded for $SlowTime_off
+PayloadInterpreter.cpp(58): [info] @APPLYSPELL|0X86C|For Honor in Skyrim.esp
+PayloadInterpreter.cpp(58): [info] ![0.5]@UNAPPLYSPELL|0X86C|For Honor in Skyrim.esp
+PayloadInterpreter.cpp(61): [info] mapping loaded for $SlowTime_on
+PayloadInterpreter.cpp(58): [info] @UNAPPLYSPELL|0X86D|For Honor in Skyrim.esp
+PayloadInterpreter.cpp(61): [info] mapping loaded for $SlowTimeF_off
+PayloadInterpreter.cpp(58): [info] @APPLYSPELL|0X86D|For Honor in Skyrim.esp
+PayloadInterpreter.cpp(58): [info] ![0.5]@UNAPPLYSPELL|0X86D|For Honor in Skyrim.esp
+PayloadInterpreter.cpp(61): [info] mapping loaded for $SlowTimeF_on
+PayloadInterpreter.cpp(14): [info] Loading from Data/SKSE/PayloadInterpreter/Config\VampireClaws.ini
+PayloadInterpreter.cpp(58): [info] @CAST|0X814|VampireClaws.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $Sorcerer_B
+PayloadInterpreter.cpp(58): [info] @CAST|0X815|VampireClaws.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $Sorcerer_C
+PayloadInterpreter.cpp(58): [info] @CAST|0X80F|VampireClaws.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $Sorcerer_F
+PayloadInterpreter.cpp(58): [info] @CAST|0X807|VampireClaws.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $Sorcerer_L
+PayloadInterpreter.cpp(58): [info] @CAST|0X806|VampireClaws.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $Sorcerer_M
+PayloadInterpreter.cpp(58): [info] @CAST|0X805|VampireClaws.esp|1|1|0|0|0|0|0|0|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $Sorcerer_S
+PayloadInterpreter.cpp(14): [info] Loading from Data/SKSE/PayloadInterpreter/Config\VikingAxe.ini
+PayloadInterpreter.cpp(58): [info] @SETGHOST|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $disableIframe
+PayloadInterpreter.cpp(58): [info] @SETGHOST|1
+PayloadInterpreter.cpp(61): [info] mapping loaded for $enableIframe
+PayloadInterpreter.cpp(14): [info] Loading from Data/SKSE/PayloadInterpreter/Config\wudi.ini
+PayloadInterpreter.cpp(58): [info] @SETGHOST|1
+PayloadInterpreter.cpp(58): [info] ![0.66]@SETGHOST|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $katana1_Iframe
+PayloadInterpreter.cpp(58): [info] @SETGHOST|1
+PayloadInterpreter.cpp(58): [info] ![0.3]@SETGHOST|0
+PayloadInterpreter.cpp(61): [info] mapping loaded for $katana2_Iframe
+PayloadInterpreter.cpp(20): [info] Predefined instructions loaded.

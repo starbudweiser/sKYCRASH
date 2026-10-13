@@ -1,0 +1,834 @@
+SKSE64 runtime: initialize (version = 2.0.20 01050610 01DD571C6E3CB52A, os = 6.2 (9200))
+imagebase = 0000000140000000
+reloc mgr imagebase = 0000000140000000
+config path = C:\Games\Skyrim Special Edition\Data\SKSE\skse.ini
+plugin directory = C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ActorLimitFix.dll
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ActorLimitFix.dll (00000001 ActorLimitFix 00000005) loaded correctly (handle 1)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\AdvancedNotificationLog.dll
+plugin 2 allocated 16 bytes from branch pool
+registering plugin listener for SKSE at 2 of 3
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\AdvancedNotificationLog.dll (00000001 AdvancedNotificationLog 02020000) loaded correctly (handle 2)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\AHZmoreHUDInventory.dll
+plugin 3 allocated 64 bytes from branch pool
+registering plugin listener for SKSE at 3 of 4
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\AHZmoreHUDInventory.dll (00000001 Ahzaab's moreHUD Inventory Plugin 00002724) loaded correctly (handle 3)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\AHZmoreHUDPlugin.dll
+plugin 4 allocated 64 bytes from branch pool
+registering plugin listener for SKSE at 4 of 5
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\AHZmoreHUDPlugin.dll (00000001 Ahzaab's moreHUD Plugin 003D30D8) loaded correctly (handle 4)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ANDR_PapyrusFunctions.dll
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ANDR_PapyrusFunctions.dll (00000001 ANDR_PapyrusFunctions 00000010) loaded correctly (handle 5)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\AnimatedStaticReload.dll
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\AnimatedStaticReload.dll (00000001 AnimatedStaticReload 01000010) loaded correctly (handle 6)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\AnimationMotionRevolution.dll
+plugin 7 allocated 45 bytes from branch pool
+plugin 7 allocated 45 bytes from branch pool
+plugin 7 allocated 45 bytes from branch pool
+plugin 7 allocated 45 bytes from branch pool
+plugin 7 allocated 45 bytes from branch pool
+plugin 7 allocated 45 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\AnimationMotionRevolution.dll (00000001 AnimationMotionRevolution 01050030) loaded correctly (handle 7)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\AnimationQueueFix.dll
+plugin 8 allocated 14 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\AnimationQueueFix.dll (00000001 AnimationQueueFix 01000010) loaded correctly (handle 8)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\AutoInputSwitch.dll
+plugin 9 allocated 8 bytes from branch pool
+registering plugin listener for SKSE at 9 of 10
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\AutoInputSwitch.dll (00000001 AutoInputSwitch 00000001) loaded correctly (handle 9)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\AutoParallax.dll
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\AutoParallax.dll (00000001 AutoParallax 01000070) loaded correctly (handle 10)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\BackportedESLSupport.dll
+plugin 11 allocated 128 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\BackportedESLSupport.dll (00000001 BackportedESLSupport 01020000) loaded correctly (handle 11)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\BarterLimitFix.dll
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\BarterLimitFix.dll (00000001 Barter Limit Fix 00000001) loaded correctly (handle 12)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\BashBugFix.dll
+registering plugin listener for SKSE at 13 of 14
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\BashBugFix.dll (00000001 Bash Bug Fix 00000003) loaded correctly (handle 13)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\BeardMaskFix.dll
+plugin 14 allocated 51 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\BeardMaskFix.dll (00000001 BeardMaskFix 00000001) loaded correctly (handle 14)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\BehaviorDataInjector.dll
+registering plugin listener for SKSE at 15 of 16
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\BehaviorDataInjector.dll (00000001 BehaviorDataInjector 00010030) loaded correctly (handle 15)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\BetterGrabbing.dll
+registering plugin listener for SKSE at 16 of 17
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\BetterGrabbing.dll (00000001 BetterGrabbing 000100C0) loaded correctly (handle 16)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\BetterJumpingSE.dll
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\BetterJumpingSE.dll (00000001 BetterJumpingSE 00000001) loaded correctly (handle 17)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\BetterThirdPersonSelection.dll
+plugin 18 allocated 256 bytes from branch pool
+registering plugin listener for SKSE at 18 of 19
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\BetterThirdPersonSelection.dll (00000001 BetterThirdPersonSelection 01000000) loaded correctly (handle 18)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\BugFixesSSE.dll
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\BugFixesSSE.dll (00000001 BugFixesSSE 00000006) loaded correctly (handle 19)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\CameraShake.dll
+registering plugin listener for SKSE at 20 of 21
+plugin 20 allocated 14 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\CameraShake.dll (00000001 PluginName 01000000) loaded correctly (handle 20)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\cbp.dll
+registering plugin listener for SKSE at 21 of 22
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\cbp.dll (00000001 CBPC plugin 00010602) loaded correctly (handle 21)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\CCExtender.dll
+plugin 22 allocated 16 bytes from branch pool
+registering plugin listener for SKSE at 22 of 23
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\CCExtender.dll (00000001 CCExtender 00000001) loaded correctly (handle 22)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\CombatPathingRevolution.dll
+registering plugin listener for SKSE at 23 of 24
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\CombatPathingRevolution.dll (00000001 CombatPathingRevolution 00030000) loaded correctly (handle 23)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\CompassNavigationOverhaul.dll
+registering plugin listener for SKSE at 24 of 25
+plugin 24 allocated 117 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\CompassNavigationOverhaul.dll (00000001 CompassNavigationOverhaul 02020000) loaded correctly (handle 24)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ConsoleUtilSSE.dll
+registering plugin listener for SKSE at 25 of 26
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ConsoleUtilSSE.dll (00000001 ConsoleUtilSSE 01050010) loaded correctly (handle 25)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ContextualCrosshair.dll
+registering plugin listener for SKSE at 26 of 27
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ContextualCrosshair.dll (00000001 ContextualCrosshair 01030000) loaded correctly (handle 26)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ContinueSound.dll
+plugin 27 allocated 1024 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ContinueSound.dll (00000001 ContinueSound 00000001) loaded correctly (handle 27)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\CoreImpactFramework.dll
+registering plugin listener for SKSE at 28 of 29
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\CoreImpactFramework.dll (00000001 CoreImpactFramework 01020010) loaded correctly (handle 28)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\CraftingCategories.dll
+plugin 29 allocated 128 bytes from branch pool
+registering plugin listener for SKSE at 29 of 30
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\CraftingCategories.dll (00000001 CraftingCategories 01010000) loaded correctly (handle 29)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\CrashLogger.dll
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\CrashLogger.dll (00000001 CrashLogger 010C0010) loaded correctly (handle 30)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\DbSkseFunctions.dll
+registering plugin listener for SKSE at 31 of 32
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\DbSkseFunctions.dll (00000001 DbSkseFunctions 00000010) loaded correctly (handle 31)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\DescriptionFramework.dll
+registering plugin listener for SKSE at 32 of 33
+plugin 32 allocated 14 bytes from branch pool
+plugin 32 allocated 14 bytes from branch pool
+plugin 32 allocated 14 bytes from branch pool
+plugin 32 allocated 14 bytes from branch pool
+plugin 32 allocated 14 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\DescriptionFramework.dll (00000001 DescriptionFramework 00000001) loaded correctly (handle 32)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\DiscordRichPresence.dll
+registering plugin listener for SKSE at 33 of 34
+plugin 33 allocated 14 bytes from branch pool
+plugin 33 allocated 14 bytes from branch pool
+plugin 33 allocated 14 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\DiscordRichPresence.dll (00000001 DiscordRichPresence 01020000) loaded correctly (handle 33)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\DismemberingFramework.dll
+registering plugin listener for SKSE at 34 of 35
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\DismemberingFramework.dll (00000001 DismemberingFramework 01020010) loaded correctly (handle 34)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\DKAF.dll
+registering plugin listener for SKSE at 35 of 36
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\DKAF.dll (00000001 DKAF 01000000) loaded correctly (handle 35)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\dmenu.dll
+registering plugin listener for SKSE at 36 of 37
+registering plugin listener for SKSE at 36 of 37
+plugin 36 allocated 28 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\dmenu.dll (00000001 dmenu 00000001) loaded correctly (handle 36)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\DoubleCheckBeforeSelling.dll
+registering plugin listener for SKSE at 37 of 38
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\DoubleCheckBeforeSelling.dll (00000001 DoubleCheckBeforeSelling 01000010) loaded correctly (handle 37)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\DtryKeyUtil.dll
+registering plugin listener for SKSE at 38 of 39
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\DtryKeyUtil.dll (00000001 DtryKeyUtil 00000001) loaded correctly (handle 38)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\DualWieldParryingSKSE.dll
+registering plugin listener for SKSE at 39 of 40
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\DualWieldParryingSKSE.dll (00000001 DualWieldParryingSKSE 01070000) loaded correctly (handle 39)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\DynamicArmorVariants.dll
+registering plugin listener for SKSE at 40 of 41
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\DynamicArmorVariants.dll (00000001 DynamicArmorVariants 00000001) loaded correctly (handle 40)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\DynamicStringDistributor.dll
+plugin 41 allocated 140 bytes from branch pool
+registering plugin listener for SKSE at 41 of 42
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\DynamicStringDistributor.dll (00000001 DynamicStringDistributor 01020050) loaded correctly (handle 41)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\DynamicWetness.dll
+registering plugin listener for SKSE at 42 of 43
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\DynamicWetness.dll (00000001 DynamicWetness 01050000) loaded correctly (handle 42)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\DynDOLOD.DLL
+registering plugin listener for SKSE at 43 of 44
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\DynDOLOD.DLL (00000001 DynDOLOD 03000270) loaded correctly (handle 43)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ENBAntiAliasing.dll
+plugin 44 allocated 14 bytes from branch pool
+plugin 44 allocated 14 bytes from branch pool
+plugin 44 allocated 14 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ENBAntiAliasing.dll (00000001 ENBAntiAliasing 01020030) loaded correctly (handle 44)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ENBFrameGeneration.dll
+plugin 45 allocated 14 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ENBFrameGeneration.dll (00000001 ENBFrameGeneration 01000020) loaded correctly (handle 45)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ENBHelperPlus.dll
+plugin 46 allocated 28 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ENBHelperPlus.dll (00000001 ENBHelperPlus 01000000) loaded correctly (handle 46)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ENBHelperSE.dll
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ENBHelperSE.dll (00000001 ENBHelperSE 00000001) loaded correctly (handle 47)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ENBLightDetectionFix.dll
+plugin 48 allocated 14 bytes from branch pool
+plugin 48 allocated 14 bytes from branch pool
+plugin 48 allocated 14 bytes from branch pool
+plugin 48 allocated 14 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ENBLightDetectionFix.dll (00000001 ENBLightDetectionFix 01000000) loaded correctly (handle 48)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ENBTerrainBlendingFix.dll
+plugin 49 allocated 14 bytes from branch pool
+plugin 49 allocated 14 bytes from branch pool
+plugin 49 allocated 14 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ENBTerrainBlendingFix.dll (00000001 ENBTerrainBlendingFix 01010000) loaded correctly (handle 49)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\EnchantableSpecialItemFix.dll
+plugin 50 allocated 14 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\EnchantableSpecialItemFix.dll (00000001 EnchantableSpecialItemFix 00000001) loaded correctly (handle 50)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\encounter_zones_unlocked.dll
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\encounter_zones_unlocked.dll (00000001 encounter_zones_unlocked 00000001) loaded correctly (handle 51)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\EngineFixes.dll
+registering plugin listener for SKSE at 52 of 53
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\EngineFixes.dll (00000001 EngineFixes plugin 00000005) loaded correctly (handle 52)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\EquipEnchantmentFix.dll
+plugin 53 allocated 64 bytes from branch pool
+plugin 53 allocated 32 bytes from local pool
+registering plugin listener for SKSE at 53 of 54
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\EquipEnchantmentFix.dll (00000001 EquipEnchantmentFix 00010306) loaded correctly (handle 53)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\EVLaS.dll
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\EVLaS.dll (00000001 EVLaS 00000001) loaded correctly (handle 54)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\FaceGenFixes.dll
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\FaceGenFixes.dll (00000001 FaceGenFixes 00000001) loaded correctly (handle 55)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\FavoritesMenuEffectsDescription.dll
+registering plugin listener for SKSE at 56 of 57
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\FavoritesMenuEffectsDescription.dll (00000001 FavoritesMenuEffectsDescription 01010000) loaded correctly (handle 56)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\FlatMapMarkersSSE.dll
+registering plugin listener for SKSE at 57 of 58
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\FlatMapMarkersSSE.dll (00000001 FlatMapMarkersSSE 00000001) loaded correctly (handle 57)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\FormListManipulator.dll
+registering plugin listener for SKSE at 58 of 59
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\FormListManipulator.dll (00000001 FormListManipulator 01080010) loaded correctly (handle 58)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\Fuz Ro D'oh.dll
+registering plugin listener for SKSE at 59 of 60
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\Fuz Ro D'oh.dll (00000001 Fuz Ro D'oh 0107463C) loaded correctly (handle 59)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\GrassCacheHelperNG.dll
+plugin 60 allocated 15 bytes from branch pool
+registering plugin listener for SKSE at 60 of 61
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\GrassCacheHelperNG.dll (00000001 GrassCacheHelperNG 01000010) loaded correctly (handle 60)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\hdtSMP64.dll
+registering plugin listener for SKSE at 61 of 62
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\hdtSMP64.dll (00000001 hdtSSEPhysics 00000001) loaded correctly (handle 61)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\HelpExtender.dll
+registering plugin listener for SKSE at 62 of 63
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\HelpExtender.dll (00000001 HelpExtender 00000001) loaded correctly (handle 62)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\HorsePoseCorrection.dll
+registering plugin listener for SKSE at 63 of 64
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\HorsePoseCorrection.dll (00000001 HorsePoseCorrection 01000000) loaded correctly (handle 63)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\HorseStaminaHUD.dll
+plugin 64 allocated 14 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\HorseStaminaHUD.dll (00000001 HorseStaminaHUD 00000001) loaded correctly (handle 64)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ImmersiveEquipmentDisplays.dll
+plugin 65 allocated 336 bytes from branch pool
+plugin 65 allocated 384 bytes from local pool
+registering plugin listener for SKSE at 65 of 66
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ImmersiveEquipmentDisplays.dll (00000001 ImmersiveEquipmentDisplays 00010704) loaded correctly (handle 65)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ImmersiveWeaponSwitch.dll
+plugin 66 allocated 56 bytes from branch pool
+registering plugin listener for SKSE at 66 of 67
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ImmersiveWeaponSwitch.dll (00000001 ImmersiveWeaponSwitch 00030034) loaded correctly (handle 66)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ImprovedCameraSE.dll
+plugin 67 allocated 14 bytes from branch pool
+plugin 67 allocated 14 bytes from branch pool
+plugin 67 allocated 14 bytes from branch pool
+plugin 67 allocated 14 bytes from branch pool
+plugin 67 allocated 14 bytes from branch pool
+plugin 67 allocated 35 bytes from branch pool
+plugin 67 allocated 14 bytes from branch pool
+plugin 67 allocated 14 bytes from branch pool
+plugin 67 allocated 37 bytes from branch pool
+plugin 67 allocated 31 bytes from branch pool
+plugin 67 allocated 31 bytes from branch pool
+plugin 67 allocated 14 bytes from branch pool
+plugin 67 allocated 14 bytes from branch pool
+plugin 67 allocated 14 bytes from branch pool
+registering plugin listener for SKSE at 67 of 68
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ImprovedCameraSE.dll (00000001 ImprovedCameraSE 02000009) loaded correctly (handle 67)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ImWalkinHere.dll
+plugin 68 allocated 16 bytes from branch pool
+registering plugin listener for SKSE at 68 of 69
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ImWalkinHere.dll (00000001 ImWalkinHere 01070000) loaded correctly (handle 68)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\InfinityUI.dll
+plugin 69 allocated 84 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\InfinityUI.dll (00000001 InfinityUI 02000030) loaded correctly (handle 69)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\InstantlySkipDialogueNG.dll
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\InstantlySkipDialogueNG.dll (00000001 InstantlySkipDialogueNG 01010010) loaded correctly (handle 70)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\InventoryInjector.dll
+plugin 71 allocated 8 bytes from branch pool
+registering plugin listener for SKSE at 71 of 72
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\InventoryInjector.dll (00000001 InventoryInjector 00000001) loaded correctly (handle 71)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\JContainers64.dll
+registering plugin listener for SKSE at 72 of 73
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\JContainers64.dll (00000001 JContainers64 00000004) loaded correctly (handle 72)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\KiLoaderSatelliteSKSE.dll
+registering plugin listener for SKSE at 73 of 74
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\KiLoaderSatelliteSKSE.dll (00000001 KiLoader SKSE Satellite 00000001) loaded correctly (handle 73)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\KreatE.dll
+unknown QueryInterface 00000010
+registering plugin listener for SKSE at 74 of 75
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\KreatE.dll (00000001 KreatE 00000001) loaded correctly (handle 74)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\large_sector_fix.dll
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\large_sector_fix.dll (00000001 large sector fix patch 00000001) loaded correctly (handle 75)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\LeveledListCrashPrevention.dll
+plugin 76 allocated 14 bytes from branch pool
+plugin 76 allocated 14 bytes from branch pool
+plugin 76 allocated 14 bytes from branch pool
+registering plugin listener for SKSE at 76 of 77
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\LeveledListCrashPrevention.dll (00000001 LeveledList Crash Fix 00000001) loaded correctly (handle 76)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\LoadingMenuOverhaul.dll
+registering plugin listener for SKSE at 77 of 78
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\LoadingMenuOverhaul.dll (00000001 LoadingMenuOverhaul 01000000) loaded correctly (handle 77)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\LoadingScreenTruce.dll
+plugin 78 allocated 16 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\LoadingScreenTruce.dll (00000001 LoadingScreenTruce 00000010) loaded correctly (handle 78)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\LocalMapUpgrade.dll
+registering plugin listener for SKSE at 79 of 80
+plugin 79 allocated 42 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\LocalMapUpgrade.dll (00000001 LocalMapUpgrade 03010000) loaded correctly (handle 79)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\loki_DynamicAnimationCasting.dll
+plugin 80 allocated 32 bytes from branch pool
+registering plugin listener for SKSE at 80 of 81
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\loki_DynamicAnimationCasting.dll (00000001 loki_DynamicAnimationCasting 00000001) loaded correctly (handle 80)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\MapMarkerFramework.dll
+plugin 81 allocated 42 bytes from branch pool
+registering plugin listener for SKSE at 81 of 82
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\MapMarkerFramework.dll (00000001 MapMarkerFramework 00000002) loaded correctly (handle 81)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\MaxsuAIProcessFix.dll
+registering plugin listener for SKSE at 82 of 83
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\MaxsuAIProcessFix.dll (00000001 PluginName 01000000) loaded correctly (handle 82)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\MaxsuBlockSpark.dll
+registering plugin listener for SKSE at 83 of 84
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\MaxsuBlockSpark.dll (00000001 MaxsuBlockSpark 00000000) loaded correctly (handle 83)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\MaxsuCombatEscape.dll
+registering plugin listener for SKSE at 84 of 85
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\MaxsuCombatEscape.dll (00000001 MaxsuCombatEscape 00000000) loaded correctly (handle 84)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\MaxsuDetectionMeter.dll
+registering plugin listener for SKSE at 85 of 86
+plugin 85 allocated 28 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\MaxsuDetectionMeter.dll (00000001 MaxsuDetectionMeter 01010010) loaded correctly (handle 85)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\MaxsuIFrame.dll
+plugin 86 allocated 16 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\MaxsuIFrame.dll (00000001 MaxsuIFrame 01000030) loaded correctly (handle 86)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\MCMHelper.dll
+registering plugin listener for SKSE at 87 of 88
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\MCMHelper.dll (00000001 MCMHelper 00000001) loaded correctly (handle 87)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\MCO.dll
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\MCO.dll (00000001 MCO 01000000) loaded correctly (handle 88)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\MenuRegularQuickSave.dll
+plugin 89 allocated 16 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\MenuRegularQuickSave.dll (00000001 MenuRegularQuickSave 01000010) loaded correctly (handle 89)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\mfgfix.dll
+registering plugin listener for SKSE at 90 of 91
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\mfgfix.dll (00000001 MfgFix 00000001) loaded correctly (handle 90)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\Modex.dll
+registering plugin listener for SKSE at 91 of 92
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\Modex.dll (00000001 Modex 00000010) loaded correctly (handle 91)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\MoreInformativeConsole.dll
+registering plugin listener for SKSE at 92 of 93
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\MoreInformativeConsole.dll (00000001 MoreInformativeConsole 00000001) loaded correctly (handle 92)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\msdia140.dll
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\msdia140.dll does not appear to be an SKSE plugin
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\MuImpactFramework.dll
+registering plugin listener for SKSE at 93 of 94
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\MuImpactFramework.dll (00000001 MuImpactFramework 00090000) loaded correctly (handle 93)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\MumsTheWord.dll
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\MumsTheWord.dll (00000001 MumsTheWord 02010000) loaded correctly (handle 94)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\NativeEditorIDFix.dll
+plugin 95 allocated 8 bytes from branch pool
+plugin 95 allocated 8 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\NativeEditorIDFix.dll (00000001 Native EditorID Fix 00000001) loaded correctly (handle 95)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\NextGenDecapitations.dll
+registering plugin listener for SKSE at 96 of 97
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\NextGenDecapitations.dll (00000001 NextGenDecapitations 01030040) loaded correctly (handle 96)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\NGIO-NG.dll
+registering plugin listener for SKSE at 97 of 98
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\NGIO-NG.dll (00000001 NGIO-NG 01050080) loaded correctly (handle 97)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\NoFurnitureCamera.dll
+registering plugin listener for SKSE at 98 of 99
+plugin 98 allocated 14 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\NoFurnitureCamera.dll (00000001 NoFurnitureCamera 01000000) loaded correctly (handle 98)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\NoLootWhileArmed.dll
+registering plugin listener for SKSE at 99 of 100
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\NoLootWhileArmed.dll (00000001 NoLootWhileArmed 02000000) loaded correctly (handle 99)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\NoOppositeGenderAnims.dll
+registering plugin listener for SKSE at 100 of 101
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\NoOppositeGenderAnims.dll (00000001 NoOppositeGenderAnims 01010000) loaded correctly (handle 100)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\NPCSpellVariance.dll
+registering plugin listener for SKSE at 101 of 102
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\NPCSpellVariance.dll (00000001 NPCSpellVariance 01000000) loaded correctly (handle 101)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\OBody.dll
+registering plugin listener for SKSE at 102 of 103
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\OBody.dll (00000001 OBody 01000000) loaded correctly (handle 102)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\OneClickPowerAttack.dll
+registering plugin listener for SKSE at 103 of 104
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\OneClickPowerAttack.dll (00000001 OneClickPowerAttack 01000000) loaded correctly (handle 103)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\OpenAnimationReplacer-IEDConditionExtensions.dll
+registering plugin listener for SKSE at 104 of 105
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\OpenAnimationReplacer-IEDConditionExtensions.dll (00000001 OpenAnimationReplacer-IEDConditionExtensions 01000020) loaded correctly (handle 104)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\OpenAnimationReplacer.dll
+registering plugin listener for SKSE at 105 of 106
+plugin 105 allocated 14 bytes from branch pool
+plugin 105 allocated 14 bytes from branch pool
+plugin 105 allocated 14 bytes from branch pool
+plugin 105 allocated 14 bytes from branch pool
+plugin 105 allocated 14 bytes from branch pool
+plugin 105 allocated 14 bytes from branch pool
+plugin 105 allocated 61 bytes from branch pool
+plugin 105 allocated 14 bytes from branch pool
+plugin 105 allocated 14 bytes from branch pool
+plugin 105 allocated 14 bytes from branch pool
+plugin 105 allocated 14 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\OpenAnimationReplacer.dll (00000001 OpenAnimationReplacer 02030060) loaded correctly (handle 105)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\oxygenMeter2.dll
+registering plugin listener for SKSE at 106 of 107
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\oxygenMeter2.dll (00000001 Oxygen Meter 2 00000001) loaded correctly (handle 106)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\PairedAnimationImprovements.dll
+plugin 107 allocated 14 bytes from branch pool
+plugin 107 allocated 14 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\PairedAnimationImprovements.dll (00000001 PairedAnimationImprovements 01000020) loaded correctly (handle 107)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\PapyrusTweaks.dll
+registering plugin listener for SKSE at 108 of 109
+plugin 108 allocated 42 bytes from branch pool
+plugin 108 allocated 14 bytes from branch pool
+plugin 108 allocated 14 bytes from branch pool
+plugin 108 allocated 14 bytes from branch pool
+plugin 108 allocated 14 bytes from branch pool
+plugin 108 allocated 14 bytes from branch pool
+plugin 108 allocated 14 bytes from branch pool
+plugin 108 allocated 14 bytes from branch pool
+plugin 108 allocated 14 bytes from branch pool
+plugin 108 allocated 14 bytes from branch pool
+plugin 108 allocated 14 bytes from branch pool
+plugin 108 allocated 14 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\PapyrusTweaks.dll (00000001 PapyrusTweaks 00000004) loaded correctly (handle 108)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\PapyrusUtil.dll
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\PapyrusUtil.dll (00000001 papyrusutil plugin 00000002) loaded correctly (handle 109)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ParryingRPG.dll
+plugin 110 allocated 16 bytes from branch pool
+registering plugin listener for SKSE at 110 of 111
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ParryingRPG.dll (00000001 ParryingRPG 02000010) loaded correctly (handle 110)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\PayloadInterpreter.dll
+registering plugin listener for SKSE at 111 of 112
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\PayloadInterpreter.dll (00000001 PayloadInterpreter 00000001) loaded correctly (handle 111)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_AlchemyXPFix.dll
+registering plugin listener for SKSE at 112 of 113
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_AlchemyXPFix.dll (00000001 AlchemyXPFix 00000001) loaded correctly (handle 112)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_AnimObjectSwapper.dll
+registering plugin listener for SKSE at 113 of 114
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_AnimObjectSwapper.dll (00000001 Anim Object Swapper 00000001) loaded correctly (handle 113)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_BaseObjectSwapper.dll
+registering plugin listener for SKSE at 114 of 115
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_BaseObjectSwapper.dll (00000001 Base Object Swapper 00000003) loaded correctly (handle 114)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_CameraPersistenceFixes.dll
+registering plugin listener for SKSE at 115 of 116
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_CameraPersistenceFixes.dll (00000001 CameraPersistenceFixes 00000001) loaded correctly (handle 115)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_ClassicParalysis.dll
+registering plugin listener for SKSE at 116 of 117
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_ClassicParalysis.dll (00000001 Classic Paralysis 00000003) loaded correctly (handle 116)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_ConsolePlusPlus.dll
+registering plugin listener for SKSE at 117 of 118
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_ConsolePlusPlus.dll (00000001 Console++ 00000001) loaded correctly (handle 117)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_CraftingRecipeDistributor.dll
+registering plugin listener for SKSE at 118 of 119
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_CraftingRecipeDistributor.dll (00000001 Crafting Recipe Distributor 00000004) loaded correctly (handle 118)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_DialogueHistory.dll
+plugin 119 allocated 14 bytes from branch pool
+registering plugin listener for SKSE at 119 of 120
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_DialogueHistory.dll (00000001 DialogueHistory 00000002) loaded correctly (handle 119)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_DualCastingFix.dll
+registering plugin listener for SKSE at 120 of 121
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_DualCastingFix.dll (00000001 DualCastingFix 00000001) loaded correctly (handle 120)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_ENBLightForEffectShaders.dll
+registering plugin listener for SKSE at 121 of 122
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_ENBLightForEffectShaders.dll (00000001 ENB Light For Effect Shaders 00000002) loaded correctly (handle 121)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_EnhancedInvisibility.dll
+registering plugin listener for SKSE at 122 of 123
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_EnhancedInvisibility.dll (00000001 Enhanced Invisibility 00000001) loaded correctly (handle 122)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_EnhancedReanimation.dll
+registering plugin listener for SKSE at 123 of 124
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_EnhancedReanimation.dll (00000001 Enhanced Reanimation 00000001) loaded correctly (handle 123)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_EssentialFavorites.dll
+registering plugin listener for SKSE at 124 of 125
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_EssentialFavorites.dll (00000001 Essential Favorites 00000002) loaded correctly (handle 124)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_FavoriteMiscItems.dll
+registering plugin listener for SKSE at 125 of 126
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_FavoriteMiscItems.dll (00000001 Favorite Misc Items 00000003) loaded correctly (handle 125)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_FEC.dll
+plugin 126 allocated 75 bytes from branch pool
+registering plugin listener for SKSE at 126 of 127
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_FEC.dll (00000001 FEC Helper plugin 00000005) loaded correctly (handle 126)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_FloatingSubtitles.dll
+plugin 127 allocated 128 bytes from branch pool
+registering plugin listener for SKSE at 127 of 128
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_FloatingSubtitles.dll (00000001 FloatingSubtitles 00000002) loaded correctly (handle 127)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_KeywordItemDistributor.dll
+registering plugin listener for SKSE at 128 of 129
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_KeywordItemDistributor.dll (00000001 Keyword Item Distributor 00000003) loaded correctly (handle 128)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_LockVariations.dll
+registering plugin listener for SKSE at 129 of 130
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_LockVariations.dll (00000001 Lock Variations 00000003) loaded correctly (handle 129)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_MainMenuVideo.dll
+registering plugin listener for SKSE at 130 of 131
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_MainMenuVideo.dll (00000001 MainMenuVideo 00000001) loaded correctly (handle 130)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_MoonMod.dll
+registering plugin listener for SKSE at 131 of 132
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_MoonMod.dll (00000001 Moons And Stars 00000002) loaded correctly (handle 131)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_PapyrusExtender.dll
+plugin 132 allocated 208 bytes from branch pool
+registering plugin listener for SKSE at 132 of 133
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_PapyrusExtender.dll (00000001 powerofthree's Papyrus Extender 00000006) loaded correctly (handle 132)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_PhotoMode.dll
+plugin 133 allocated 14 bytes from branch pool
+plugin 133 allocated 14 bytes from branch pool
+registering plugin listener for SKSE at 133 of 134
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_PhotoMode.dll (00000001 PhotoMode 00000001) loaded correctly (handle 133)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_SaveUnbaker.dll
+registering plugin listener for SKSE at 134 of 135
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_SaveUnbaker.dll (00000001 Save Unbaker 00000001) loaded correctly (handle 134)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_SpellPerkItemDistributor.dll
+registering plugin listener for SKSE at 135 of 136
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_SpellPerkItemDistributor.dll (00000001 po3_SpellPerkItemDistributor 00000007) loaded correctly (handle 135)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_SplashesOfStorms.dll
+registering plugin listener for SKSE at 136 of 137
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_SplashesOfStorms.dll (00000001 Splashes of Storms 00000001) loaded correctly (handle 136)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_Tweaks.dll
+plugin 137 allocated 450 bytes from branch pool
+registering plugin listener for SKSE at 137 of 138
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\po3_Tweaks.dll (00000001 po3_Tweaks 00000001) loaded correctly (handle 137)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\Precision.dll
+plugin 138 allocated 1024 bytes from branch pool
+registering plugin listener for SKSE at 138 of 139
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\Precision.dll (00000001 Precision 02000040) loaded correctly (handle 138)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\PreSSEDisplayTweaks.dll
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\PreSSEDisplayTweaks.dll (00000001 PreSSEDisplayTweaks 01010000) loaded correctly (handle 139)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\QUI.dll
+registering plugin listener for SKSE at 140 of 141
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\QUI.dll (00000001 QUI 00030020) loaded correctly (handle 140)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\QuickLootIE.dll
+plugin 141 allocated 256 bytes from branch pool
+registering plugin listener for SKSE at 141 of 142
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\QuickLootIE.dll (00000001 QuickLootIE 03040000) loaded correctly (handle 141)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\RecursionFPSFix.dll
+plugin 142 allocated 14 bytes from branch pool
+plugin 142 allocated 14 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\RecursionFPSFix.dll (00000001 RecursionFPSFix 00000001) loaded correctly (handle 142)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\RemoveAllItemsFix.dll
+registering plugin listener for SKSE at 143 of 144
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\RemoveAllItemsFix.dll (00000001 RemoveAllItemsFix 01010000) loaded correctly (handle 143)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\RimLightingFix.dll
+plugin 144 allocated 14 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\RimLightingFix.dll (00000001 RimLightingFix 01000000) loaded correctly (handle 144)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\SanguineSymphony.dll
+registering plugin listener for SKSE at 145 of 146
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\SanguineSymphony.dll (00000001 SanguineSymphony 01010000) loaded correctly (handle 145)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ScaleformTranslationPP.dll
+plugin 146 allocated 16 bytes from branch pool
+registering plugin listener for SKSE at 146 of 147
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ScaleformTranslationPP.dll (00000001 ScaleformTranslationPP 01080000) loaded correctly (handle 146)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\SCAR.dll
+registering plugin listener for SKSE at 147 of 148
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\SCAR.dll (00000001 SCAR 02000010) loaded correctly (handle 147)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ScrambledBugs.dll
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ScrambledBugs.dll (00000001 ScrambledBugs 00000011) loaded correctly (handle 148)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ScriptEffectArchetypeCrashFix.dll
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\ScriptEffectArchetypeCrashFix.dll (00000001 Script Effect Archetype Crash Fix 00000001) loaded correctly (handle 149)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\SimpleDualSheath.dll
+plugin 150 allocated 200 bytes from branch pool
+plugin 150 allocated 800 bytes from local pool
+registering plugin listener for SKSE at 150 of 151
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\SimpleDualSheath.dll (00000001 SimpleDualSheath 00010507) loaded correctly (handle 150)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\skee64-memleak-patch.dll
+registering plugin listener for SKSE at 151 of 152
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\skee64-memleak-patch.dll (00000001 skee64-memleak-patch 00010000) loaded correctly (handle 151)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\skee64.dll
+registering plugin listener for SKSE at 152 of 153
+registering plugin listener for (null) at 152 of 153
+plugin 152 allocated 512 bytes from branch pool
+plugin 152 allocated 512 bytes from local pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\skee64.dll (00000001 skee 00000001) loaded correctly (handle 152)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\SKSEMenuFramework.dll
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\SKSEMenuFramework.dll (00000001 SKSEMenuFramework 02010010) loaded correctly (handle 153)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\SkyParkourNG.dll
+registering plugin listener for SKSE at 154 of 155
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\SkyParkourNG.dll (00000001 SkyParkourNG 03020000) loaded correctly (handle 154)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\SkyPatcher.dll
+registering plugin listener for SKSE at 155 of 156
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\SkyPatcher.dll (00000001 SkyPatcher 00000006) loaded correctly (handle 155)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\SkyReflectionFix.dll
+plugin 156 allocated 14 bytes from branch pool
+registering plugin listener for SKSE at 156 of 157
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\SkyReflectionFix.dll (00000001 SkyReflectionFix 01000010) loaded correctly (handle 156)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\SmoothCam.dll
+registering plugin listener for SKSE at 157 of 158
+plugin 157 allocated 512 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\SmoothCam.dll (00000001 SmoothCam 00000011) loaded correctly (handle 157)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\SoftShadows.dll
+registering plugin listener for SKSE at 158 of 159
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\SoftShadows.dll (00000001 SoftShadows 02000000) loaded correctly (handle 158)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\SoundRecordDistributor.dll
+registering plugin listener for SKSE at 159 of 160
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\SoundRecordDistributor.dll (00000001 SoundRecordDistributor 01050000) loaded correctly (handle 159)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\SprintCancelsSneak.dll
+registering plugin listener for SKSE at 160 of 161
+plugin 160 allocated 14 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\SprintCancelsSneak.dll (00000001 SprintCancelsSneak 01010000) loaded correctly (handle 160)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\SSEDisplayTweaks.dll
+plugin 161 allocated 512 bytes from branch pool
+plugin 161 allocated 1536 bytes from local pool
+registering plugin listener for SKSE at 161 of 162
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\SSEDisplayTweaks.dll (00000001 SSEDisplayTweaks 00000510) loaded correctly (handle 161)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\SSMT_Fix.dll
+plugin 162 allocated 16 bytes from branch pool
+plugin 162 allocated 24 bytes from local pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\SSMT_Fix.dll (00000001 SSMT_Fix 00010102) loaded correctly (handle 162)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\StayAtSystemPageSE.dll
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\StayAtSystemPageSE.dll (00000001 StayAtSystemPageSE 01060000) loaded correctly (handle 163)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\STB_Widgets.dll
+plugin 164 allocated 512 bytes from branch pool
+registering plugin listener for SKSE at 164 of 165
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\STB_Widgets.dll (00000001 STB_Widgets 00000001) loaded correctly (handle 164)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\StormLightning.dll
+registering plugin listener for SKSE at 165 of 166
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\StormLightning.dll (00000001 StormLightningPlugin 00010422) loaded correctly (handle 165)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\TK_Dodge_RE.dll
+registering plugin listener for SKSE at 166 of 167
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\TK_Dodge_RE.dll (00000001 TK_Dodge_RE 003D0000) loaded correctly (handle 166)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\TrueDirectionalMovement.dll
+plugin 167 allocated 512 bytes from branch pool
+registering plugin listener for SKSE at 167 of 168
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\TrueDirectionalMovement.dll (00000001 TrueDirectionalMovement 00000002) loaded correctly (handle 167)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\TrueHUD.dll
+plugin 168 allocated 256 bytes from branch pool
+registering plugin listener for SKSE at 168 of 169
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\TrueHUD.dll (00000001 TrueHUD 00000001) loaded correctly (handle 168)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\Twilight.dll
+plugin 169 allocated 14 bytes from branch pool
+registering plugin listener for SKSE at 169 of 170
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\Twilight.dll (00000001 Twilight 01010000) loaded correctly (handle 169)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\Underwear.dll
+registering plugin listener for SKSE at 170 of 171
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\Underwear.dll (00000001 Underwear 01020020) loaded correctly (handle 170)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\UniqueMapWeather.dll
+plugin 171 allocated 14 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\UniqueMapWeather.dll (00000001 UniqueMapWeather 01010010) loaded correctly (handle 171)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\VendorRespawnFix.dll
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\VendorRespawnFix.dll (00000001 Vendor Respawn Fix 00000001) loaded correctly (handle 172)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\Vibrant weapons.dll
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\Vibrant weapons.dll (00000001 Vibrant weapons 01020300) loaded correctly (handle 173)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\WhoseQuestIsItAnyway.dll
+plugin 174 allocated 64 bytes from branch pool
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\WhoseQuestIsItAnyway.dll (00000001 WhoseQuestIsItAnyway 01050000) loaded correctly (handle 174)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\YesImSure.dll
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\YesImSure.dll (00000001 YesImSure 00000001) loaded correctly (handle 175)
+checking plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\_SplashScreen.dll
+registering plugin listener for SKSE at 176 of 177
+plugin C:\Games\Skyrim Special Edition\Data\SKSE\Plugins\\_SplashScreen.dll (00000001 _SplashScreen 00000001) loaded correctly (handle 176)
+dispatch message (0) to plugin listeners
+sending message type 0 to plugin 2
+sending message type 0 to plugin 3
+sending message type 0 to plugin 4
+sending message type 0 to plugin 9
+sending message type 0 to plugin 13
+sending message type 0 to plugin 15
+plugin 15 allocated 16 bytes from branch pool
+sending message type 0 to plugin 16
+sending message type 0 to plugin 18
+sending message type 0 to plugin 20
+sending message type 0 to plugin 21
+sending message type 0 to plugin 22
+sending message type 0 to plugin 23
+plugin 23 allocated 128 bytes from branch pool
+plugin 23 allocated 64 bytes from branch pool
+plugin 23 allocated 16 bytes from branch pool
+plugin 23 allocated 16 bytes from branch pool
+plugin 23 allocated 16 bytes from branch pool
+plugin 23 allocated 16 bytes from branch pool
+plugin 23 allocated 64 bytes from branch pool
+plugin 23 allocated 64 bytes from branch pool
+plugin 23 allocated 16 bytes from branch pool
+plugin 23 allocated 16 bytes from branch pool
+plugin 23 allocated 64 bytes from branch pool
+plugin 23 allocated 16 bytes from branch pool
+plugin 23 allocated 64 bytes from branch pool
+sending message type 0 to plugin 24
+registering plugin listener for InfinityUI at 24 of 177
+exception occurred while loading plugins
+init complete
+hooked dinput
+dispatch message (6) to plugin listeners
+sending message type 6 to plugin 2
+sending message type 6 to plugin 3
+sending message type 6 to plugin 4
+sending message type 6 to plugin 9
+sending message type 6 to plugin 13
+sending message type 6 to plugin 15
+sending message type 6 to plugin 16
+sending message type 6 to plugin 18
+sending message type 6 to plugin 20
+sending message type 6 to plugin 21
+sending message type 6 to plugin 22
+sending message type 6 to plugin 23
+sending message type 6 to plugin 24
+sending message type 6 to plugin 25
+sending message type 6 to plugin 26
+sending message type 6 to plugin 28
+sending message type 6 to plugin 29
+sending message type 6 to plugin 31
+sending message type 6 to plugin 32
+sending message type 6 to plugin 33
+sending message type 6 to plugin 34
+sending message type 6 to plugin 35
+sending message type 6 to plugin 36
+sending message type 6 to plugin 37
+sending message type 6 to plugin 38
+sending message type 6 to plugin 39
+sending message type 6 to plugin 40
+sending message type 6 to plugin 41
+sending message type 6 to plugin 42
+sending message type 6 to plugin 43
+sending message type 6 to plugin 52
+sending message type 6 to plugin 53
+sending message type 6 to plugin 56
+sending message type 6 to plugin 57
+sending message type 6 to plugin 58
+sending message type 6 to plugin 59
+sending message type 6 to plugin 60
+sending message type 6 to plugin 61
+sending message type 6 to plugin 62
+sending message type 6 to plugin 63
+sending message type 6 to plugin 65
+sending message type 6 to plugin 66
+sending message type 6 to plugin 67
+sending message type 6 to plugin 68
+sending message type 6 to plugin 71
+sending message type 6 to plugin 72
+sending message type 6 to plugin 73
+sending message type 6 to plugin 74
+sending message type 6 to plugin 76
+sending message type 6 to plugin 77
+sending message type 6 to plugin 79
+sending message type 6 to plugin 80
+sending message type 6 to plugin 81
+sending message type 6 to plugin 82
+sending message type 6 to plugin 83
+sending message type 6 to plugin 84
+sending message type 6 to plugin 85
+sending message type 6 to plugin 87
+sending message type 6 to plugin 90
+sending message type 6 to plugin 91
+sending message type 6 to plugin 92
+sending message type 6 to plugin 93
+sending message type 6 to plugin 96
+sending message type 6 to plugin 97
+sending message type 6 to plugin 98
+sending message type 6 to plugin 99
+sending message type 6 to plugin 100
+sending message type 6 to plugin 101
+sending message type 6 to plugin 102
+sending message type 6 to plugin 103
+sending message type 6 to plugin 104
+sending message type 6 to plugin 105
+sending message type 6 to plugin 106
+sending message type 6 to plugin 108
+sending message type 6 to plugin 110
+sending message type 6 to plugin 111
+sending message type 6 to plugin 112
+sending message type 6 to plugin 113
+sending message type 6 to plugin 114
+sending message type 6 to plugin 115
+sending message type 6 to plugin 116
+sending message type 6 to plugin 117
+sending message type 6 to plugin 118
+sending message type 6 to plugin 119
+sending message type 6 to plugin 120
+sending message type 6 to plugin 121
+sending message type 6 to plugin 122
+sending message type 6 to plugin 123
+sending message type 6 to plugin 124
+sending message type 6 to plugin 125
+sending message type 6 to plugin 126
+sending message type 6 to plugin 127
+sending message type 6 to plugin 128
+sending message type 6 to plugin 129
+sending message type 6 to plugin 130
+sending message type 6 to plugin 131
+sending message type 6 to plugin 132
+sending message type 6 to plugin 133
+sending message type 6 to plugin 134
+sending message type 6 to plugin 135
+sending message type 6 to plugin 136
+sending message type 6 to plugin 137
+sending message type 6 to plugin 138
+sending message type 6 to plugin 140
+sending message type 6 to plugin 141
+sending message type 6 to plugin 143
+sending message type 6 to plugin 145
+sending message type 6 to plugin 146
+sending message type 6 to plugin 147
+sending message type 6 to plugin 150
+sending message type 6 to plugin 151
+sending message type 6 to plugin 152
+sending message type 6 to plugin 154
+sending message type 6 to plugin 155
+sending message type 6 to plugin 156
+sending message type 6 to plugin 157
+sending message type 6 to plugin 158
+sending message type 6 to plugin 159
+sending message type 6 to plugin 160
+sending message type 6 to plugin 161
+sending message type 6 to plugin 164
+sending message type 6 to plugin 165
+sending message type 6 to plugin 166
+sending message type 6 to plugin 167
+sending message type 6 to plugin 168
+sending message type 6 to plugin 169
+sending message type 6 to plugin 170
+sending message type 6 to plugin 176
+dispatched message.
+Reading translations from Interface\Translations\AHZmoreHUD_FRENCH.txt...
+Reading translations from Interface\Translations\TrueHUD_FRENCH.txt...
+Reading translations from Interface\Translations\Expressive Facegen Morphs_FRENCH.txt...
+Reading translations from Interface\Translations\OCPA_FRENCH.txt...
+Reading translations from Interface\Translations\Dismembering Framework_FRENCH.txt...
+Reading translations from Interface\Translations\BetterThirdPersonSelection_FRENCH.txt...
+Reading translations from Interface\Translations\SkyUI_SE_FRENCH.txt...
+Reading translations from Interface\Translations\MCMHelper_FRENCH.txt...
+Reading translations from Interface\Translations\MfgFix_FRENCH.txt...
+Reading translations from Interface\Translations\PhotoMode_FRENCH.txt...
+Reading translations from Interface\Translations\RaceMenu_FRENCH.txt...
+Reading translations from Interface\Translations\DialogueHistory_FRENCH.txt...
+Reading translations from Interface\Translations\Audio Overhaul Skyrim_FRENCH.txt...
+Reading translations from Interface\Translations\Regional Sounds Expansion_FRENCH.txt...
+Reading translations from Interface\Translations\TrueDirectionalMovement_FRENCH.txt...
+Reading translations from Interface\Translations\FloatingSubtitles_FRENCH.txt...
+Reading translations from Interface\Translations\Legendary Map_FRENCH.txt...
+Reading translations from Interface\Translations\QuickLootIE_FRENCH.txt...
+Reading translations from Interface\Translations\XPMSE_FRENCH.txt...
+Reading translations from Interface\Translations\OBody_FRENCH.txt...
+Reading translations from Interface\Translations\3BBB_FRENCH.txt...
+Reading translations from Interface\Translations\Precision_FRENCH.txt...
+Reading translations from Interface\Translations\nwsFollowerFramework_FRENCH.txt...
+Reading translations from Interface\Translations\FEC_FRENCH.txt...
+Reading translations from Interface\Translations\CraftingAnimations_FRENCH.txt...
+Reading translations from Interface\Translations\LootingAnimations_FRENCH.txt...
+Reading translations from Interface\Translations\Sanguine Symphony_FRENCH.txt...
+Reading translations from Interface\Translations\BOOBIES_ImmersiveIcons_FRENCH.txt...
+Reading translations from Interface\Translations\ExtendedCredits_Patreons_FRENCH.txt...
+Reading translations from Interface\Translations\atlas map markers_FRENCH.txt...
+Reading translations from Interface\Translations\MCM for FWMF_FRENCH.txt...
+dispatch message (5) to plugin listeners
+sending message type 5 to plugin 152
+sending message type 5 to plugin 24
+dispatched message.
+dispatch message (5) to plugin listeners
+sending message type 5 to plugin 152
+sending message type 5 to plugin 24
+dispatched message.
+dispatch message (5) to plugin listeners
+sending message type 5 to plugin 152
+sending message type 5 to plugin 24
+dispatched message.
+dispatch message (5) to plugin listeners
+sending message type 5 to plugin 152
+sending message type 5 to plugin 24
+dispatched message.

@@ -1,0 +1,9 @@
+[2026-10-08 13:59:18.736] [info] [236] [XSEPlugin.cpp:47] Loaded ENBAntiAliasing 1-2-3-0
+[2026-10-08 13:59:18.737] [info] [236] [XSEPlugin.cpp:81] Obtained ENB API, installing hooks
+[2026-10-08 13:59:18.741] [info] [236] [Streamline.cpp:14] [Streamline] Interposer loaded at address: 0x6ffff9000000
+[2026-10-08 13:59:18.741] [info] [236] [Hooks.cpp:93] Hooking D3D11CreateDeviceAndSwapChain
+[2026-10-08 13:59:18.742] [info] [236] [XSEPlugin.cpp:101] Registering for MenuOpenCloseEvent
+[2026-10-08 13:59:30.134] [info] [236] [Streamline.cpp:20] [Streamline] Initializing Streamline
+[2026-10-08 13:59:30.266] [critical] [236] [Streamline.cpp:59] [Streamline] Failed to initialize Streamline
+[2026-10-08 13:59:30.267] [info] [236] [Streamline.cpp:96] [Streamline] DLSS feature is not loaded
+[2026-10-08 13:59:30.268] [info] [236] [Streamline.cpp:104] [Streamline] DLSS is not available
