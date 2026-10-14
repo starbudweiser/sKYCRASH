@@ -12,6 +12,7 @@ from collections import Counter
 from dataclasses import dataclass, field
 
 import compat
+import insights
 from i18n import L, N_
 
 MAX_LOG_BYTES = 20 * 1024 * 1024
@@ -106,6 +107,7 @@ class AuditReport:
     game_dir: str = ""                            # dossier du jeu détecté/choisi (vide si inconnu)
     skse_info: dict = None                         # plugins vérifiés/chargés lus dans skse64.log
     skse_runtime: str = ""                         # runtime SKSE (hex) lu dans skse64.log
+    extras: dict = field(default_factory=dict)     # recoupements (chronologie, historique, sauvegarde) pour l'export
 
     def to_markdown(self) -> str:
         out = [L("# Audit — verdict : {verdict}", verdict=self.verdict), ""]
@@ -660,11 +662,21 @@ def audit_paths(paths: list, game_dir: str = "") -> AuditReport:
             report.analysed.append(p)
 
     gdir = compat.find_game_dir((report.skse_info or {}).get("plugin_dir"), game_dir)
+    if game_dir and not os.path.isfile(os.path.join(game_dir, "SkyrimSE.exe")):
+        report.findings.append(Finding(
+            SEV_WARN, "réglages", L("Le dossier du jeu des réglages n'existe plus"),
+            L("Réglage : {old} — utilisé à la place : {new}", old=game_dir, new=gdir or L("aucun")),
+            L("réglages"), [], L("Mettre à jour le dossier du jeu dans Réglages… > Général.")))
     if gdir:
         try:
             compat.audit_install(gdir, report, scores, _bump)
         except OSError:
             pass  # installation illisible : on garde l'audit basé sur les logs
+
+    try:
+        insights.analyse(report, scores, entries, gdir, read_lines, _bump)
+    except (OSError, ValueError) as e:  # recoupements facultatifs : jamais bloquants
+        report.findings.append(Finding(SEV_INFO, "recoupement", L("Recoupements incomplets : {e}", e=e), "", ""))
 
     report.suspects = sorted(
         ((n, d["score"], d["reasons"]) for n, d in scores.items()), key=lambda x: -x[1])[:8]

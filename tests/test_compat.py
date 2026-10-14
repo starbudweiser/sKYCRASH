@@ -31,8 +31,8 @@ class CompatTests(unittest.TestCase):
         self.assertIsNone(compat.decode_runtime("zz"))
 
     def test_address_library_name(self):
-        self.assertEqual(compat.address_library_name((1, 5, 97)), "versionlib-1-5-97-0.bin")
-        self.assertEqual(compat.address_library_name((1, 6, 1170)), "version-1-6-1170-0.bin")
+        self.assertEqual(compat.address_library_name((1, 5, 97)), "version-1-5-97-0.bin")
+        self.assertEqual(compat.address_library_name((1, 6, 1170)), "versionlib-1-6-1170-0.bin")
 
     def test_not_loaded_ignores_helper_dll(self):
         info = compat.skse_plugins(SKSE_LOG)
@@ -57,7 +57,7 @@ class CompatTests(unittest.TestCase):
             r = audit_engine.audit_paths([log], game_dir=d)
             titles = " | ".join(f.title for f in r.findings)
             self.assertEqual(r.game_dir, d)
-            self.assertIn("Address Library introuvable (version-1-6-1170-0.bin)", titles)
+            self.assertIn("Address Library introuvable (versionlib-1-6-1170-0.bin)", titles)
             self.assertIn("Version du jeu différente du runtime SKSE", titles)
             self.assertIn("vérifié mais non chargé : Broken.dll", titles)
 

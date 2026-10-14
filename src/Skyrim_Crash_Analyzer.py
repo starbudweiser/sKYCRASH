@@ -19,6 +19,7 @@ from PyQt6.QtWidgets import (
 import ai_client
 import ai_format
 import audit_engine
+import diagnostic
 import i18n
 import knowledge_updater
 from i18n import L, N_
@@ -629,9 +630,15 @@ class CrashAnalyzer(QWidget):
         self.log_list.itemClicked.connect(self._open_log_item)
         main_layout.addWidget(self.log_list)
 
+        self.export_button = flat_button(QPushButton(""), "neutral")
+        self.export_button.clicked.connect(self.export_diagnostic)
         self.purge_button = flat_button(QPushButton(""), "red")
         self.purge_button.clicked.connect(self.purge_all_logs)
-        main_layout.addWidget(self.purge_button)
+        bottom = QHBoxLayout()
+        bottom.setSpacing(GAP)
+        bottom.addWidget(self.export_button, 1)
+        bottom.addWidget(self.purge_button, 1)
+        main_layout.addLayout(bottom)
 
         # --- panneau de chat IA ---
         chat_panel = QWidget()
@@ -694,7 +701,11 @@ class CrashAnalyzer(QWidget):
         self.act_settings.setShortcut(QKeySequence("Ctrl+,"))  # ⌘, sur macOS
         self.act_settings.setMenuRole(QAction.MenuRole.PreferencesRole)
         self.act_settings.triggered.connect(self.open_settings)
+        self.act_export = QAction(self)
+        self.act_export.setShortcut(QKeySequence("Ctrl+E"))  # ⌘E sur macOS
+        self.act_export.triggered.connect(self.export_diagnostic)
         self.menu_file.addAction(self.act_open)
+        self.menu_file.addAction(self.act_export)
         self.menu_file.addAction(self.act_settings)
 
         self.game_folders = load_config()
@@ -737,6 +748,9 @@ class CrashAnalyzer(QWidget):
         self.menu_file.setTitle(L("Fichier"))
         self.act_open.setText(L("Ouvrir un log…"))
         self.act_settings.setText(L("Réglages…"))
+        self.act_export.setText(L("Exporter le diagnostic…"))
+        self.export_button.setText(L("Exporter le diagnostic…"))
+        self.export_button.setToolTip(L("Un seul fichier avec tout le contexte du plantage, à transmettre (⌘E)"))
         self.purge_button.setText(L("Purger les logs"))
         self.purge_button.setToolTip(L("Supprime les .log / .log0 des répertoires configurés"))
         self.chat_title.setText(L("Assistant IA"))
@@ -813,6 +827,38 @@ class CrashAnalyzer(QWidget):
         self.report_box.setText(L("Audit en cours…"))
         game_dir = self.settings.get("game_dir", "")
         self._start(lambda: audit_engine.audit_paths(files, game_dir), self._on_audit_done, self._on_audit_failed)
+
+    def export_diagnostic(self):
+        files = gather_audit_files(self._all_folders())
+        if not files:
+            QMessageBox.information(self, APP_NAME, L("Aucun log à exporter. Configurez les dossiers dans Réglages… > Dossiers de logs."))
+            return
+        start = HOME / "Desktop" if (HOME / "Desktop").is_dir() else HOME
+        path, _ = QFileDialog.getSaveFileName(self, L("Exporter le diagnostic"), str(start / diagnostic.default_filename()),
+                                              L("Markdown (*.md)"))
+        if not path:
+            return
+        self.export_button.setEnabled(False)
+        game_dir = self.settings.get("game_dir", "")
+        anon = self.settings.get("anonymize", "1") == "1"
+
+        def work():
+            report = audit_engine.audit_paths(files, game_dir)
+            with open(path, "w", encoding="utf-8") as f:
+                f.write(diagnostic.build(report, audit_engine.read_lines, anonymize=anon, app_name=APP_NAME))
+            return report
+
+        def done(report):
+            self.export_button.setEnabled(True)
+            self.audit_report = report
+            self.render_audit(report)
+            subprocess.run(["open", "-R", path], check=False)  # le fichier apparaît sélectionné dans le Finder
+
+        def fail(msg):
+            self.export_button.setEnabled(True)
+            QMessageBox.warning(self, APP_NAME, L("Export impossible : {msg}", msg=msg))
+
+        self._start(work, done, fail)
 
     def _on_audit_done(self, report):
         self.audit_button.setEnabled(True)

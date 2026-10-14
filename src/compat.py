@@ -66,7 +66,7 @@ def runtime_label(hex8: str) -> str:
 
 def address_library_name(version: tuple) -> str:
     major, minor, build = version[:3]
-    prefix = "versionlib" if (major, minor) == (1, 5) else "version"
+    prefix = "version" if (major, minor) == (1, 5) else "versionlib"  # SE : version-*.bin ; AE : versionlib-*.bin
     return f"{prefix}-{major}-{minor}-{build}-0.bin"
 
 
@@ -97,8 +97,24 @@ def not_loaded(info: dict) -> list:
 
 
 # ------------------------------------------------------------ dossier du jeu
+_extra_roots: list = []  # dossiers contenant d'autres bouteilles (ex. disque externe), déduits du réglage
+
+
+def _bottle_root_of(path: str):
+    parts = os.path.normpath(path or "").split(os.sep)
+    if "drive_c" in parts and parts.index("drive_c") >= 2:
+        return os.sep.join(parts[:parts.index("drive_c") - 1])
+    return None
+
+
 def _bottles() -> list:
-    return [b for b in glob.glob(BOTTLES_GLOB) if os.path.isdir(os.path.join(b, "drive_c"))]
+    globs = [BOTTLES_GLOB] + [os.path.join(r, "*") for r in _extra_roots]
+    out = []
+    for g in globs:
+        for b in sorted(glob.glob(g)):
+            if os.path.isdir(os.path.join(b, "drive_c")) and b not in out:
+                out.append(b)
+    return out
 
 
 def win_to_host(win_path: str) -> list:
@@ -112,7 +128,14 @@ def win_to_host(win_path: str) -> list:
 
 
 def find_game_dir(plugin_dir_win: str = None, user_dir: str = "") -> str:
-    """Dossier contenant SkyrimSE.exe : choix utilisateur, sinon déduit du log SKSE sous CrossOver."""
+    """Dossier contenant SkyrimSE.exe : choix utilisateur, sinon déduit du log SKSE sous CrossOver.
+
+    Les bouteilles voisines de celle du réglage (même dossier parent) sont aussi explorées :
+    une bouteille renommée ou déplacée sur un disque externe reste trouvée.
+    """
+    root = _bottle_root_of(user_dir)
+    if root and root not in _extra_roots:
+        _extra_roots.append(root)
     cands = []
     if user_dir:
         cands.append(user_dir)
@@ -143,12 +166,41 @@ def read_exe_version(exe_path: str):
     return (ms >> 16, ms & 0xFFFF, ls >> 16, ls & 0xFFFF)
 
 
-def find_plugins_txt(game_dir: str):
-    for b in _bottles():
-        hits = glob.glob(os.path.join(b, "drive_c", "users", "*", "AppData", "Local", "Skyrim Special Edition*", "plugins.txt"))
-        if hits:
-            return hits[0]
+def _plugins_txt_in(drive_c: str):
+    for d in glob.glob(os.path.join(drive_c, "users", "*", "AppData", "Local", "Skyrim Special Edition*")):
+        try:
+            for n in os.listdir(d):
+                if n.lower() == "plugins.txt":
+                    return os.path.join(d, n)
+        except OSError:
+            continue
     return None
+
+
+def find_plugins_txt(game_dir: str):
+    """plugins.txt de la bouteille qui contient le jeu, sinon de la première bouteille CrossOver qui en a un."""
+    parts = os.path.normpath(game_dir or "").split(os.sep)
+    if "drive_c" in parts:
+        hit = _plugins_txt_in(os.sep.join(parts[:parts.index("drive_c") + 1]))
+        if hit:
+            return hit
+    for b in _bottles():
+        hit = _plugins_txt_in(os.path.join(b, "drive_c"))
+        if hit:
+            return hit
+    return None
+
+
+def is_light_plugin(path: str) -> bool:
+    """Vrai pour un .esl ou un .esp/.esm marqué ESL (drapeau 0x200 de l'en-tête TES4)."""
+    if path.lower().endswith(".esl"):
+        return True
+    try:
+        with open(path, "rb") as f:
+            head = f.read(12)
+    except OSError:
+        return False  # plugin listé mais absent : compté comme plein, par prudence
+    return len(head) == 12 and head[:4] == b"TES4" and bool(struct.unpack_from("<I", head, 8)[0] & 0x200)
 
 
 def _fmt_date(ts: float) -> str:
@@ -252,7 +304,9 @@ def audit_install(game_dir: str, report, scores, bump):
         report.findings.append(Finding(
             SEV_INFO, "plugins", L("plugins.txt : {a} plugin(s) actifs sur {t}", a=len(active), t=len(entries)),
             ptxt, src))
-        esl_unknown = [e for e in active if e.lower().endswith((".esp", ".esm"))]
+        data_dir = os.path.join(game_dir, "Data")
+        esl_unknown = [e for e in active if e.lower().endswith((".esp", ".esm"))
+                       and not is_light_plugin(os.path.join(data_dir, e))]
         if len(esl_unknown) > MAX_PLUGINS_NON_ESL:
             report.findings.append(Finding(
                 SEV_WARN, "plugins",
