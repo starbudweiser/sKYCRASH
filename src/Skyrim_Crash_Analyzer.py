@@ -20,6 +20,7 @@ import ai_client
 import ai_format
 import audit_engine
 import diagnostic
+import guard
 import i18n
 import insights
 import knowledge_updater
@@ -128,7 +129,10 @@ def gather_audit_files(folders: list, limit: int=40) -> list:
                 except OSError:
                     continue
     found.sort(reverse=True)
-    return [p for _m, p in found[:limit]]
+    # les crash logs récents passent toujours, même noyés parmi des dizaines de journaux plus récents
+    crashes = [p for _m, p in found if CRASH_NAME_RE.match(os.path.basename(p))][:audit_engine.MAX_CRASH_LOGS]
+    rest = [p for _m, p in found if p not in crashes]
+    return crashes + rest[:max(0, limit - len(crashes))]
 
 
 def read_lines(path: str) -> list:
@@ -199,6 +203,25 @@ def _archive_crash(path: str, folder: str) -> None:
                  if CRASH_NAME_RE.match(n))
     for _m, n in old[:-MAX_ARCHIVED_CRASHES]:  # on garde les plus récents
         os.remove(os.path.join(dest_dir, n))
+
+
+def skse_log_dir(folders: list) -> str:
+    """Dossier « My Games/Skyrim Special Edition/SKSE » : journal SKSE et rapports de Crash Logger."""
+    for docs in insights._docs_dirs(folders) + [str(DOCS / "My Games" / "Skyrim Special Edition")]:
+        d = os.path.join(docs, "SKSE")
+        if os.path.isdir(d):
+            return d
+    return ""
+
+
+def with_skse_dir(game_folders: dict) -> dict:
+    """Dossiers configurés + dossier SKSE, toujours analysé même s'il a été retiré des réglages."""
+    out = {g: list(f) for g, f in game_folders.items()}
+    every = [f for fs in out.values() for f in fs]
+    d = skse_log_dir(every)
+    if d and out and os.path.normpath(d) not in {os.path.normpath(f) for f in every}:
+        next(iter(out.values())).append(d)
+    return out
 
 
 def purge_logs(folders: list) -> tuple:
@@ -382,7 +405,8 @@ class SettingsDialog(QDialog):
         v = QVBoxLayout(page)
         v.setContentsMargins(0, GAP, 0, 0)
         v.setSpacing(GAP)
-        v.addWidget(self._note(L("Dossiers où sKYCRASH cherche les logs de crash, SKSE et Papyrus.")))
+        v.addWidget(self._note(L("Dossiers où sKYCRASH cherche les logs de crash, SKSE et Papyrus.") + " "
+                               + L("Le dossier SKSE (journal SKSE et rapports de Crash Logger) est toujours analysé, même s'il n'est pas dans la liste.")))
         self.folder_lists = {}
         for game in self.temp_folders:
             lw = QListWidget()
@@ -809,7 +833,7 @@ class CrashAnalyzer(QWidget):
 
     # ------------------------------------------------------------ audit / IA
     def _all_folders(self):
-        return [f for folders in self.game_folders.values() for f in folders]
+        return [f for folders in with_skse_dir(self.game_folders).values() for f in folders]
 
     # ------------------------------------------------------------ surveillance
     def _crash_names(self) -> set:
@@ -1027,7 +1051,9 @@ class CrashAnalyzer(QWidget):
 
         def job():
             report = existing or audit_engine.audit_paths(files, settings.get("game_dir", ""))
-            return report, ai_client.chat(settings, report.to_context(), history)
+            answer = ai_client.chat(settings, report.to_context(), history)
+            answer, _removed = guard.apply(answer, report.extras.get("inventory") or {})  # filet de sécurité
+            return report, answer
 
         self._start(job, self._on_chat_done, self._on_chat_failed)
 
@@ -1152,7 +1178,7 @@ class CrashAnalyzer(QWidget):
         results = {}  # chemin complet -> bool erreur
         any_folder = False
 
-        for game, folders in self.game_folders.items():
+        for game, folders in with_skse_dir(self.game_folders).items():
             game_errors = []
             for name, folder, path, _m in list_logs(folders):
                 any_folder = True
@@ -1182,7 +1208,7 @@ class CrashAnalyzer(QWidget):
         self.log_list.clear()
 
         all_logs = []
-        for game, folders in self.game_folders.items():
+        for game, folders in with_skse_dir(self.game_folders).items():
             for name, folder, path, mtime in list_logs(folders):
                 all_logs.append((name, folder, path, mtime, game))
         all_logs.sort(key=lambda x: x[3], reverse=True)

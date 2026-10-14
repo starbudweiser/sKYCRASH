@@ -13,6 +13,7 @@ from dataclasses import dataclass, field
 
 import compat
 import insights
+import inventory
 from i18n import L, N_
 
 MAX_LOG_BYTES = 20 * 1024 * 1024
@@ -128,7 +129,8 @@ class AuditReport:
         return "\n".join(out)
 
     def to_context(self, max_chars: int = 60000) -> str:
-        parts = [self.to_markdown(), "", L("## Extraits de logs")]
+        facts = inventory.to_context(self.extras.get("inventory") or {})
+        parts = ([facts, ""] if facts else []) + [self.to_markdown(), "", L("## Extraits de logs")]
         for path, text in self.excerpts.items():
             parts.append(f"### {os.path.basename(path)}\n{text}")
         return "\n".join(parts)[:max_chars]
@@ -160,7 +162,7 @@ def classify_log(path: str, lines: list) -> str:
         return "crash"
     if name.startswith("papyrus"):
         return "papyrus"
-    if name.startswith(("skse", "sksevr")):
+    if re.match(r"^skse(?:64|vr)?(?:_\w+)?\.log$", name):  # skse64.log, skse64_loader.log ; pas les .txt de mods
         return "skse"
     return "other"
 
@@ -679,6 +681,10 @@ def audit_paths(paths: list, game_dir: str = "") -> AuditReport:
         insights.analyse(report, scores, entries, gdir, read_lines, _bump)
     except (OSError, ValueError) as e:  # recoupements facultatifs : jamais bloquants
         report.findings.append(Finding(SEV_INFO, "recoupement", L("Recoupements incomplets : {e}", e=e), "", ""))
+    try:
+        report.extras["inventory"] = inventory.build(gdir, entries, report.extras.get("history") or [])
+    except OSError:
+        pass  # fiche facultative : l'audit reste valable sans elle
 
     report.suspects = sorted(
         ((n, d["score"], d["reasons"]) for n, d in scores.items()), key=lambda x: -x[1])[:8]

@@ -117,7 +117,7 @@ function m(e, t) {
       ? `crash`
       : n.startsWith(`papyrus`)
         ? `papyrus`
-        : n.startsWith(`skse`)
+        : /^skse(?:64|vr)?(?:_\w+)?\.log$/.test(n) // skse64.log, skse64_loader.log ; pas les .txt de mods
           ? `skse`
           : `other`;
 }

@@ -17,6 +17,7 @@ from i18n import L, N_
 
 BASE_MASTERS = ("skyrim.esm", "update.esm", "dawnguard.esm", "hearthfires.esm", "dragonborn.esm")
 MAX_HISTORY = 12
+MAX_SAVE_AGE_DAYS = 7  # au-delà, la sauvegarde la plus récente n'est sans doute pas celle qui a été chargée
 ARCHIVE_DIR = "sKYCRASH-archive"  # crash logs mis de côté par « Purger les logs », lus par l'historique
 
 CRASH_TIME_RE = re.compile(r"^CRASH TIME:\s*(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})")
@@ -272,6 +273,8 @@ def analyse(report, scores: dict, entries: list, game_dir: str, read_lines, bump
                 break
             if save:
                 break
+        if save and before and before - save.saved_at > MAX_SAVE_AGE_DAYS * 86400:
+            save = None  # trop ancienne (ex. réenregistrée depuis) : comparaison non significative
         if save:
             active_low = {p.lower() for p in act}
             in_save = {p.lower() for p in save.all_plugins}

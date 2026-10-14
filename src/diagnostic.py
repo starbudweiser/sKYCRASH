@@ -11,6 +11,7 @@ from datetime import datetime
 
 import ai_client
 import insights
+import inventory
 from audit_engine import SECTION_RE
 from i18n import L
 
@@ -81,6 +82,9 @@ def build(report, read_lines, anonymize: bool = True, app_name: str = "sKYCRASH"
     if report.game_dir:
         md.append(L("Installation : `{dir}`", dir=report.game_dir))
     audit = report.to_markdown().replace("\n## ", "\n### ")
+    facts = inventory.to_context(ex.get("inventory") or {})
+    if facts:
+        md += ["", facts]
     md += ["", "#" + audit if audit.startswith("# ") else audit, ""]  # titres décalés d'un niveau
 
     md += [L("## Chronologie du dernier plantage"), ""]
