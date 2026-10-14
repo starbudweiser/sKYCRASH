@@ -3,8 +3,9 @@
 Sources (liste blanche de domaines, HTTPS uniquement, aucune clé requise) :
   - GitHub : releases + issues « crash » des dépôts clés (Crash Logger SSE, Community Shaders...)
   - Steam : annonces de mises à jour du jeu (ISteamNews)
-  - Reddit : fils r/skyrimmods parlant de crash/CTD (flux RSS)
+  - Reddit : fils r/skyrimmods et r/macgaming parlant de crash/CTD (flux RSS)
   - SKSE : page officielle des versions
+  - CrossOver : journal des versions (CodeWeavers), pour les joueurs sur Mac
 
 Chaque source produit une note Markdown `auto_<id>.md` (même format que skills/) dans
 ~/Library/Application Support/SkyrimCrashAnalyzer/knowledge. Les notes sont des DONNÉES
@@ -35,11 +36,15 @@ APP_DIR = Path.home() / "Library" / "Application Support" / "SkyrimCrashAnalyzer
 KNOWLEDGE_DIR = APP_DIR / "knowledge"
 STATE_NAME = "_state.json"
 UA = "SkyrimCrashAnalyzer/1.0 (+local knowledge updater)"
-ALLOWED_HOSTS = {"api.github.com", "api.steampowered.com", "www.reddit.com", "skse.silverlock.org"}
+ALLOWED_HOSTS = {"api.github.com", "api.steampowered.com", "www.reddit.com", "skse.silverlock.org",
+                 "www.codeweavers.com"}
 TIMEOUT_S = 15
 MAX_BYTES = 1_500_000
 MAX_NOTE_CHARS = 6000
 DEFAULT_INTERVAL_H = 24
+LAUNCH_INTERVAL_H = 1     # au lancement de l'app : mise à jour si la dernière date de plus d'une heure
+PERIODIC_INTERVAL_H = 6   # app restée ouverte : vérification toutes les 6 h
+SLOW_HOSTS = {"www.reddit.com": 6.0}  # secondes entre deux requêtes vers ces hôtes (sinon 429)
 STEAM_APPID = 489830  # Skyrim Special Edition / Anniversary Edition
 
 _LOCK = threading.Lock()
@@ -56,7 +61,7 @@ class RateLimited(UpdateError):
 @dataclass
 class Source:
     id: str
-    kind: str          # github_releases | github_issues | steam_news | reddit_rss | skse_site
+    kind: str          # github_releases | github_issues | steam_news | reddit_rss | skse_site | crossover_changelog
     target: str        # dépôt "owner/name", appid, requête ou URL
     title: str
     keywords: tuple = ()
@@ -85,10 +90,26 @@ SOURCES = (
            "Mod Organizer 2 — crashs signalés", ("mo2", "mod organizer", "usvfs")),
     Source("gh_wabbajack", "github_releases", "wabbajack-tools/wabbajack",
            "Wabbajack — versions récentes", ("wabbajack",)),
+    Source("gh_enginefixes", "github_releases", "aers/EngineFixesSkyrim64",
+           "SSE Engine Fixes — versions récentes", ("enginefixes", "engine fixes", "tbbmalloc", "enginefixes.toml")),
+    Source("gh_enginefixes_issues", "github_issues", "aers/EngineFixesSkyrim64",
+           "SSE Engine Fixes — crashs signalés", ("enginefixes", "engine fixes", "tbbmalloc")),
+    Source("gh_spid", "github_releases", "powerof3/Spell-Perk-Item-Distributor",
+           "Spell Perk Item Distributor (SPID) — versions récentes", ("po3_spellperkitemdistributor", "spid", "_distr.ini")),
+    Source("gh_kid", "github_releases", "powerof3/Keyword-Item-Distributor",
+           "Keyword Item Distributor (KID) — versions récentes", ("po3_keyworditemdistributor", "_kid.ini")),
+    Source("gh_dxmt", "github_releases", "3Shain/dxmt",
+           "DXMT (Direct3D 11 sur Metal, CrossOver) — versions récentes", ("dxmt", "d3d11.dll", "metal", "crossover")),
+    Source("gh_dxvk", "github_releases", "doitsujin/dxvk",
+           "DXVK (Direct3D sur Vulkan) — versions récentes", ("dxvk", "d3d11.dll", "dxgi.dll", "vulkan")),
     Source("steam_skyrim", "steam_news", str(STEAM_APPID),
            "Skyrim SE/AE — annonces de mises à jour (Steam)", ("skyrimse.exe", "address library", "versionlib")),
     Source("reddit_crash", "reddit_rss", "CTD OR crash",
            "r/skyrimmods — fils récents sur les crashs", ()),
+    Source("reddit_mac", "reddit_rss", "macgaming:skyrim",
+           "r/macgaming — Skyrim sur Mac (CrossOver, Whisky, GPTK)", ("crossover", "wine", "virtualapple", "d3dmetal", "dxmt")),
+    Source("crossover_changelog", "crossover_changelog", "https://www.codeweavers.com/crossover/changelog",
+           "CrossOver — journal des versions (CodeWeavers)", ("crossover", "wine", "virtualapple", "d3dmetal", "dxmt", "moltenvk")),
     Source("skse_site", "skse_site", "https://skse.silverlock.org/",
            "SKSE — page officielle des versions", ("skse", "skse64", "runtime", "address library")),
 )
@@ -261,6 +282,24 @@ def parse_reddit_rss(body: bytes, _target: str) -> list:
     return items
 
 
+_CX_VERSION = re.compile(r'<a name="([\d.]+)"></a>\s*<span[^>]*>(.*?)</span>(.*?)(?=<a name="|$)', re.S)
+_CX_ITEM = re.compile(r"<li>(?!\s*<span)(.*?)</li>", re.S)
+_CX_RELEVANT = re.compile(r"skyrim|bethesda|direct3d|d3d1[01]|dxmt|d3dmetal|metal|crash|freeze|hang", re.I)
+
+
+def parse_crossover_changelog(body: bytes, _target: str) -> list:
+    """Les 6 dernières versions de CrossOver, avec en priorité les correctifs utiles (D3D, Metal, crash, Skyrim)."""
+    raw = body.decode("utf-8", errors="replace")
+    items = []
+    for m in list(_CX_VERSION.finditer(raw))[:6]:
+        head = clean(m.group(2), 80)
+        fixes = [clean(x, 160) for x in _CX_ITEM.findall(m.group(3))]
+        fixes = [f for f in fixes if f]
+        useful = [f for f in fixes if _CX_RELEVANT.search(f)] or fixes[:2]
+        items.append(f"{head} : " + " ; ".join(useful[:4]))
+    return items
+
+
 def parse_skse_site(body: bytes, _target: str) -> list:
     text = _TAG.sub("\n", body.decode("utf-8", errors="replace"))
     out = []
@@ -288,8 +327,11 @@ def _request_for(src: Source) -> tuple:
         return (f"https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/?appid={int(src.target)}"
                 "&count=25&maxlength=500", "application/json", parse_steam_news)
     if src.kind == "reddit_rss":
-        return ("https://www.reddit.com/r/skyrimmods/search.rss?restrict_sr=1&sort=new&q="
-                + urllib.parse.quote(src.target), "application/atom+xml", parse_reddit_rss)
+        sub, _, query = src.target.rpartition(":")  # "sous:requête", sinon r/skyrimmods
+        return (f"https://www.reddit.com/r/{sub or 'skyrimmods'}/search.rss?restrict_sr=1&sort=new&q="
+                + urllib.parse.quote(query), "application/atom+xml", parse_reddit_rss)
+    if src.kind == "crossover_changelog":
+        return (src.target, "text/html", parse_crossover_changelog)
     if src.kind == "skse_site":
         return (src.target, "text/html", parse_skse_site)
     raise UpdateError(f"type de source inconnu : {src.kind}")
@@ -362,6 +404,7 @@ def update_all(out_dir: Path | None = None, force: bool = False, sources=None, f
         srcs = state.setdefault("sources", {})
         now = datetime.now(timezone.utc).strftime("%Y-%m-%d")
         blocked_hosts = set()
+        last_call = {}
         try:
             out.mkdir(parents=True, exist_ok=True)
         except OSError as e:
@@ -375,6 +418,9 @@ def update_all(out_dir: Path | None = None, force: bool = False, sources=None, f
                 host = urllib.parse.urlparse(url).hostname
                 if host in blocked_hosts:
                     raise RateLimited("hôte ignoré (quota atteint)")
+                if host in SLOW_HOSTS and host in last_call:
+                    sleep(max(0.0, SLOW_HOSTS[host] - (time.time() - last_call[host])))
+                last_call[host] = time.time()
                 path = out / f"auto_{src.id}.md"
                 status_code, body, etag = fetch(url, None if (force or not path.exists()) else etags.get(url), accept)
                 if status_code == 304:

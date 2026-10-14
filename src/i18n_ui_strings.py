@@ -50,7 +50,6 @@ TR = {
         "Permanently delete {n} log file(s)?", "Eliminare definitivamente {n} file di log?",
         "¿Eliminar definitivamente {n} archivo(s) de log?"),
     "Dossiers concernés :": ("Affected folders:", "Cartelle interessate:", "Carpetas afectadas:"),
-    "Action irréversible.": ("This cannot be undone.", "Azione irreversibile.", "Acción irreversible."),
     "Supprimer": ("Delete", "Elimina", "Eliminar"),
     "Annuler": ("Cancel", "Annulla", "Cancelar"),
     "{n} fichier(s) supprimé(s).": ("{n} file(s) deleted.", "{n} file eliminato/i.", "{n} archivo(s) eliminado(s)."),
@@ -306,4 +305,17 @@ TR = {
     "{n} plugin(s) ajoutés depuis la sauvegarde « {s} »": ("{n} plugin(s) added since the save “{s}”", "{n} plugin aggiunti dal salvataggio «{s}»", "{n} plugin(s) añadidos desde la partida «{s}»"),
     "{n} plugin(s) de la sauvegarde « {s} » ne sont plus actifs": ("{n} plugin(s) from the save “{s}” are no longer active", "{n} plugin del salvataggio «{s}» non sono più attivi", "{n} plugin(s) de la partida «{s}» ya no están activos"),
     "| Date | Point de plantage | Durée de jeu | Objets en cause |": ("| Date | Crash point | Play time | Objects involved |", "| Data | Punto di crash | Durata di gioco | Oggetti coinvolti |", "| Fecha | Punto de crash | Tiempo de juego | Objetos implicados |"),
+    # ------------------------------------------------------------ purge (archive) et dossier du jeu
+    "Ancien : {old}\nRetrouvé : {new}": ("Old: {old}\nFound: {new}", "Precedente: {old}\nTrovata: {new}", "Anterior: {old}\nEncontrada: {new}"),
+    "Le dossier du jeu des réglages n'existe plus. Utiliser l'installation retrouvée ?": ("The game folder in the settings no longer exists. Use the installation that was found?", "La cartella del gioco nelle impostazioni non esiste più. Usare l'installazione trovata?", "La carpeta del juego de los ajustes ya no existe. ¿Usar la instalación encontrada?"),
+    "Les autres logs sont supprimés : action irréversible.": ("The other logs are deleted: this cannot be undone.", "Gli altri log vengono eliminati: azione irreversibile.", "Los demás logs se eliminan: acción irreversible."),
+    "Les {k} rapport(s) de plantage sont archivés dans « {dir} » : l'historique les garde.": ("The {k} crash report(s) are archived in “{dir}”: the history keeps them.", "I {k} rapporti di crash vengono archiviati in «{dir}»: lo storico li conserva.", "Los {k} informe(s) de crash se archivan en «{dir}»: el historial los conserva."),
+    "Plus tard": ("Later", "Più tardi", "Más tarde"),
+    "Utiliser ce dossier": ("Use this folder", "Usa questa cartella", "Usar esta carpeta"),
+    "{n} rapport(s) de plantage archivé(s).": ("{n} crash report(s) archived.", "{n} rapporto/i di crash archiviato/i.", "{n} informe(s) de crash archivado(s)."),
+    # ------------------------------------------------------------ veille au lancement
+    "Base de connaissances : mise à jour…": ("Knowledge base: updating…", "Base di conoscenza: aggiornamento…", "Base de conocimientos: actualizando…"),
+    "Base de connaissances : veille désactivée": ("Knowledge base: monitoring off", "Base di conoscenza: monitoraggio disattivato", "Base de conocimientos: vigilancia desactivada"),
+    "Base de connaissances : {n} sources, mise à jour {d}": ("Knowledge base: {n} sources, updated {d}", "Base di conoscenza: {n} fonti, aggiornata {d}", "Base de conocimientos: {n} fuentes, actualizada {d}"),
+    "{f} en échec": ("{f} failed", "{f} non riuscite", "{f} con error"),
 }

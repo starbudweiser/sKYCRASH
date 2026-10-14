@@ -17,7 +17,9 @@ h2 { font: 700 14px/20px var(--font-sans); }
 .btn-accent { background: var(--accent-fill); color: var(--on-accent-fill); font-weight: 700; }
 .btn-accent:hover { background: var(--accent-fill-hover); }
 .btn-accent:active { background: var(--accent-fill-pressed); }
-.danger-text { color: var(--danger); align-self: flex-start; }
+.danger-text { color: var(--danger); }
+.bottom-actions { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2); }
+.card.save::before { background: var(--accent); }
 
 .dropzone { padding: var(--space-4); border: 1px dashed var(--border-control); border-radius: var(--radius-lg); text-align: center; color: var(--text-subtle); background: var(--bg-inset); transition: border-color .15s, color .15s, background-color .15s; }
 .dropzone.over { border-color: var(--accent); color: var(--accent-text); background: var(--accent-tint); }

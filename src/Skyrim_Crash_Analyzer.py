@@ -21,6 +21,7 @@ import ai_format
 import audit_engine
 import diagnostic
 import i18n
+import insights
 import knowledge_updater
 from i18n import L, N_
 
@@ -181,16 +182,42 @@ def list_logs(folders: list) -> list:
     return out
 
 
+CRASH_NAME_RE = re.compile(r"^crash[-_].*\.log$", re.I)
+MAX_ARCHIVED_CRASHES = 50
+
+
+def _archive_crash(path: str, folder: str) -> None:
+    """Déplace un crash log dans le dossier d'archive (lu par l'historique), sans écraser."""
+    dest_dir = os.path.join(folder, insights.ARCHIVE_DIR)
+    os.makedirs(dest_dir, exist_ok=True)
+    stem, ext = os.path.splitext(os.path.basename(path))
+    dest, k = os.path.join(dest_dir, stem + ext), 1
+    while os.path.exists(dest):
+        dest, k = os.path.join(dest_dir, f"{stem}-{k}{ext}"), k + 1
+    os.rename(path, dest)
+    old = sorted((os.path.getmtime(os.path.join(dest_dir, n)), n) for n in os.listdir(dest_dir)
+                 if CRASH_NAME_RE.match(n))
+    for _m, n in old[:-MAX_ARCHIVED_CRASHES]:  # on garde les plus récents
+        os.remove(os.path.join(dest_dir, n))
+
+
 def purge_logs(folders: list) -> tuple:
-    """Supprime les logs des dossiers configurés (non récursif). Retourne (supprimés, erreurs)."""
-    deleted, errors = 0, []
-    for name, _folder, path, _m in list_logs(folders):
+    """Supprime les logs des dossiers configurés (non récursif) ; les crash logs sont archivés.
+
+    Retourne (supprimés, archivés, erreurs).
+    """
+    deleted, archived, errors = 0, 0, []
+    for name, folder, path, _m in list_logs(folders):
         try:
-            os.remove(path)
-            deleted += 1
+            if CRASH_NAME_RE.match(name):
+                _archive_crash(path, folder)
+                archived += 1
+            else:
+                os.remove(path)
+                deleted += 1
         except OSError as e:
             errors.append(f"{name} : {e.strerror or e}")
-    return deleted, errors
+    return deleted, archived, errors
 
 
 # === SYSTÈME DE STYLE UNIFIÉ (design system Socle) ===
@@ -653,6 +680,10 @@ class CrashAnalyzer(QWidget):
         chat_title.setFixedHeight(CTRL_H)
         chat_title.setStyleSheet("font-size: 16px; font-weight: 700;")
         head.addWidget(chat_title, 1)
+        self.kb_status = QLabel("")
+        self.kb_status.setStyleSheet("color: #8f8f8f; font-size: 11px;")
+        self.kb_status.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+        head.addWidget(self.kb_status)  # à droite du titre, à la place de l'ancien bouton « IA… »
 
         self.chat_view = QTextEdit()
         self.chat_view.setReadOnly(True)
@@ -724,19 +755,35 @@ class CrashAnalyzer(QWidget):
         self._setup_watch()
         self.center_window()
 
-        # veille : mise à jour de la base de connaissances (en arrière-plan, au plus 1x/24 h)
+        # veille : base de connaissances mise à jour au lancement (si > 1 h), puis toutes les 6 h
         self._kb_timer = QTimer(self)
-        self._kb_timer.setInterval(6 * 3600 * 1000)
-        self._kb_timer.timeout.connect(self._maybe_update_knowledge)
+        self._kb_timer.setInterval(int(knowledge_updater.PERIODIC_INTERVAL_H * 3600 * 1000))
+        self._kb_timer.timeout.connect(lambda: self._maybe_update_knowledge(knowledge_updater.PERIODIC_INTERVAL_H))
         self._kb_timer.start()
-        QTimer.singleShot(4000, self._maybe_update_knowledge)
+        self._show_kb_status()
+        QTimer.singleShot(2000, lambda: self._maybe_update_knowledge(knowledge_updater.LAUNCH_INTERVAL_H))
 
-    def _maybe_update_knowledge(self):
+    def _maybe_update_knowledge(self, interval_h: float):
         if self.settings.get("auto_knowledge", "1") != "1" or os.environ.get("SKYRIM_CA_FOLDERS"):
             return  # désactivée, ou mode preview (ne rien écrire)
-        if not knowledge_updater.due():
+        if not knowledge_updater.due(interval_h):
             return
-        self._start(lambda: knowledge_updater.update_all(), lambda _r: None, lambda _m: None)
+        self.kb_status.setText(L("Base de connaissances : mise à jour…"))
+        self._start(lambda: knowledge_updater.update_all(),
+                    lambda rep: self._show_kb_status(rep), lambda _m: self._show_kb_status())
+
+    def _show_kb_status(self, rep=None):
+        """Ligne discrète sous le titre du chat : fraîcheur de la base et sources en échec."""
+        if self.settings.get("auto_knowledge", "1") != "1":
+            self.kb_status.setText(L("Base de connaissances : veille désactivée"))
+            return
+        last = knowledge_updater.status().get("last_run")
+        when = datetime.fromtimestamp(last).strftime("%d/%m %H:%M") if last else L("jamais")
+        text = L("Base de connaissances : {n} sources, mise à jour {d}", n=len(knowledge_updater.SOURCES), d=when)
+        if rep is not None and rep.failed:
+            text += " — " + L("{f} en échec", f=len(rep.failed))
+            self.kb_status.setToolTip("\n".join(f"{k} : {v}" for k, v in rep.failed.items()))
+        self.kb_status.setText(text)
 
     def _apply_texts(self):
         """(Re)pose tous les textes statiques dans la langue courante."""
@@ -852,6 +899,7 @@ class CrashAnalyzer(QWidget):
             self.export_button.setEnabled(True)
             self.audit_report = report
             self.render_audit(report)
+            self._offer_game_dir(report)
             subprocess.run(["open", "-R", path], check=False)  # le fichier apparaît sélectionné dans le Finder
 
         def fail(msg):
@@ -864,6 +912,27 @@ class CrashAnalyzer(QWidget):
         self.audit_button.setEnabled(True)
         self.audit_report = report
         self.render_audit(report)
+        self._offer_game_dir(report)
+
+    def _offer_game_dir(self, report):
+        """Le dossier du jeu des réglages n'existe plus mais l'installation a été retrouvée : proposer de l'adopter."""
+        found = report.extras.get("game_dir_found")
+        old = self.settings.get("game_dir", "")
+        if not found or not old or found == getattr(self, "_game_dir_declined", None):
+            return
+        box = QMessageBox(self)
+        box.setIcon(QMessageBox.Icon.Question)
+        box.setWindowTitle(L("Dossier du jeu"))
+        box.setText(L("Le dossier du jeu des réglages n'existe plus. Utiliser l'installation retrouvée ?"))
+        box.setInformativeText(L("Ancien : {old}\nRetrouvé : {new}", old=old, new=found))
+        use = box.addButton(L("Utiliser ce dossier"), QMessageBox.ButtonRole.AcceptRole)
+        box.addButton(L("Plus tard"), QMessageBox.ButtonRole.RejectRole)
+        box.exec()
+        if box.clickedButton() is use:
+            self.settings["game_dir"] = found
+            save_settings(self.settings)
+        else:
+            self._game_dir_declined = found  # ne pas redemander pendant cette session
 
     def _on_audit_failed(self, msg):
         self.audit_button.setEnabled(True)
@@ -1054,17 +1123,24 @@ class CrashAnalyzer(QWidget):
         box = QMessageBox(self)
         box.setIcon(QMessageBox.Icon.Warning)
         box.setWindowTitle(L("Purger les logs"))
-        box.setText(L("Supprimer définitivement {n} fichier(s) log ?", n=len(logs)))
-        box.setInformativeText(L("Dossiers concernés :") + "\n" + "\n".join(dirs) + "\n\n" + L("Action irréversible."))
+        crashes = sum(1 for n, _f, _p, _m in logs if CRASH_NAME_RE.match(n))
+        box.setText(L("Supprimer définitivement {n} fichier(s) log ?", n=len(logs) - crashes))
+        box.setInformativeText(
+            L("Dossiers concernés :") + "\n" + "\n".join(dirs) + "\n\n"
+            + (L("Les {k} rapport(s) de plantage sont archivés dans « {dir} » : l'historique les garde.",
+                 k=crashes, dir=insights.ARCHIVE_DIR) + "\n" if crashes else "")
+            + L("Les autres logs sont supprimés : action irréversible."))
         yes = box.addButton(L("Supprimer"), QMessageBox.ButtonRole.DestructiveRole)
         box.addButton(L("Annuler"), QMessageBox.ButtonRole.RejectRole)
         box.exec()
         if box.clickedButton() is not yes:
             return
-        deleted, errors = purge_logs(folders)
+        deleted, archived, errors = purge_logs(folders)
         self.analyze_logs()
         self._known_crashes = self._crash_names()
         msg = L("{n} fichier(s) supprimé(s).", n=deleted)
+        if archived:
+            msg += " " + L("{n} rapport(s) de plantage archivé(s).", n=archived)
         if errors:
             QMessageBox.warning(self, APP_NAME, msg + "\n\n" + L("Échecs :") + "\n" + "\n".join(errors[:10]))
         else:

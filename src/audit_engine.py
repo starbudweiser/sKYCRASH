@@ -667,6 +667,8 @@ def audit_paths(paths: list, game_dir: str = "") -> AuditReport:
             SEV_WARN, "réglages", L("Le dossier du jeu des réglages n'existe plus"),
             L("Réglage : {old} — utilisé à la place : {new}", old=game_dir, new=gdir or L("aucun")),
             L("réglages"), [], L("Mettre à jour le dossier du jeu dans Réglages… > Général.")))
+        if gdir:
+            report.extras["game_dir_found"] = gdir  # proposé à l'utilisateur pour corriger le réglage
     if gdir:
         try:
             compat.audit_install(gdir, report, scores, _bump)

@@ -17,6 +17,7 @@ from i18n import L, N_
 
 BASE_MASTERS = ("skyrim.esm", "update.esm", "dawnguard.esm", "hearthfires.esm", "dragonborn.esm")
 MAX_HISTORY = 12
+ARCHIVE_DIR = "sKYCRASH-archive"  # crash logs mis de côté par « Purger les logs », lus par l'historique
 
 CRASH_TIME_RE = re.compile(r"^CRASH TIME:\s*(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})")
 CRASH_NAME_RE = re.compile(r"crash-(\d{4})-(\d{2})-(\d{2})-(\d{2})-(\d{2})-(\d{2})", re.I)
@@ -104,6 +105,7 @@ def crash_history(folders: list, read_lines) -> list:
     paths = set()
     for d in folders:
         paths.update(glob.glob(os.path.join(d, "crash-*.log")))
+        paths.update(glob.glob(os.path.join(d, ARCHIVE_DIR, "crash-*.log")))
     items = []
     for p in paths:
         try:
@@ -206,7 +208,8 @@ def analyse(report, scores: dict, entries: list, game_dir: str, read_lines, bump
     extras = report.extras
     history = crash_history(folders, read_lines)
     extras["history"] = history
-    latest = history[0] if history else None
+    # le dernier plantage « actif » : un crash log archivé par la purge ne sert qu'à l'historique
+    latest = history[0] if history and ARCHIVE_DIR not in history[0]["path"].split(os.sep) else None
 
     # 1. chronologie du dernier plantage
     if latest and latest["time"]:

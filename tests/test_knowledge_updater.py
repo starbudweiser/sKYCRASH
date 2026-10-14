@@ -29,6 +29,12 @@ RSS = (b'<?xml version="1.0"?><feed xmlns="http://www.w3.org/2005/Atom"><entry><
        b'<updated>2026-10-09T00:00:00+00:00</updated><content type="html">&lt;p&gt;crash with Foo.dll&lt;/p&gt;</content></entry>'
        b'<entry><title>Cool armor</title><updated>2026-10-09T00:00:00+00:00</updated><content>nice</content></entry></feed>')
 
+CROSSOVER = (b'<div id="changelog"><a name="26.3.0"></a> <span class="txt_yellow"><b>26.3.0</b> CrossOver - July 21, 2026</span>'
+             b'<ul><li><span class="subtitle">Bug fixes:</span><ul><li>Fix for Diablo IV not launching.</li>'
+             b'<li>Fix for crash in Direct3D 11 games using DXMT.</li></ul></li></ul><hr>'
+             b'<a name="26.2.0"></a> <span class="txt_yellow"><b>26.2.0</b> CrossOver - June 9, 2026</span>'
+             b'<ul><li><span class="subtitle">Bug fixes:</span><ul><li>Added warnings for 32-bit bottles.</li></ul></li></ul></div>')
+
 
 def fake_fetch(url, etag=None, accept=""):
     if "releases" in url:
@@ -39,6 +45,8 @@ def fake_fetch(url, etag=None, accept=""):
         return 200, STEAM, None
     if "reddit" in url:
         return 200, RSS, None
+    if "codeweavers" in url:
+        return 200, CROSSOVER, None
     return 200, b"<html><body><p>Skyrim Special Edition runtime 1.6.1170 build 2.2.6</p></body></html>", None
 
 
@@ -72,6 +80,20 @@ class TestParsers(unittest.TestCase):
 
     def test_steam_filter(self):
         self.assertEqual(len(ku.parse_steam_news(STEAM, "")), 1)
+
+    def test_crossover_changelog(self):
+        items = ku.parse_crossover_changelog(CROSSOVER, "")
+        self.assertEqual(len(items), 2)
+        self.assertIn("26.3.0 CrossOver - July 21, 2026", items[0])
+        self.assertIn("Direct3D 11", items[0])          # correctif pertinent retenu en priorité
+        self.assertNotIn("Diablo", items[0])
+        self.assertIn("32-bit", items[1])               # rien de pertinent : les premiers correctifs
+
+    def test_reddit_subreddit_target(self):
+        url = ku._request_for(ku.Source("x", "reddit_rss", "macgaming:skyrim", "t"))[0]
+        self.assertIn("/r/macgaming/search.rss", url)
+        self.assertTrue(url.endswith("q=skyrim"))
+        self.assertIn("/r/skyrimmods/", ku._request_for(ku.Source("y", "reddit_rss", "CTD OR crash", "t"))[0])
 
     def test_rss_filter_and_dtd(self):
         self.assertEqual(len(ku.parse_reddit_rss(RSS, "")), 1)

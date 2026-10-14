@@ -1,6 +1,7 @@
 import "@socle/tokens.css";
 import "@socle/components/bundle.css";
 import "./style.css";
+import * as XINS from "./insights.js";
 
 var e = { CRIT: 3, WARN: 2, INFO: 1 },
   t = { 3: `CRITIQUE`, 2: `AVERTISSEMENT`, 1: `INFO` },
@@ -26,7 +27,7 @@ var e = { CRIT: 3, WARN: 2, INFO: 1 },
   r =
     /^(d3d1[01]|d3d12|dxgi|nvwgf2um\w*|atidxx\w*|amdxx\w*|d3dcompiler_\d+|dxvk\w*|d3dmetal)\.dll$/i,
   i = /\b([A-Za-z0-9_\-.]+\.(?:dll|exe))\b/gi,
-  a = /\b([A-Za-z0-9_\-.']+\.(?:esp|esm|esl))\b/gi,
+  a = /\b([A-Za-z0-9_\-. ']+?\.(?:esp|esm|esl))\b/gi, // comme PLUGIN_RE de l'app : noms avec espaces
   o = /\b(EXCEPTION_[A-Z_]+)\b/,
   s = 400,
   c = [
@@ -371,6 +372,8 @@ function v(e) {
               (_(e.name, e.lines, t, n), XPA(e.name, e.lines, t, n))
             : e.kind === `other` && XOT(e.name, e.lines, t, n);
     }),
+    (t.extras = {}),
+    XINS.analyse(r, t, n, p, XSAVES),
     (t.suspects = Object.entries(n)
       .map(([e, t]) => [e, t.score, t.reasons])
       .sort((e, t) => t[1] - e[1])
@@ -1380,7 +1383,8 @@ var E = (e) => document.getElementById(e),
   O = [],
   k = null,
   A = [],
-  j = !1;
+  j = !1,
+  XSAVES = [];
 function M(e, t, n) {
   let r = document.createElement(e);
   return t && (r.className = t), n !== void 0 && (r.textContent = n), r;
@@ -1398,9 +1402,20 @@ async function N(e) {
   };
 }
 async function P(e) {
-  let t = [...e].filter((e) => /\.(log|txt)$/i.test(e.name));
-  if (!t.length) return I(`Aucun fichier .log/.txt reconnu.`);
-  F(await Promise.all(t.map(N)));
+  let t = [...e].filter((e) => /\.(log|txt)$/i.test(e.name)),
+    s = [...e].filter((e) => /\.ess$/i.test(e.name));
+  if (!t.length && !s.length) return I(`Aucun fichier .log/.txt reconnu.`);
+  let errs = [];
+  for (const f of s) {
+    try {
+      XSAVES = XSAVES.filter((x) => x.name !== f.name);
+      XSAVES.push(await XINS.readSave(f.name, await f.arrayBuffer(), f.lastModified));
+    } catch (err) {
+      errs.push(`${f.name} : ${err.message}`);
+    }
+  }
+  F(t.length ? await Promise.all(t.map(N)) : O);
+  errs.length && I(`Sauvegarde illisible : ${errs.join(" ; ")}`);
 }
 function XLV(e) {
   let t = document.getElementById(`logview`);
@@ -1444,7 +1459,17 @@ function F(e) {
           }),
           t.append(r);
       }),
+    XSAVES.forEach((s) => {
+      let r = M(`div`, `card save`);
+      r.append(
+        M(`div`, `n`, s.name),
+        M(`div`, `k`, `sauvegarde · ${s.player} · ${s.all.length} plugins`),
+      ),
+        (r.title = s.name),
+        t.append(r);
+    }),
     (E(`btn-audit`).disabled = !O.length),
+    (E(`btn-export`).disabled = !O.length),
     I(`${O.length} fichier(s) chargé(s). Lancez l'audit.`);
 }
 function XFMT(el, tx) {
@@ -1634,6 +1659,20 @@ function L() {
       }),
     (e.scrollTop = 0);
 }
+function XEXP() {
+  if (!O.length)
+    return I(`Aucun log à exporter. Configurez les dossiers dans Réglages… > Dossiers de logs.`);
+  L();
+  let anon = localStorage.getItem(`sca.anon`) !== `0`;
+  XINS.downloadText(
+    XINS.buildDiagnostic(k, O.map((e) => ({ ...e, lines: e.text.split(/\r?\n/), kind: m(e.name, e.text.split(/\r?\n/, 60)) })),
+      anon ? window.XANON || ((t) => t) : (t) => t),
+    XINS.defaultFilename(),
+  );
+}
+document.addEventListener(`keydown`, (e) => {
+  (e.metaKey || e.ctrlKey) && e.key.toLowerCase() === `e` && (e.preventDefault(), XEXP());
+});
 function R(e, t) {
   let n = M(`div`, `msg ${e}`, t),
     r = E(`chat-log`);
@@ -1664,11 +1703,15 @@ async function z(e) {
 E(`btn-sample`).addEventListener(`click`, () => F(b.map((e) => ({ ...e })))),
   E(`file-input`).addEventListener(`change`, (e) => P(e.target.files)),
   E(`btn-audit`).addEventListener(`click`, L),
+  E(`btn-export`).addEventListener(`click`, XEXP),
   E(`btn-purge`).addEventListener(`click`, () => {
     if (!O.length) return I(`Aucun fichier log à supprimer.`);
+    let c = O.filter((e) => m(e.name, e.text.split(/\r?\n/, 60)) === `crash`).length;
     confirm(
-      `Supprimer définitivement ${O.length} fichier(s) log ? (simulation dans la preview)`,
-    ) && (F([]), I(`Logs purgés.`));
+      `Supprimer définitivement ${O.length - c} fichier(s) log ?` +
+        (c ? ` Les ${c} rapport(s) de plantage sont archivés dans « sKYCRASH-archive » : l'historique les garde.` : ``) +
+        ` (simulation dans la preview)`,
+    ) && ((XSAVES = []), F([]), I(`Logs purgés.`));
   }),
   E(`chat-form`).addEventListener(`submit`, (e) => {
     e.preventDefault();

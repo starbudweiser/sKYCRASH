@@ -155,5 +155,24 @@ class InsightTests(unittest.TestCase):
             self.assertIn("**DynamicMusicAndSounds.log** : 3 ligne(s)", md)
 
 
+class PurgeArchiveTests(unittest.TestCase):
+    def test_purge_archives_crash_logs(self):
+        import Skyrim_Crash_Analyzer as app
+        import insights
+        with tempfile.TemporaryDirectory() as d:
+            crash = write(os.path.join(d, "crash-2026-10-14-02-46-21.log"),
+                          crash_log("2026-10-14 02:46:21", "EngineFixes.dll+00F05EF", ["TESRegion"], ["A.dll"], []))
+            write(os.path.join(d, "SPS.log"), "x")
+            deleted, archived, errors = app.purge_logs([d])
+            self.assertEqual((deleted, archived, errors), (1, 1, []))
+            self.assertFalse(os.path.exists(crash))
+            self.assertTrue(os.path.isfile(os.path.join(d, insights.ARCHIVE_DIR, os.path.basename(crash))))
+            hist = insights.crash_history([d], audit_engine.read_lines)
+            self.assertEqual(len(hist), 1)  # l'historique lit l'archive
+            # un crash archivé ne sert qu'à l'historique, pas à la chronologie du « dernier » plantage
+            r = audit_engine.audit_paths([write(os.path.join(d, "skse64.log"), "SKSE64 runtime")])
+            self.assertNotIn("timeline", r.extras)
+
+
 if __name__ == "__main__":
     unittest.main()
