@@ -21,6 +21,7 @@ import ai_format
 import audit_engine
 import diagnostic
 import guard
+import jev_client
 import i18n
 import insights
 import knowledge_updater
@@ -446,6 +447,11 @@ class SettingsDialog(QDialog):
         form.addRow(L("Clé API Gemini"), self.g_key)
         form.addRow(L("URL Ollama"), self.o_url)
         form.addRow(L("Modèle Ollama"), self._with_refresh(self.o_model, self.refresh_ollama))
+        self.j_key = QLineEdit()
+        self.j_key.setEchoMode(QLineEdit.EchoMode.Password)
+        self.j_key.setPlaceholderText(L("(clé enregistrée)") if jev_client.get_api_key() else L("Facultatif : clé TypeSafe"))
+        self.j_key.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+        form.addRow(L("Clé Jev (vérification)"), self.j_key)
         self.use_skills = socle_qt.WrapChoice(L("Utiliser les fiches de connaissances modding Skyrim (dossier skills/)"))
         self.use_skills.setChecked(self.settings.get("use_skills", "1") == "1")
         self.web_search = socle_qt.WrapChoice(L("Recherche web Google (Gemini uniquement, plus lent)"))
@@ -456,7 +462,8 @@ class SettingsDialog(QDialog):
         self.anonymize.setChecked(self.settings.get("anonymize", "1") == "1")
         form.addRow(L("Confidentialité"), self.anonymize)
         form.addRow(self._note(L("La clé est stockée dans le Trousseau macOS (jamais en clair dans la config). ")
-                               + L("Avec Gemini, le rapport d'audit et des extraits de logs sont envoyés à Google. Ollama reste 100 % local.")))
+                               + L("Avec Gemini, le rapport d'audit et des extraits de logs sont envoyés à Google. Ollama reste 100 % local.") + " "
+                               + L("Avec une clé Jev (TypeSafe), chaque conseil de l'assistant est confronté aux faits vérifiés de l'installation, envoyés à TypeSafe ; les conseils contredits sont retirés.")))
         return page
 
     def _knowledge_tab(self):
@@ -599,6 +606,9 @@ class SettingsDialog(QDialog):
 
     def get_key(self):
         return self.g_key.text().strip()
+
+    def get_jev_key(self):
+        return self.j_key.text().strip()
 
 
 class CrashAnalyzer(QWidget):
@@ -1015,6 +1025,12 @@ class CrashAnalyzer(QWidget):
                 ai_client.set_api_key(key)
             except ai_client.AIError as e:
                 QMessageBox.warning(self, APP_NAME, str(e))
+        jkey = dlg.get_jev_key()
+        if jkey:
+            try:
+                jev_client.set_api_key(jkey)
+            except jev_client.JevError as e:
+                QMessageBox.warning(self, APP_NAME, str(e))
 
     def explain_crash(self):
         self.chat_input.setText(
@@ -1052,7 +1068,8 @@ class CrashAnalyzer(QWidget):
         def job():
             report = existing or audit_engine.audit_paths(files, settings.get("game_dir", ""))
             answer = ai_client.chat(settings, report.to_context(), history)
-            answer, _removed = guard.apply(answer, report.extras.get("inventory") or {})  # filet de sécurité
+            answer, _removed = guard.apply(answer, report.extras.get("inventory") or {},
+                                     guard.default_judge())  # filet de sécurité (motifs + Jev si clé)
             return report, answer
 
         self._start(job, self._on_chat_done, self._on_chat_failed)

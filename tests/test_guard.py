@@ -44,6 +44,43 @@ class GuardTests(unittest.TestCase):
         self.assertEqual(out, BAD)
 
 
+class JevJudgeTests(unittest.TestCase):
+    def test_judge_removes_flagged_items_only(self):
+        seen = []
+
+        def judge(items, facts):
+            seen.extend(items)
+            return ["ENB" in t for t in items]
+
+        out, removed = guard.apply(BAD + "\n6. Désinstaller ENB, absent de votre jeu.", FACTS, judge)
+        self.assertEqual(removed[-1], guard.JEV_LABEL)
+        self.assertNotIn("ENB", out)
+        self.assertIn("2. Désactiver DynamicMusicAndSounds.dll", out)
+        self.assertNotIn("Installer Crash Logger", " ".join(seen))  # déjà retiré par les motifs
+
+    def test_service_error_keeps_patterns(self):
+        def judge(items, facts):
+            raise guard.jev_client.JevError("hors ligne")
+
+        self.assertEqual(guard.apply(BAD, FACTS, judge), guard.apply(BAD, FACTS))
+
+    def test_jev_judge_threshold(self):
+        def fake(state, questions):
+            self.assertEqual(state["advice"], ["a", "b", "c"])
+            self.assertIn("Faits vérifiés", state["installation_facts"])
+            self.assertIn("`advice[1]`", questions["c1"]["instructions"])
+            p = {"c0": 0.95, "c1": 0.6, "c2": 0.1}
+            return {k: {"choice": "contradicts" if v > 0.5 else "consistent",
+                        "probabilities": {"contradicts": v}} for k, v in p.items()}
+
+        old = guard.jev_client.system_one
+        guard.jev_client.system_one = fake
+        try:
+            self.assertEqual(guard.jev_judge(["a", "b", "c"], FACTS), [True, False, False])
+        finally:
+            guard.jev_client.system_one = old
+
+
 class InventoryTests(unittest.TestCase):
     def test_facts_from_disk(self):
         with tempfile.TemporaryDirectory() as d:
