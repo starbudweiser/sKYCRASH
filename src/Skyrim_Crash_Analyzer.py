@@ -8,8 +8,8 @@ from datetime import datetime
 from pathlib import Path
 
 import socle_qt
-from PyQt6.QtCore import QFileSystemWatcher, QSize, Qt, QThread, QTimer, pyqtSignal
-from PyQt6.QtGui import QAction, QColor, QCursor, QFontMetrics, QKeySequence, QPalette, QTextCharFormat
+from PyQt6.QtCore import QFileSystemWatcher, QSize, Qt, QThread, QTimer, QUrl, pyqtSignal
+from PyQt6.QtGui import QAction, QColor, QCursor, QDesktopServices, QFontMetrics, QKeySequence, QPalette, QTextCharFormat
 from PyQt6.QtWidgets import (
     QApplication, QComboBox, QDialog, QDialogButtonBox, QFileDialog, QFormLayout, QFrame,
     QGridLayout, QGroupBox, QHBoxLayout, QLineEdit, QListWidget, QListWidgetItem, QMenuBar, QMessageBox, QPushButton,
@@ -451,7 +451,21 @@ class SettingsDialog(QDialog):
         self.j_key.setEchoMode(QLineEdit.EchoMode.Password)
         self.j_key.setPlaceholderText(L("(clé enregistrée)") if jev_client.get_api_key() else L("Facultatif : clé TypeSafe"))
         self.j_key.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
-        form.addRow(L("Clé Jev (vérification)"), self.j_key)
+        balance = flat_button(QPushButton(L("Voir le solde ↗")), "neutral")
+        balance.clicked.connect(lambda: QDesktopServices.openUrl(QUrl(jev_client.CONSOLE_URL)))
+        j_row = QHBoxLayout()
+        j_row.setSpacing(GAP)
+        j_row.setContentsMargins(0, 0, 0, 0)
+        j_row.addWidget(self.j_key, 1)
+        j_row.addWidget(balance)
+        j_holder = QWidget()
+        j_holder.setLayout(j_row)
+        form.addRow(L("Clé Jev (vérification)"), j_holder)
+        u = jev_client.month_usage()
+        form.addRow("", self._note(L("Ce mois-ci : {n} requête(s) Jev · {t} jetons ({i} en entrée, {o} en sortie), comptés par "
+                                     "l'appli. Le solde de crédits n'est visible que sur la console TypeSafe.",
+                                     n=u["requests"], t=f'{u["input_tokens"] + u["output_tokens"]:,}'.replace(",", " "),
+                                     i=f'{u["input_tokens"]:,}'.replace(",", " "), o=f'{u["output_tokens"]:,}'.replace(",", " "))))
         self.use_skills = socle_qt.WrapChoice(L("Utiliser les fiches de connaissances modding Skyrim (dossier skills/)"))
         self.use_skills.setChecked(self.settings.get("use_skills", "1") == "1")
         self.web_search = socle_qt.WrapChoice(L("Recherche web Google (Gemini uniquement, plus lent)"))

@@ -350,4 +350,9 @@ TR = {
     "Module 'keyring' indisponible : définissez TYPESAFE_API_KEY dans l'environnement.": ("'keyring' module unavailable: set TYPESAFE_API_KEY in the environment.", "Modulo 'keyring' non disponibile: imposta TYPESAFE_API_KEY nell'ambiente.", "Módulo 'keyring' no disponible: define TYPESAFE_API_KEY en el entorno."),
     'contradiction avec les faits (Jev)': ('contradicts the facts (Jev)', 'contraddice i fatti (Jev)', 'contradice los datos (Jev)'),
     "variable d'environnement TYPESAFE_API_KEY": ('TYPESAFE_API_KEY environment variable', "variabile d'ambiente TYPESAFE_API_KEY", 'variable de entorno TYPESAFE_API_KEY'),
+    "Voir le solde ↗": ("View balance ↗", "Vedi il saldo ↗", "Ver el saldo ↗"),
+    "Ce mois-ci : {n} requête(s) Jev · {t} jetons ({i} en entrée, {o} en sortie), comptés par l'appli. Le solde de crédits n'est visible que sur la console TypeSafe.": (
+        "This month: {n} Jev request(s) · {t} tokens ({i} input, {o} output), counted by the app. The credit balance is only shown in the TypeSafe console.",
+        "Questo mese: {n} richieste Jev · {t} token ({i} in ingresso, {o} in uscita), contati dall'app. Il saldo dei crediti è visibile solo nella console TypeSafe.",
+        "Este mes: {n} petición(es) a Jev · {t} tokens ({i} de entrada, {o} de salida), contados por la app. El saldo de créditos solo se ve en la consola de TypeSafe."),
 }
