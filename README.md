@@ -22,6 +22,9 @@ sKYCRASH reads your Skyrim crash reports (Crash Logger SSE, .NET Script Framewor
 - **Save comparison**: reads your last `.ess` save and lists plugins added or removed since — a classic cause of crashes on load.
 - **Crash timeline and history**: DLLs that appeared just before a new kind of crash are flagged as prime suspects.
 - **AI assistant** (optional): local and private with Ollama, or Google Gemini with your own key. Answers are checked against your real installation and contradicting tips are removed.
+- **Jev advice check** (optional): with a TypeSafe key, Jev judges each assistant tip against the verified facts of your installation and removes the ones that contradict them. Without a key, the built-in filters still apply.
+- **New in 1.0.1 — Jev usage**: Settings… > AI shows this month's Jev requests and tokens (input and output), counted by the app, and a **View balance ↗** button that opens the TypeSafe console, where the credit balance is shown.
+- **New in 1.0.1 — build from GitHub**: `./Build_App.sh` now also works from a plain clone of the repository (ad hoc signing when the toolkit's signing script is missing).
 - **Self-updating knowledge base**: follows Crash Logger, Community Shaders, Steam updates, r/skyrimmods, SKSE and CrossOver release notes.
 - **Export diagnostic** (⌘E): one file with the whole crash context, ready to share on a forum or Discord.
 - **Purge logs**: archives old crash reports so the next crash is easy to spot.
@@ -62,9 +65,12 @@ No. The analysis, audit and evidence work offline without any AI. The assistant 
 **Which AI should I choose?**  
 Ollama is 100% local and private (`ollama pull llama3.1`). Gemini gives better answers but sends the report and log excerpts to Google.
 
+**What is Jev and do I need it?**  
+Jev (TypeSafe) is an optional second check on the assistant's tips. Paste a TypeSafe key in Settings… > AI to turn it on; the monthly usage is shown right below the key.
+
 ### Privacy
 
-Logs stay on your Mac. Network access is used only for the knowledge base updates (public pages from GitHub, Steam, Reddit, SKSE and CodeWeavers, HTTPS only, no account) and, if you enable it, for the Gemini AI assistant. API keys are stored in the macOS Keychain.
+Logs stay on your Mac. Network access is used only for the knowledge base updates (public pages from GitHub, Steam, Reddit, SKSE and CodeWeavers, HTTPS only, no account) and, if you enable them, for the Gemini AI assistant and the Jev check (the assistant's tips and the verified facts are sent to TypeSafe). API keys are stored in the macOS Keychain.
 
 ### Building from source
 
@@ -94,6 +100,9 @@ sKYCRASH lit vos rapports de crash Skyrim (Crash Logger SSE, .NET Script Framewo
 - **Comparaison avec la sauvegarde** : lit votre dernière sauvegarde `.ess` et liste les plugins ajoutés ou retirés depuis — une cause classique de crash au chargement.
 - **Chronologie et historique des crashs** : une DLL apparue juste avant un nouveau type de crash est signalée comme suspect principal.
 - **Assistant IA** (facultatif) : local et privé avec Ollama, ou Google Gemini avec votre propre clé. Les réponses sont vérifiées face à votre installation réelle et les conseils contradictoires retirés.
+- **Vérification des conseils par Jev** (facultatif) : avec une clé TypeSafe, Jev juge chaque conseil de l'assistant face aux faits vérifiés de votre installation et retire ceux qui les contredisent. Sans clé, les filtres intégrés s'appliquent toujours.
+- **Nouveau en 1.0.1 — consommation Jev** : Réglages… > IA affiche les requêtes et jetons Jev du mois (entrée et sortie), comptés par l'appli, et un bouton **Voir le solde ↗** qui ouvre la console TypeSafe, où s'affiche le solde de crédits.
+- **Nouveau en 1.0.1 — compilation depuis GitHub** : `./Build_App.sh` fonctionne aussi depuis un simple clone du dépôt (signature ad hoc si le script de signature du kit est absent).
 - **Base de connaissances auto-alimentée** : suit Crash Logger, Community Shaders, les mises à jour Steam, r/skyrimmods, SKSE et les notes de version de CrossOver.
 - **Exporter le diagnostic** (⌘E) : un seul fichier avec tout le contexte du crash, prêt à partager sur un forum ou Discord.
 - **Purger les logs** : archive les anciens rapports pour repérer facilement le prochain crash.
@@ -134,9 +143,12 @@ Non. L'analyse, l'audit et les preuves fonctionnent hors ligne sans IA. L'assist
 **Quelle IA choisir ?**  
 Ollama est 100 % local et privé (`ollama pull llama3.1`). Gemini répond mieux mais envoie le rapport et des extraits de logs à Google.
 
+**Qu'est-ce que Jev, et faut-il l'activer ?**  
+Jev (TypeSafe) est une seconde vérification facultative des conseils de l'assistant. Collez une clé TypeSafe dans Réglages… > IA pour l'activer ; la consommation du mois s'affiche juste sous la clé.
+
 ### Confidentialité
 
-Les logs restent sur votre Mac. Le réseau ne sert qu'à mettre à jour la base de connaissances (pages publiques de GitHub, Steam, Reddit, SKSE et CodeWeavers, HTTPS uniquement, sans compte) et, si vous l'activez, à l'assistant IA Gemini. Les clés API sont rangées dans le Trousseau macOS.
+Les logs restent sur votre Mac. Le réseau ne sert qu'à mettre à jour la base de connaissances (pages publiques de GitHub, Steam, Reddit, SKSE et CodeWeavers, HTTPS uniquement, sans compte) et, si vous les activez, à l'assistant IA Gemini et à la vérification Jev (les conseils de l'assistant et les faits vérifiés sont envoyés à TypeSafe). Les clés API sont rangées dans le Trousseau macOS.
 
 ### Compiler depuis les sources
 
