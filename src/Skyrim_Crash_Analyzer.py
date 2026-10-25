@@ -20,6 +20,7 @@ import ai_client
 import ai_format
 import audit_engine
 import diagnostic
+import export_events
 import guard
 import jev_client
 import i18n
@@ -399,6 +400,10 @@ class SettingsDialog(QDialog):
         self.auto_watch = socle_qt.WrapChoice(L("Surveiller les dossiers : nouveau crash = notification + audit automatique"))
         self.auto_watch.setChecked(self.settings.get("auto_watch", "1") == "1")
         form.addRow(L("Surveillance"), self.auto_watch)
+
+        self.export_events = socle_qt.WrapChoice(L("Exporter les analyses pour mORTEX (fichier crash_events.jsonl, sans chemin personnel)"))
+        self.export_events.setChecked(self.settings.get("export_events", "1") == "1")
+        form.addRow(L("Échange avec mORTEX"), self.export_events)
         return page
 
     def _folders_tab(self):
@@ -612,6 +617,7 @@ class SettingsDialog(QDialog):
             "use_skills": "1" if self.use_skills.isChecked() else "0",
             "web_search": "1" if self.web_search.isChecked() else "0",
             "auto_watch": "1" if self.auto_watch.isChecked() else "0",
+            "export_events": "1" if self.export_events.isChecked() else "0",
             "auto_knowledge": "1" if self.auto_knowledge.isChecked() else "0",
             "game_dir": self.game_dir.text().strip(),
             "anonymize": "1" if self.anonymize.isChecked() else "0",
@@ -921,7 +927,8 @@ class CrashAnalyzer(QWidget):
         self.audit_button.setEnabled(False)
         self.report_box.setText(L("Audit en cours…"))
         game_dir = self.settings.get("game_dir", "")
-        self._start(lambda: audit_engine.audit_paths(files, game_dir), self._on_audit_done, self._on_audit_failed)
+        export = self.settings.get("export_events", "1") == "1"
+        self._start(lambda: export_events.audit_and_export(files, game_dir, export), self._on_audit_done, self._on_audit_failed)
 
     def export_diagnostic(self):
         files = gather_audit_files(self._all_folders())
@@ -936,9 +943,10 @@ class CrashAnalyzer(QWidget):
         self.export_button.setEnabled(False)
         game_dir = self.settings.get("game_dir", "")
         anon = self.settings.get("anonymize", "1") == "1"
+        export = self.settings.get("export_events", "1") == "1"
 
         def work():
-            report = audit_engine.audit_paths(files, game_dir)
+            report = export_events.audit_and_export(files, game_dir, export)
             with open(path, "w", encoding="utf-8") as f:
                 f.write(diagnostic.build(report, audit_engine.read_lines, anonymize=anon, app_name=APP_NAME))
             return report

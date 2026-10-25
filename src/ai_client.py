@@ -35,7 +35,8 @@ DEFAULT_SETTINGS = {
     "use_skills": "1",                       # fiches modding Skyrim dans le prompt ("1"/"0")
     "web_search": "0",                        # Gemini + Google Search ("1"/"0")
     "auto_watch": "1",                        # surveillance des nouveaux crash logs ("1"/"0")
-    "auto_knowledge": "1",                    # veille : mise à jour auto de la base de connaissances ("1"/"0")
+    "export_events": "1",                     # export des analyses pour mORTEX (crash_events.jsonl) ("1"/"0")
+    "auto_knowledge": "1",                   # veille : mise à jour auto de la base de connaissances ("1"/"0")
     "game_dir": "",                           # dossier de Skyrim SE (vide = détection auto)
 }
 

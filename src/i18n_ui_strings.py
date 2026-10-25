@@ -86,6 +86,11 @@ TR = {
         "Monitora le cartelle: nuovo crash = notifica + audit automatico",
         "Vigilar las carpetas: nuevo crash = notificación + auditoría automática"),
     "Surveillance": ("Monitoring", "Monitoraggio", "Vigilancia"),
+    "Exporter les analyses pour mORTEX (fichier crash_events.jsonl, sans chemin personnel)": (
+        "Export analyses for mORTEX (crash_events.jsonl file, no personal paths)",
+        "Esporta le analisi per mORTEX (file crash_events.jsonl, senza percorsi personali)",
+        "Exportar los análisis para mORTEX (archivo crash_events.jsonl, sin rutas personales)"),
+    "Échange avec mORTEX": ("Exchange with mORTEX", "Scambio con mORTEX", "Intercambio con mORTEX"),
     "Auto (CrossOver) — ou dossier contenant SkyrimSE.exe": (
         "Auto (CrossOver) — or folder containing SkyrimSE.exe",
         "Auto (CrossOver) — o cartella contenente SkyrimSE.exe",
