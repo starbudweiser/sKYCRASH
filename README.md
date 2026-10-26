@@ -30,6 +30,16 @@ sKYCRASH reads your Skyrim crash reports (Crash Logger SSE, .NET Script Framewor
 - **Purge logs**: archives old crash reports so the next crash is easy to spot.
 - Interface in **English, French, Italian and Spanish** (follows your Mac's language; can be changed in the app).
 
+### What's new in 1.1.0
+
+- Crash Logger 1.25: the C++ exception section is read (type, HRESULT, throwing module), with advice for the usual DirectX errors under CrossOver.
+- Fix: the new CALL STACK section title was reported as an empty call stack, and "C++ Exception" was shown as an unknown exception.
+- Each suspect DLL or plugin now shows the mod that provides it (Mod Organizer 2 instance or mABBAJACK installation).
+
+### Updates
+
+From version 1.1.0 the app checks once a day whether a newer release exists on GitHub and offers to open the Nexus page, remind you later or skip that version. Nothing is downloaded or installed automatically. The full history is in [CHANGELOG.md](CHANGELOG.md).
+
 ### Screenshots
 
 ![Analyzed logs, log list and AI assistant](docs/screenshots/01_home.png)
@@ -107,6 +117,16 @@ sKYCRASH lit vos rapports de crash Skyrim (Crash Logger SSE, .NET Script Framewo
 - **Exporter le diagnostic** (⌘E) : un seul fichier avec tout le contexte du crash, prêt à partager sur un forum ou Discord.
 - **Purger les logs** : archive les anciens rapports pour repérer facilement le prochain crash.
 - Interface en **français, anglais, italien et espagnol** (suit la langue du Mac ; modifiable dans l'appli).
+
+### Nouveautés de la 1.1.0
+
+- Crash Logger 1.25 : la section d'exception C++ est lue (type, HRESULT, module qui l'a levée), avec des conseils pour les erreurs DirectX courantes sous CrossOver.
+- Correctif : le nouveau titre de la section CALL STACK était déclaré comme une pile d'appels vide, et « C++ Exception » comme une exception inconnue.
+- Chaque DLL ou plugin suspect indique maintenant le mod qui le fournit (instance Mod Organizer 2 ou installation mABBAJACK).
+
+### Mises à jour
+
+À partir de la version 1.1.0, l'appli vérifie une fois par jour si une version plus récente existe sur GitHub et propose d'ouvrir la page Nexus, de rappeler plus tard ou d'ignorer cette version. Rien n'est téléchargé ni installé automatiquement. L'historique complet est dans [CHANGELOG.md](CHANGELOG.md).
 
 ### Captures d'écran
 
