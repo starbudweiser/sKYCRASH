@@ -107,7 +107,7 @@ SOURCES = (
     Source("reddit_crash", "reddit_rss", "CTD OR crash",
            "r/skyrimmods — fils récents sur les crashs", ()),
     Source("reddit_mac", "reddit_rss", "macgaming:skyrim",
-           "r/macgaming — Skyrim sur Mac (CrossOver, Whisky, GPTK)", ("crossover", "wine", "virtualapple", "d3dmetal", "dxmt")),
+           "r/macgaming — Skyrim sur Mac (CrossOver, GPTK)", ("crossover", "wine", "virtualapple", "d3dmetal", "dxmt")),
     Source("crossover_changelog", "crossover_changelog", "https://www.codeweavers.com/crossover/changelog",
            "CrossOver — journal des versions (CodeWeavers)", ("crossover", "wine", "virtualapple", "d3dmetal", "dxmt", "moltenvk")),
     Source("skse_site", "skse_site", "https://skse.silverlock.org/",
