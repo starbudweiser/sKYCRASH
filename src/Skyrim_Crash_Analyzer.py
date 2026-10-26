@@ -8,6 +8,8 @@ from datetime import datetime
 from pathlib import Path
 
 import socle_qt
+import update_check
+from i18n import get_lang
 from PyQt6.QtCore import QFileSystemWatcher, QSize, Qt, QThread, QTimer, QUrl, pyqtSignal
 from PyQt6.QtGui import QAction, QColor, QCursor, QDesktopServices, QFontMetrics, QKeySequence, QPalette, QTextCharFormat
 from PyQt6.QtWidgets import (
@@ -1321,6 +1323,7 @@ def main():
     app.setApplicationName(APP_NAME)
     win = CrashAnalyzer()
     win.show()
+    update_check.start_qt(win, "sKYCRASH", lang=get_lang)  # nouvelle version ? (au plus une fois par jour)
     sys.exit(app.exec())
 
 
