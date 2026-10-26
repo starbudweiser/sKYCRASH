@@ -14,6 +14,7 @@ from dataclasses import dataclass, field
 import compat
 import insights
 import inventory
+import mod_origin
 from i18n import L, N_
 
 MAX_LOG_BYTES = 20 * 1024 * 1024
@@ -182,7 +183,8 @@ def audit_crash(path: str, lines: list, report: AuditReport, scores: dict, is_la
     exc = EXC_RE.search(text)
     header = next((l for l in zone if re.search(r"unhandled", l, re.I)), "")
     header_mods = [m for m in MODULE_RE.findall(header)]
-    exc_name = exc.group(1) if exc else L("exception inconnue")
+    quoted = re.search(r'unhandled exception "([^"]+)"', header, re.I)
+    exc_name = exc.group(1) if exc else (quoted.group(1) if quoted else L("exception inconnue"))
     report.findings.append(Finding(
         SEV_CRIT, "crash", L("Crash détecté : {exc}{tag}", exc=exc_name, tag=tag),
         L("Fichier {src}", src=src), src, [header.strip()] if header else [],
@@ -238,14 +240,50 @@ def audit_crash(path: str, lines: list, report: AuditReport, scores: dict, is_la
                                            L("{n} occurrence(s)", n=len(hits)),
                                            src, hits[:3], L(advice)))
 
+    audit_cpp_exception(lines, report, scores, weight, src)
     extra = audit_crashlogger_extras(lines, report, scores, weight, src)
     report.excerpts[path] = (extra or "\n".join(zone[:150]))[:12000]
+
+
+# Crash Logger 1.25+ : exception C++ levée par un plugin (Type, Info avec le HRESULT, Throw Location)
+HRESULT_HINTS = (
+    ("0x80004002", N_("Interface DirectX introuvable (E_NOINTERFACE) : sous CrossOver, DirectX 12 et certaines "
+                      "fonctions DXGI ne sont pas fournies. Désactiver la génération d'images et l'upscaler DX12 "
+                      "(Community Shaders, Frame Generation), ou essayer D3DMetal.")),
+    ("0x887a0005", N_("Carte graphique perdue (DXGI_ERROR_DEVICE_REMOVED) : surcharge ou plantage du pilote. "
+                      "Réduire les réglages graphiques, retirer les overlays, vérifier la mémoire.")),
+    ("0x8007000e", N_("Mémoire insuffisante (E_OUTOFMEMORY) : réduire textures et mods gourmands.")),
+    ("0x80070057", N_("Paramètre refusé par DirectX (E_INVALIDARG) : souvent un réglage ou un preset incompatible "
+                      "avec la couche de compatibilité.")),
+)
+
+
+def audit_cpp_exception(lines: list, report: AuditReport, scores: dict, weight: int, src: str):
+    fields = {}
+    for l in _section(lines, "C++ EXCEPTION:"):
+        m = re.match(r"\s*(Type|Info|Throw Location):\s*(.+)$", l)
+        if m:
+            fields[m.group(1)] = m.group(2).strip()
+    if not fields:
+        return
+    kind = fields.get("Type", "").strip("()* ") or L("type inconnu")
+    info = fields.get("Info", "")
+    where = fields.get("Throw Location", "")
+    hint = next((L(text) for code, text in HRESULT_HINTS if code in info.lower()), "")
+    report.findings.append(Finding(
+        SEV_WARN, "crash", L("Exception C++ : {kind}", kind=kind),
+        "; ".join(x for x in (info, L("levée dans {where}", where=where) if where else "") if x), src,
+        [f"{k}: {v}" for k, v in fields.items()],
+        hint or L("Le plugin qui a levé l'exception est en général le premier module tiers de la pile d'appels.")))
+    mod = MODULE_RE.search(where)
+    if mod and not _is_ignored_module(mod.group(1)):
+        _bump(scores, mod.group(1), 4 * weight, L("a levé l'exception C++ ({src})", src=src))
 
 
 # ------------------------------------------- sections Crash Logger SSE (STACK, MODULES...)
 STACK_REF_RE = re.compile(r"->\s*(\S+?\.(?:dll|exe))\+([0-9A-Fa-f]+)", re.I)
 SPEC_RE = re.compile(r"^\s*(OS|CPU|GPU #\d+|PHYSICAL MEMORY|GPU MEMORY):\s*(.+)$")
-SECTION_RE = re.compile(r"^[A-Z][A-Z #0-9/]+:\s*$")
+SECTION_RE = re.compile(r"^[A-Z][A-Z #0-9/+()\[\]]+:\s*$")  # inclut « C++ EXCEPTION: » et « CALL STACK ([P]robable / [S]tack scan): »
 MEM_RE = re.compile(r"([\d.]+)\s*(?:GB)?\s*/\s*([\d.]+)\s*GB")
 WINE_RE = re.compile(r"virtualapple|compatibility mode|crossover|wine|rosetta|d3dmetal|dxvk|apple", re.I)
 ENB_HINTS = ("d3dcompiler_46e", "enbhelper", "enbseries", "enblocal", "kiloadersatelliteenb")
@@ -320,7 +358,8 @@ def audit_crashlogger_extras(lines: list, report: AuditReport, scores: dict, wei
         m = SPEC_RE.match(l)
         if m:
             specs[m.group(1)] = m.group(2).strip()
-    call_stack = [l for l in _section(lines, "PROBABLE CALL STACK:") if l.strip()]
+    call_stack = [l for l in (_section(lines, "PROBABLE CALL STACK:")
+                              or _section(lines, "CALL STACK ([P]robable / [S]tack scan):")) if l.strip()]
     stack_lines = _section(lines, "STACK:")
     refs = [(m.group(1), m.group(2).upper()) for l in stack_lines for m in STACK_REF_RE.finditer(l)]
     modules = [re.split(r"\s{2,}|\t", l.strip())[0] for l in _section(lines, "MODULES:") if l.strip()]
@@ -688,6 +727,14 @@ def audit_paths(paths: list, game_dir: str = "") -> AuditReport:
 
     report.suspects = sorted(
         ((n, d["score"], d["reasons"]) for n, d in scores.items()), key=lambda x: -x[1])[:8]
+    try:
+        origins = mod_origin.build_index(gdir)
+    except OSError:
+        origins = {}
+    for name, _s, reasons in report.suspects:
+        mods = mod_origin.origin_of(name, origins) if name.lower().endswith(mod_origin.EXTS) else []
+        if mods:
+            reasons.append(L("fourni par le mod « {mod} »", mod=", ".join(mods[:3])))
     for name, role in compat.annotate_suspects(report):
         for n, _s, reasons in report.suspects:
             if n == name:

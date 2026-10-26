@@ -365,4 +365,29 @@ TR = {
     "{total} erreurs Papyrus ; scripts les plus fautifs": ("{total} Papyrus errors; most faulty scripts", "{total} errori Papyrus; script più problematici", "{total} errores de Papyrus; scripts más defectuosos"),
     "{v} erreurs Papyrus ({src})": ("{v} Papyrus errors ({src})", "{v} errori Papyrus ({src})", "{v} errores de Papyrus ({src})"),
     "Épuisement de mémoire (RAM/VRAM/heap)": ("Memory exhaustion (RAM/VRAM/heap)", "Esaurimento della memoria (RAM/VRAM/heap)", "Agotamiento de memoria (RAM/VRAM/heap)"),
+    "Interface DirectX introuvable (E_NOINTERFACE) : sous CrossOver, DirectX 12 et certaines fonctions DXGI ne sont pas fournies. Désactiver la génération d'images et l'upscaler DX12 (Community Shaders, Frame Generation), ou essayer D3DMetal.": (
+        "DirectX interface not found (E_NOINTERFACE): under CrossOver, DirectX 12 and some DXGI functions are not provided. Turn off frame generation and the DX12 upscaler (Community Shaders, Frame Generation), or try D3DMetal.",
+        "Interfaccia DirectX non trovata (E_NOINTERFACE): con CrossOver, DirectX 12 e alcune funzioni DXGI non sono disponibili. Disattiva la generazione di fotogrammi e l'upscaler DX12 (Community Shaders, Frame Generation), oppure prova D3DMetal.",
+        "Interfaz DirectX no encontrada (E_NOINTERFACE): en CrossOver, DirectX 12 y algunas funciones DXGI no están disponibles. Desactiva la generación de fotogramas y el escalado DX12 (Community Shaders, Frame Generation), o prueba D3DMetal."),
+    "Carte graphique perdue (DXGI_ERROR_DEVICE_REMOVED) : surcharge ou plantage du pilote. Réduire les réglages graphiques, retirer les overlays, vérifier la mémoire.": (
+        "Graphics card lost (DXGI_ERROR_DEVICE_REMOVED): driver overload or crash. Lower the graphics settings, remove overlays, check memory.",
+        "Scheda grafica persa (DXGI_ERROR_DEVICE_REMOVED): sovraccarico o crash del driver. Riduci le impostazioni grafiche, rimuovi gli overlay, controlla la memoria.",
+        "Tarjeta gráfica perdida (DXGI_ERROR_DEVICE_REMOVED): sobrecarga o fallo del controlador. Baja los ajustes gráficos, quita los overlays, revisa la memoria."),
+    "Mémoire insuffisante (E_OUTOFMEMORY) : réduire textures et mods gourmands.": (
+        "Out of memory (E_OUTOFMEMORY): reduce textures and heavy mods.",
+        "Memoria insufficiente (E_OUTOFMEMORY): riduci texture e mod pesanti.",
+        "Memoria insuficiente (E_OUTOFMEMORY): reduce texturas y mods pesados."),
+    "Paramètre refusé par DirectX (E_INVALIDARG) : souvent un réglage ou un preset incompatible avec la couche de compatibilité.": (
+        "Parameter rejected by DirectX (E_INVALIDARG): often a setting or preset that the compatibility layer does not support.",
+        "Parametro rifiutato da DirectX (E_INVALIDARG): spesso un'impostazione o un preset non supportato dal livello di compatibilità.",
+        "Parámetro rechazado por DirectX (E_INVALIDARG): a menudo un ajuste o preset que la capa de compatibilidad no admite."),
+    "type inconnu": ("unknown type", "tipo sconosciuto", "tipo desconocido"),
+    "Exception C++ : {kind}": ("C++ exception: {kind}", "Eccezione C++: {kind}", "Excepción C++: {kind}"),
+    "levée dans {where}": ("thrown in {where}", "sollevata in {where}", "lanzada en {where}"),
+    "Le plugin qui a levé l'exception est en général le premier module tiers de la pile d'appels.": (
+        "The plugin that threw the exception is usually the first third-party module in the call stack.",
+        "Il plugin che ha sollevato l'eccezione è di solito il primo modulo di terze parti nello stack delle chiamate.",
+        "El plugin que lanzó la excepción suele ser el primer módulo de terceros de la pila de llamadas."),
+    "a levé l'exception C++ ({src})": ("threw the C++ exception ({src})", "ha sollevato l'eccezione C++ ({src})", "lanzó la excepción C++ ({src})"),
+    "fourni par le mod « {mod} »": ("provided by the mod “{mod}”", "fornito dalla mod «{mod}»", "proporcionado por el mod «{mod}»"),
 }
