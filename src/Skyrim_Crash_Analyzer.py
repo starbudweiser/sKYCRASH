@@ -310,10 +310,13 @@ class Worker(QThread):
     """Exécute une fonction bloquante hors du thread UI."""
     result = pyqtSignal(object)
     failed = pyqtSignal(str)
+    running = set()  # tous les workers vivants, attendus à la fermeture (cf. main)
 
     def __init__(self, fn, parent=None):
         super().__init__(parent)
         self._fn = fn
+        Worker.running.add(self)
+        self.finished.connect(lambda: Worker.running.discard(self))
 
     def run(self):
         try:
@@ -1331,6 +1334,7 @@ def _startup_lang() -> str:
 def main():
     app = QApplication(sys.argv)
     socle_qt.apply(app, full=False)  # design system Socle
+    socle_qt.brand(app, "sKYCRASH", "#ff7a00")  # « s » dans l'orange de l'iris du logo
     app.setApplicationName(APP_NAME)
     i18n.set_lang(_startup_lang())
     windows = []
@@ -1343,7 +1347,16 @@ def main():
 
     splash = SplashScreen()  # t = 0 splash, t = 2 s fenêtre principale, t = 4 s sortie du splash
     splash.start(open_main)
-    sys.exit(app.exec())
+    code = app.exec()
+    # Un QThread détruit en cours d'exécution fait avorter Qt (« sKYCRASH a quitté de manière imprévue ») :
+    # on laisse 2 s aux travaux de fond (veille, audit, IA), puis on sort sans détruire ceux qui tournent encore.
+    for w in list(Worker.running):
+        w.wait(2000)
+    if any(w.isRunning() for w in Worker.running):
+        sys.stdout.flush()
+        sys.stderr.flush()
+        os._exit(code)
+    sys.exit(code)
 
 
 if __name__ == "__main__":
