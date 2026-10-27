@@ -85,7 +85,7 @@ EASE_IRIS = _bezier(0.22, 1, 0.36, 1)
 EASE_WHITE = _bezier(0.34, 1.3, 0.5, 1)
 EASE_LETTER = _bezier(0.2, 1.2, 0.4, 1)
 EASE_RULE = _bezier(0.65, 0, 0.35, 1)
-EASE_LEAVE = _bezier(0.6, -0.28, 0.735, 0.045)  # easeInBack : la carte gonfle puis se replie
+EASE_LEAVE = _bezier(0.6, -0.15, 0.735, 0.045)  # léger rebond : la carte ne dépasse pas 104 %
 
 
 def _phase(t: float, start: float, dur: float) -> float:
@@ -159,9 +159,12 @@ class SplashScreen(QWidget):
     def start(self, open_main) -> None:
         """Affiche le splash ; `open_main()` crée et affiche la fenêtre principale à t = 2 s."""
         self._open_main = open_main
-        screen = QGuiApplication.primaryScreen().availableGeometry()
-        self.move(screen.center().x() - WIDTH // 2, screen.center().y() - HEIGHT // 2)
+        # centre exact de l'écran complet (pas la zone disponible ; QRect.center() arrondit à -1)
+        screen = QGuiApplication.primaryScreen().geometry()
+        pos = (screen.x() + (screen.width() - WIDTH) // 2, screen.y() + (screen.height() - HEIGHT) // 2)
+        self.move(*pos)
         self.show()
+        self.move(*pos)  # macOS remonte la fenêtre de 20 px à son premier affichage
         self._clock.start()
         if not self.static:
             self._tick.start()
@@ -304,14 +307,14 @@ class SplashScreen(QWidget):
             f = QFont(self.f_sub)
             spacing = _lerp(14, SUB_SPACING, e)
             f.setLetterSpacing(QFont.SpacingType.AbsoluteSpacing, spacing)
-            width = QFontMetricsF(f).horizontalAdvance(self.subtitle)
+            width = QFontMetricsF(f).horizontalAdvance(self.subtitle) - spacing
+            fit = min(sub_fit, text_w / max(1.0, width))  # pas de rognage : l'entrée tient dans la zone
             p.save()
             p.setFont(f)
             p.setPen(QColor("#d8d8d8"))
             p.setOpacity(p.opacity() * e)
             p.translate(left, top + size + rule_gap)
-            p.scale(sub_fit, sub_fit)
-            p.setClipRect(QRectF(0, -4, text_w / sub_fit + 2, sub_h + 8))
+            p.scale(fit, fit)
             p.drawText(QRectF(0, 0, width + 40, sub_h),
                        Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter, self.subtitle)
             p.restore()
