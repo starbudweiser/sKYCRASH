@@ -22,7 +22,7 @@ h2 { font: 700 14px/20px var(--font-sans); }
 .card.save::before { background: var(--accent); }
 
 .dropzone { padding: var(--space-4); border: 1px dashed var(--border-control); border-radius: var(--radius-lg); text-align: center; color: var(--text-subtle); background: var(--bg-inset); transition: border-color .15s, color .15s, background-color .15s; }
-.dropzone.over { border-color: var(--accent); color: var(--accent-text); background: var(--accent-tint); }
+.dropzone.over { border-color: var(--accent); color: var(--accent-text); background: var(--surface-hover); }
 
 /* Rapport d'audit */
 .report { flex: 1; min-height: 160px; overflow: auto; white-space: pre-wrap; font: 12px/18px var(--font-mono); color: var(--text); }
@@ -37,7 +37,7 @@ h2 { font: 700 14px/20px var(--font-sans); }
 .tag { display: inline-block; margin-right: var(--space-2); padding: 0 var(--space-1\.5); border-radius: var(--radius); font: 700 10px/16px var(--font-sans); }
 .tag.s3 { background: var(--danger-bg); color: var(--danger-soft); }
 .tag.s2 { background: var(--warning-bg); color: var(--warning-soft); }
-.tag.s1 { background: var(--accent-tint); color: var(--info-soft); }
+.tag.s1 { background: var(--control); color: var(--accent-text); }
 .evi { padding-left: var(--space-3); color: var(--text-muted); }
 .tip { padding-left: var(--space-3); color: var(--accent-text); }
 
@@ -56,7 +56,7 @@ h2 { font: 700 14px/20px var(--font-sans); }
 .chat-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); }
 .chat-log { flex: 1; min-height: 0; overflow: auto; display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-3); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
 .msg { max-width: 92%; padding: var(--space-2) var(--space-3); border-radius: var(--radius); border: 1px solid var(--border); white-space: pre-wrap; word-break: break-word; line-height: 1.5; }
-.msg.user { align-self: flex-end; background: var(--accent-tint); border-color: var(--info-border); color: var(--text-strong); }
+.msg.user { align-self: flex-end; background: var(--surface-raised); border-color: var(--info-border); color: var(--text-strong); }
 .msg.assistant { align-self: flex-start; background: var(--bg-inset); }
 .msg.error { align-self: stretch; background: var(--danger-bg); border-color: var(--danger-border); color: var(--danger-soft); }
 .msg.thinking { color: var(--text-subtle); }
