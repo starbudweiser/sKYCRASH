@@ -8,9 +8,10 @@ from datetime import datetime
 from pathlib import Path
 
 import socle_qt
+from splash import SplashScreen
 import update_check
 from i18n import get_lang
-from PyQt6.QtCore import QFileSystemWatcher, QSize, Qt, QThread, QTimer, QUrl, pyqtSignal
+from PyQt6.QtCore import QFileSystemWatcher, QLocale, QSize, Qt, QThread, QTimer, QUrl, pyqtSignal
 from PyQt6.QtGui import QAction, QColor, QCursor, QDesktopServices, QFontMetrics, QKeySequence, QPalette, QTextCharFormat
 from PyQt6.QtWidgets import (
     QApplication, QComboBox, QDialog, QDialogButtonBox, QFileDialog, QFormLayout, QFrame,
@@ -1317,13 +1318,31 @@ class CrashAnalyzer(QWidget):
         return fmt
 
 
+def _startup_lang() -> str:
+    """Langue du splash : celle des réglages, sinon celle du système (anglais si non prise en charge)."""
+    stored = _read_config_file().get("settings")
+    lang = stored.get("language") if isinstance(stored, dict) else None
+    if lang in i18n.LANGS:
+        return lang
+    code = QLocale.system().name()[:2].lower()
+    return code if code in i18n.LANGS else "en"
+
+
 def main():
     app = QApplication(sys.argv)
     socle_qt.apply(app, full=False)  # design system Socle
     app.setApplicationName(APP_NAME)
-    win = CrashAnalyzer()
-    win.show()
-    update_check.start_qt(win, "sKYCRASH", lang=get_lang)  # nouvelle version ? (au plus une fois par jour)
+    i18n.set_lang(_startup_lang())
+    windows = []
+
+    def open_main():
+        win = CrashAnalyzer()
+        win.show()
+        windows.append(win)
+        update_check.start_qt(win, "sKYCRASH", lang=get_lang)  # nouvelle version ? (au plus une fois par jour)
+
+    splash = SplashScreen()  # t = 0 splash, t = 2 s fenêtre principale, t = 4 s sortie du splash
+    splash.start(open_main)
     sys.exit(app.exec())
 
 

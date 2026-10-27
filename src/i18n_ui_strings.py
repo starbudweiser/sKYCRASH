@@ -5,6 +5,10 @@ Les placeholders {x} doivent rester identiques dans toutes les langues (vérifi�
 
 TR = {
     # ------------------------------------------------------------ interface
+    # écran de lancement
+    "ANALYSE DE CRASH": ("CRASH ANALYZER", "ANALISI DEI CRASH", "ANÁLISIS DE CRASHES"),
+    "Logs · audit · assistant IA": ("Logs · audit · AI assistant", "Log · audit · assistente IA",
+                                    "Logs · auditoría · asistente IA"),
     "Analyser les logs": ("Analyze logs", "Analizza i log", "Analizar logs"),
     "Audit approfondi": ("Deep audit", "Audit approfondito", "Auditoría a fondo"),
     "Fichier…": ("File…", "File…", "Archivo…"),

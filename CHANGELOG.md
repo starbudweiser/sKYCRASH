@@ -2,6 +2,16 @@
 
 Notes de version / release notes (EN + FR). Translations in IT and ES: see the Nexus Mods page.
 
+## Unreleased / Non publié
+
+**English**
+
+- Animated launch screen, like the other Skyrim Tools: the eye spins into place and the title appears letter by letter, the main window opens after 2 seconds and the splash leaves after 4 seconds. With "Reduce motion" enabled in macOS, the splash stays still for the same duration.
+
+**Français**
+
+- Écran de lancement animé, comme les autres Skyrim Tools : l'œil se met en place en tourbillon et le titre apparaît lettre par lettre ; la fenêtre principale s'ouvre au bout de 2 secondes et le splash s'efface au bout de 4. Avec « Réduire les animations » activé dans macOS, le splash reste fixe, pendant la même durée.
+
 ## 1.1.0
 
 **English**

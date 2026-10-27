@@ -46,7 +46,7 @@ mkdir -p "$WORK_DIR"
     --hidden-import keyring.backends.macOS \
     --hidden-import skill_loader --hidden-import ai_format --hidden-import compat \
     --hidden-import knowledge_updater --hidden-import i18n --hidden-import i18n_strings \
-    --hidden-import i18n_ui_strings --hidden-import i18n_engine_strings \
+    --hidden-import i18n_ui_strings --hidden-import i18n_engine_strings --hidden-import splash \
     --add-data "$ROOT/data/skills:data/skills" \
     --add-data "$ROOT/data/knowledge_seed:data/knowledge_seed" \
     --osx-bundle-identifier "local.stephan.skyrimcrashanalyzer" \
