@@ -6,7 +6,8 @@ sous la forme {texte_fr: (en, it, es)}. Module sans dépendance Qt.
 """
 from __future__ import annotations
 
-import locale
+import re
+import subprocess
 
 LANGS = {"fr": "Français", "en": "English", "it": "Italiano", "es": "Español"}
 LANG_NAMES_FR = {"fr": "français", "en": "anglais", "it": "italien", "es": "espagnol"}
@@ -14,13 +15,13 @@ _INDEX = {"en": 0, "it": 1, "es": 2}
 _lang = "fr"
 
 
-def system_lang(default: str = "fr") -> str:
-    """Langue du système si prise en charge, sinon `default`."""
+def system_lang(default: str = "en") -> str:
+    """Première langue préférée du système parmi celles de l'appli, sinon `default`."""
     try:
-        code = (locale.getlocale()[0] or locale.getdefaultlocale()[0] or "")[:2].lower()
-    except (ValueError, TypeError):
-        code = ""
-    return code if code in LANGS else default
+        out = subprocess.run(["defaults", "read", "-g", "AppleLanguages"], capture_output=True, text=True, timeout=2).stdout
+    except (OSError, subprocess.SubprocessError):
+        return default
+    return next((c for c in re.findall(r'"?([a-z]{2})[-_,"\s]', out) if c in LANGS), default)
 
 
 def set_lang(code: str) -> str:
