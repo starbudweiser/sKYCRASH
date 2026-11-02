@@ -9,7 +9,7 @@ from pathlib import Path
 
 import socle_qt
 from splash import SplashScreen
-import update_check
+import updater
 from i18n import get_lang
 from PyQt6.QtCore import QFileSystemWatcher, QLocale, QSize, Qt, QThread, QTimer, QUrl, pyqtSignal
 from PyQt6.QtGui import QAction, QColor, QCursor, QDesktopServices, QFontMetrics, QKeySequence, QPalette, QTextCharFormat
@@ -1343,7 +1343,7 @@ def main():
         win = CrashAnalyzer()
         win.show()
         windows.append(win)
-        update_check.start_qt(win, "sKYCRASH", lang=get_lang)  # nouvelle version ? (au plus une fois par jour)
+        updater.start_qt(win, "sKYCRASH", lang=get_lang)  # nouvelle version ? (au plus une fois par jour)
 
     splash = SplashScreen()  # t = 0 splash, t = 2 s fenêtre principale, t = 4 s sortie du splash
     splash.start(open_main)
