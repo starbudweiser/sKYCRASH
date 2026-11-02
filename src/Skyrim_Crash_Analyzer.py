@@ -11,7 +11,7 @@ import socle_qt
 from splash import SplashScreen
 import updater
 from i18n import get_lang
-from PyQt6.QtCore import QFileSystemWatcher, QLocale, QSize, Qt, QThread, QTimer, QUrl, pyqtSignal
+from PyQt6.QtCore import QCoreApplication, QFileSystemWatcher, QLibraryInfo, QLocale, QTranslator, QSize, Qt, QThread, QTimer, QUrl, pyqtSignal
 from PyQt6.QtGui import QAction, QColor, QCursor, QDesktopServices, QFontMetrics, QKeySequence, QPalette, QTextCharFormat
 from PyQt6.QtWidgets import (
     QApplication, QComboBox, QDialog, QDialogButtonBox, QFileDialog, QFormLayout, QFrame,
@@ -290,6 +290,26 @@ INPUT_QSS = (
     " subcontrol-position: center right; width: 24px; border: none; background: transparent; }"
     "QComboBox QLineEdit { background: transparent; border: none; padding: 0; min-height: 0; }"
 )
+
+
+_qt_tr = None
+
+
+def qt_lang(code: str) -> None:
+    """Boutons standard de Qt (Oui/Non, Annuler, OK…) dans la langue de l'appli : traductions de Qt embarquées."""
+    global _qt_tr
+    app = QCoreApplication.instance()
+    if app is None:
+        return
+    if _qt_tr is not None:
+        app.removeTranslator(_qt_tr)
+        _qt_tr = None
+    if code != "en":
+        tr = QTranslator(app)
+        if tr.load(f"qtbase_{code}", QLibraryInfo.path(QLibraryInfo.LibraryPath.TranslationsPath)):
+            app.installTranslator(tr)
+            _qt_tr = tr
+
 
 # Style commun des dialogues (fond, champs, boutons standard de QDialogButtonBox)
 DIALOG_QSS = (
@@ -669,7 +689,7 @@ class CrashAnalyzer(QWidget):
         self._think_timer.timeout.connect(self._tick_thinking)
         self._workers = set()
         self.settings = load_settings()
-        i18n.set_lang(self.settings["language"])
+        qt_lang(i18n.set_lang(self.settings["language"]))
 
         left = QWidget()
         main_layout = QVBoxLayout(left)
@@ -1033,7 +1053,7 @@ class CrashAnalyzer(QWidget):
         old_lang = self.settings.get("language")
         self.settings = dlg.get_settings()
         save_settings(self.settings)
-        i18n.set_lang(self.settings["language"])
+        qt_lang(i18n.set_lang(self.settings["language"]))
         self._apply_texts()
         folders = dlg.get_folders()
         folders_changed = folders != self.game_folders
@@ -1336,7 +1356,7 @@ def main():
     socle_qt.apply(app, full=False)  # design system Socle
     socle_qt.brand(app, "sKYCRASH", "#ff7a00")  # « s » dans l'orange de l'iris du logo
     app.setApplicationName(APP_NAME)
-    i18n.set_lang(_startup_lang())
+    qt_lang(i18n.set_lang(_startup_lang()))
     windows = []
 
     def open_main():
