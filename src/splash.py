@@ -1,8 +1,8 @@
 """Écran de lancement animé (règle Socle « Splash animé », modèle : le splash de mORTEX).
 
 Fenêtre sans cadre et transparente de 500 × 190 px (carte de 476 × 166 et marge de 12 px pour
-son ombre), centrée. Chronologie : t = 0 splash visible → t = 2 s fenêtre principale → t = 4 s
-sortie animée de 600 ms. Si la fenêtre principale n'est pas prête à 4 s, le splash attend
+son ombre), centrée. Chronologie : t = 0 splash visible → t = 2 s fenêtre principale → t = 3 s
+sortie animée de 600 ms. Si la fenêtre principale n'est pas prête à 3 s, le splash attend
 qu'elle soit affichée. Réglage « Réduire les animations » de macOS : splash fixe, mêmes durées.
 
 Tout est dessiné au QPainter (PyQt6 sans WebEngine) ; le logo reprend l'œil de l'icône.
@@ -26,7 +26,7 @@ from i18n import L, N_
 WIDTH = socle_qt.TOKENS["metrics"]["size-splash-width"]    # 500 : carte de 476 et marge de 12
 HEIGHT = socle_qt.TOKENS["metrics"]["size-splash-height"]  # 190 : carte de 166 et marge de 12
 MARGIN = 12
-SHOWN_MS = 4000      # durée à l'écran avant la sortie
+SHOWN_MS = 3000      # durée à l'écran avant la sortie
 MAIN_AT_MS = 2000    # ouverture de la fenêtre principale
 LEAVE_MS = 600       # sortie animée
 
@@ -187,7 +187,7 @@ class SplashScreen(QWidget):
         self._maybe_leave()
 
     def _maybe_leave(self) -> None:
-        """Sortie à 4 s, ou dès que la fenêtre principale est affichée si elle a pris du retard."""
+        """Sortie à 3 s, ou dès que la fenêtre principale est affichée si elle a pris du retard."""
         if self._leave_at is not None or not self._main_shown or not self._long_enough:
             return
         self._leave_at = self.elapsed()

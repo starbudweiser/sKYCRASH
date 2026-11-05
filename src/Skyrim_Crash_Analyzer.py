@@ -1365,7 +1365,7 @@ def main():
         windows.append(win)
         updater.start_qt(win, "sKYCRASH", lang=get_lang)  # nouvelle version ? (au plus une fois par jour)
 
-    splash = SplashScreen()  # t = 0 splash, t = 2 s fenêtre principale, t = 4 s sortie du splash
+    splash = SplashScreen()  # t = 0 splash, t = 2 s fenêtre principale, t = 3 s sortie du splash
     splash.start(open_main)
     code = app.exec()
     # Un QThread détruit en cours d'exécution fait avorter Qt (« sKYCRASH a quitté de manière imprévue ») :
