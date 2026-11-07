@@ -27,3 +27,8 @@ logs/
 .env.*
 !.env.example
 ETAT.md
+
+# Swift
+macos/.build/
+macos/.swiftpm/
+*.app/
