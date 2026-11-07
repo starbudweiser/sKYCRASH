@@ -16,7 +16,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         Socle.brand(APP_NAME, color: LOGO_ORANGE)  // « s » dans l'orange de l'iris du logo
         let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
         Splash.shared.start(Splash.Config(title: APP_NAME, subtitle: L("ANALYSE DE CRASH"), footer: version.isEmpty ? "" : "v" + version,
-                                          accent: LOGO_ORANGE))
+                                          iconView: AnyView(AnimatedEyeIcon()), accent: LOGO_ORANGE))
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
@@ -139,6 +139,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
                     else if step.hasPrefix("lang:") { model.setLanguage(String(step.dropFirst(5))); buildMenu() }
                     else if step.hasPrefix("scan:") { model.scanFile(String(step.dropFirst(5))) }
                     else if step.hasPrefix("log:") { model.viewingLog = (String(step.dropFirst(4)), PyFS.basename(String(step.dropFirst(4)))) }
+                }
+            }
+        }
+        // Splash (essais) : SKYCRASH_SPLASH_SHOTS=<préfixe> enregistre le panneau du splash à 0,4 / 1 / 1,6 / 2,4 s
+        if let prefix = env["SKYCRASH_SPLASH_SHOTS"] {
+            for (i, at) in [0.4, 1.0, 1.6, 2.4].enumerated() {
+                DispatchQueue.main.asyncAfter(deadline: .now() + at) {
+                    guard let v = NSApp.windows.first(where: { $0 is NSPanel && $0.frame.width == 500 })?.contentView else { return }
+                    v.layoutSubtreeIfNeeded()
+                    if let rep = v.bitmapImageRepForCachingDisplay(in: v.bounds) {
+                        v.cacheDisplay(in: v.bounds, to: rep)
+                        try? rep.representation(using: .png, properties: [:])?.write(to: URL(fileURLWithPath: "\(prefix)-\(i).png"))
+                    }
                 }
             }
         }
