@@ -173,7 +173,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             if env["SKYCRASH_SETTINGS_SHOTS"] != nil {
                 for (i, tab) in SettingsView.Tab.allCases.enumerated() {
                     let host = NSHostingView(rootView: SettingsView(model: model, tab: tab))
-                    host.frame = NSRect(x: 0, y: 0, width: 680, height: 600)
+                    host.frame = NSRect(x: 0, y: 0, width: 680, height: 700)
                     let tmp = NSWindow(contentRect: host.frame, styleMask: [.titled], backing: .buffered, defer: false)
                     tmp.contentView = host
                     host.layoutSubtreeIfNeeded()

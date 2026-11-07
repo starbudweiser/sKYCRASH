@@ -70,7 +70,7 @@ struct SettingsView: View {
             }
         }
         .padding(Socle.M.space5)
-        .frame(width: 680, height: 600)
+        .frame(width: 680, height: 700)
         .background(Socle.C.bg)
         .onAppear {
             guard !loaded else { return }

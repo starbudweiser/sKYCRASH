@@ -23,6 +23,19 @@ public struct HTTPFailure: Error {
 public enum HTTP {
     public struct Response { public let status: Int; public let body: Data; public let headers: [String: String]; public let finalURL: URL? }
 
+    /// Motif technique en anglais, indépendant de la langue du système (comme le motif d'erreur de la version Python).
+    static func reason(_ e: URLError) -> String {
+        switch e.code {
+        case .cannotConnectToHost: return "connection refused"
+        case .cannotFindHost, .dnsLookupFailed: return "host not found"
+        case .notConnectedToInternet: return "no internet connection"
+        case .networkConnectionLost: return "connection lost"
+        case .timedOut: return "timed out"
+        case .secureConnectionFailed, .serverCertificateUntrusted: return "TLS error"
+        default: return "network error (\(e.errorCode))"
+        }
+    }
+
     /// Requête synchrone (ne jamais appeler depuis le thread principal). Les statuts ≥ 400 lèvent `HTTPFailure.status`.
     public static func send(_ req: URLRequest, timeout: TimeInterval, maxBytes: Int = Int.max) throws -> Response {
         var r = req
@@ -38,8 +51,9 @@ public enum HTTP {
         sem.wait()
         session.finishTasksAndInvalidate()
         if let e = result.2 as? URLError {
-            if e.code == .timedOut { throw HTTPFailure(kind: .timeout(e.localizedDescription)) }
-            throw HTTPFailure(kind: .connection(e.localizedDescription))
+            let reason = Self.reason(e)
+            if e.code == .timedOut { throw HTTPFailure(kind: .timeout(reason)) }
+            throw HTTPFailure(kind: .connection(reason))
         }
         if let e = result.2 { throw HTTPFailure(kind: .connection(e.localizedDescription)) }
         guard let http = result.1 as? HTTPURLResponse else { throw HTTPFailure(kind: .connection("réponse invalide")) }
