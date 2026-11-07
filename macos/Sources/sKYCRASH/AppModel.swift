@@ -227,7 +227,7 @@ final class AppModel {
         alert.addButton(withTitle: L("Utiliser ce dossier"))
         alert.addButton(withTitle: L("Plus tard"))
         alert.window.title = L("Dossier du jeu")
-        if alert.runModal() == .alertFirstButtonReturn {
+        if alert.runCenteredOnAppWindow() == .alertFirstButtonReturn {
             settings["game_dir"] = found
             Config.saveSettings(settings)
         } else { declinedGameDir = found }
@@ -322,7 +322,7 @@ final class AppModel {
         let yes = alert.addButton(withTitle: L("Supprimer"))
         yes.hasDestructiveAction = true
         alert.addButton(withTitle: L("Annuler"))
-        guard alert.runModal() == .alertFirstButtonReturn else { return }
+        guard alert.runCenteredOnAppWindow() == .alertFirstButtonReturn else { return }
         let (deleted, archived, errors) = Config.purgeLogs(folders)
         analyzeLogs()
         knownCrashes = crashNames()
@@ -497,7 +497,7 @@ final class AppModel {
         a.alertStyle = .informational
         a.addButton(withTitle: "OK")
         a.window.title = APP_NAME
-        a.runModal()
+        a.runCenteredOnAppWindow()
     }
 
     func warn(_ text: String) {
@@ -506,7 +506,7 @@ final class AppModel {
         a.alertStyle = .warning
         a.addButton(withTitle: "OK")
         a.window.title = APP_NAME
-        a.runModal()
+        a.runCenteredOnAppWindow()
     }
 
     func openLog(_ row: LogRow) { viewingLog = (row.path, row.name) }

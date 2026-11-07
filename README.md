@@ -9,6 +9,10 @@
 
 💬 **Support & community:** [Discord](https://discord.gg/xdDVDPQsYs) · *Aide et communauté : [Discord](https://discord.gg/xdDVDPQsYs)*
 
+### About
+
+sKYCRASH analyzes Skyrim SE/AE crash logs (Crash Logger SSE, SKSE, Papyrus), cross-checks them with your installation and your last save, and ranks the suspects with their evidence. By Starbudweiser & Claude Code (Anthropic). MIT License, © 2026 Starbudweiser. Provided as is, without warranty of any kind. See **About sKYCRASH** in the app menu.
+
 ---
 ## 🇬🇧 English
 
@@ -30,7 +34,13 @@ sKYCRASH reads your Skyrim crash reports (Crash Logger SSE, .NET Script Framewor
 - **Self-updating knowledge base**: follows Crash Logger, Community Shaders, Steam updates, r/skyrimmods, SKSE and CrossOver release notes.
 - **Export diagnostic** (⌘E): one file with the whole crash context, ready to share on a forum or Discord.
 - **Purge logs**: archives old crash reports so the next crash is easy to spot.
-- Interface in **English, French, Italian and Spanish** (follows your Mac's language; can be changed in the app).
+- Interface in **English, French, Italian and Spanish** (follows your Mac's language; can be changed in the Language menu).
+
+### What's new in 1.3.1
+
+- Rebuilt as a **native Swift app** (no more Python or PyInstaller): same analysis, same results (compared line by line with the previous version on the sample logs, on real crash logs and on saves), faster to start, and not flagged by antivirus scanners. Your settings, the knowledge base and the mORTEX export file are picked up as they are.
+- Automatic updates from inside the app (see Updates below).
+- New "Language" menu in the menu bar (Automatic, Français, English, Español, Italiano), and drag-and-drop of a log file onto the window.
 
 ### What's new in 1.3.0
 
@@ -42,7 +52,7 @@ sKYCRASH reads your Skyrim crash reports (Crash Logger SSE, .NET Script Framewor
 
 ### Updates
 
-The app checks once a day whether a newer release exists on GitHub and offers to open the Nexus page, remind you later or skip that version. Nothing is downloaded or installed automatically. The full history is in [CHANGELOG.md](CHANGELOG.md).
+The app checks once a day whether a newer release exists on GitHub, shows its notes in your language and offers to install it and relaunch (or to remind you later or skip that version). The download is checked (SHA-256, Developer ID signature, notarization) before it replaces the app, and never while an analysis is running. "Check for updates…" in the menu does the same on demand. The full history is in [CHANGELOG.md](CHANGELOG.md).
 
 ### Screenshots
 
@@ -51,7 +61,7 @@ The app checks once a day whether a newer release exists on GitHub and offers to
 
 ### Requirements
 
-A Mac with **Apple Silicon** (M1 or later), **macOS 13 Ventura** or later. No Python, no Wine, no virtual machine needed.
+A Mac with **Apple Silicon** (M1 or later), **macOS 15 Sequoia** or later. No Python, no Wine, no virtual machine needed.
 
 ### Installation
 
@@ -86,11 +96,13 @@ Logs stay on your Mac. Network access is used only for the knowledge base update
 
 ### Building from source
 
-Requires Python 3.12 with PyQt6 and PyInstaller. From the repository folder:
+Requires macOS 15 and the Swift 6 toolchain (Xcode or Command Line Tools). From the repository folder:
 
 ```bash
 ./Build_App.sh
 ```
+
+The engine (`macos/Sources/CrashCore`) has its own tests: `swift test --package-path macos`.
 
 ### License
 
@@ -118,7 +130,13 @@ sKYCRASH lit vos rapports de crash Skyrim (Crash Logger SSE, .NET Script Framewo
 - **Base de connaissances auto-alimentée** : suit Crash Logger, Community Shaders, les mises à jour Steam, r/skyrimmods, SKSE et les notes de version de CrossOver.
 - **Exporter le diagnostic** (⌘E) : un seul fichier avec tout le contexte du crash, prêt à partager sur un forum ou Discord.
 - **Purger les logs** : archive les anciens rapports pour repérer facilement le prochain crash.
-- Interface en **français, anglais, italien et espagnol** (suit la langue du Mac ; modifiable dans l'appli).
+- Interface en **français, anglais, italien et espagnol** (suit la langue du Mac ; modifiable dans le menu Langue).
+
+### Nouveautés de la 1.3.1
+
+- Reconstruite en **appli Swift native** (plus de Python ni de PyInstaller) : même analyse, mêmes résultats (comparés ligne à ligne avec la version précédente sur les logs d'exemple, sur de vrais crash logs et sur des sauvegardes), démarrage plus rapide, et plus de fausses alertes antivirus. Vos réglages, la base de connaissances et le fichier d'export pour mORTEX sont repris tels quels.
+- Mise à jour automatique depuis l'appli (voir Mises à jour ci-dessous).
+- Nouveau menu « Langue » dans la barre de menus (Automatique, Français, English, Español, Italiano), et glisser-déposer d'un fichier log sur la fenêtre.
 
 ### Nouveautés de la 1.3.0
 
@@ -130,7 +148,7 @@ sKYCRASH lit vos rapports de crash Skyrim (Crash Logger SSE, .NET Script Framewo
 
 ### Mises à jour
 
-L'appli vérifie une fois par jour si une version plus récente existe sur GitHub et propose d'ouvrir la page Nexus, de rappeler plus tard ou d'ignorer cette version. Rien n'est téléchargé ni installé automatiquement. L'historique complet est dans [CHANGELOG.md](CHANGELOG.md).
+L'appli vérifie une fois par jour si une version plus récente existe sur GitHub, affiche ses notes dans votre langue et propose de l'installer et de se relancer (ou de rappeler plus tard, ou d'ignorer cette version). Le téléchargement est vérifié (SHA-256, signature Developer ID, notarisation) avant de remplacer l'appli, et jamais pendant une analyse. « Rechercher les mises à jour… » dans le menu fait la même chose à la demande. L'historique complet est dans [CHANGELOG.md](CHANGELOG.md).
 
 ### Captures d'écran
 
@@ -139,7 +157,7 @@ L'appli vérifie une fois par jour si une version plus récente existe sur GitHu
 
 ### Configuration requise
 
-Un Mac **Apple Silicon** (M1 ou plus récent), **macOS 13 Ventura** ou plus récent. Ni Python, ni Wine, ni machine virtuelle.
+Un Mac **Apple Silicon** (M1 ou plus récent), **macOS 15 Sequoia** ou plus récent. Ni Python, ni Wine, ni machine virtuelle.
 
 ### Installation
 
@@ -174,11 +192,13 @@ Les logs restent sur votre Mac. Le réseau ne sert qu'à mettre à jour la base 
 
 ### Compiler depuis les sources
 
-Nécessite Python 3.12 avec PyQt6 et PyInstaller. Depuis le dossier du dépôt :
+Nécessite macOS 15 et la chaîne d'outils Swift 6 (Xcode ou Command Line Tools). Depuis le dossier du dépôt :
 
 ```bash
 ./Build_App.sh
 ```
+
+Le moteur (`macos/Sources/CrashCore`) a ses propres tests : `swift test --package-path macos`.
 
 ### Licence
 

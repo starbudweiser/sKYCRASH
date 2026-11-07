@@ -13,7 +13,7 @@ enum About {
     static func show() {
         window?.close()  // reconstruite à chaque ouverture : suit la langue choisie dans le menu Langue
         window = makeWindow()
-        window?.socleCenter()
+        window?.updaterCenter()
         if ProcessInfo.processInfo.environment["SPLASH_QUIET"] != nil { window?.orderBack(nil) } else { window?.present() }  // essais discrets
     }
 

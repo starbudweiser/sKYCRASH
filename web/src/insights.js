@@ -1,4 +1,4 @@
-// Recoupements de la preview (miroir de src/insights.py, src/savegame.py et src/diagnostic.py) :
+// Recoupements de la preview (miroir du moteur Swift : macos/Sources/CrashCore/Insights.swift, SaveGame.swift et Diagnostic.swift) :
 // chronologie, historique des crash logs, sauvegarde .ess comparée aux plugins du dernier plantage,
 // domaine des objets en cause, et export du dossier de diagnostic en Markdown.
 // Sans accès aux fichiers du jeu, la liste « actuelle » est celle du dernier crash log (section PLUGINS).

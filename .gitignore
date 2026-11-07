@@ -2,14 +2,6 @@
 .DS_Store
 Icon?
 
-# Python
-__pycache__/
-*.py[cod]
-.venv/
-venv/
-*.egg-info/
-.pyinstaller_cache/
-
 # Node / Vite
 node_modules/
 .vite/
@@ -32,3 +24,6 @@ ETAT.md
 macos/.build/
 macos/.swiftpm/
 *.app/
+
+# Ancien environnement Python (version PyQt6 retirée)
+.venv/
