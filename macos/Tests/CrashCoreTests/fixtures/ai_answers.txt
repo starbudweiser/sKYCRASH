@@ -1,0 +1,41 @@
+VERDICT: Le crash vient de `tbbmalloc.dll` lors d'une allocation mémoire.
+CAUSE: Épuisement de la mémoire sous CrossOver, **très probable** avec les textures 4K.
+CONFIANCE: Élevée (la pile d'appels est cohérente).
+PREUVES:
+- `tbbmalloc.dll` apparaît 4× dans le STACK.
+- Mémoire à 92 % au moment du crash.
+ACTIONS:
+1. Installer Crash Logger SSE pour obtenir un rapport plus précis.
+2. Vérifier que l'Address Library est installée pour cette version.
+3. Réduire les textures 4K du mod d'overhaul.
+4. Vérifier la limite de 254 plugins.
+5. Désactiver ENB puis relancer le jeu.
+MANQUE: Le contenu de Papyrus.0.log.
+=====
+## Verdict
+Probable cause: **CrashLoggerSSE.dll** crashed while reading `SKSE/Crashlogs` files.
+Confidence: High
+Steps:
+1. Download SKSE and install it again.
+2. Open the folder SKSE/Crashlogs/ and check the newest file.
+- Add Engine Fixes to your load order.
+---
+Missing information: none
+=====
+Veredicto: Fallo de memoria.
+Causa probable: texturas pesadas.
+Confianza: Media
+Acciones:
+1. Descargar el Creation Club de nuevo.
+2. Reducir texturas.
+Falta: el log de Papyrus.
+=====
+Une simple réponse sans sections, avec **du gras** et du `code`, <b>balises</b> & "guillemets".
+
+Deuxième paragraphe.
+=====
+CONFIANCE: Faible.
+- une puce seule
+3) étape sans liste
+CAUSE : cause avec deux-points espacés
+=====
