@@ -16,14 +16,14 @@ import Foundation
 
 extension String {
     /// `str.strip()`
-    var pyStrip: String { pyRStrip.pyLStrip }
-    var pyLStrip: String {
+    public var pyStrip: String { pyRStrip.pyLStrip }
+    public var pyLStrip: String {
         let u = unicodeScalars
         var i = u.startIndex
         while i < u.endIndex, pyIsSpace(u[i]) { i = u.index(after: i) }
         return String(u[i...])
     }
-    var pyRStrip: String {
+    public var pyRStrip: String {
         let u = unicodeScalars
         var j = u.endIndex
         while j > u.startIndex {
@@ -32,15 +32,15 @@ extension String {
         }
         return String(u[..<j])
     }
-    func pyStrip(_ chars: String) -> String { pyLStrip(chars).pyRStrip(chars) }
-    func pyLStrip(_ chars: String) -> String {
+    public func pyStrip(_ chars: String) -> String { pyLStrip(chars).pyRStrip(chars) }
+    public func pyLStrip(_ chars: String) -> String {
         let set = Set(chars.unicodeScalars)
         let u = unicodeScalars
         var i = u.startIndex
         while i < u.endIndex, set.contains(u[i]) { i = u.index(after: i) }
         return String(u[i...])
     }
-    func pyRStrip(_ chars: String) -> String {
+    public func pyRStrip(_ chars: String) -> String {
         let set = Set(chars.unicodeScalars)
         let u = unicodeScalars
         var j = u.endIndex
@@ -51,10 +51,10 @@ extension String {
         return String(u[..<j])
     }
     /// `str.isspace()` du premier caractère (`s[:1].isspace()`).
-    var firstIsSpace: Bool { unicodeScalars.first.map(pyIsSpace) ?? false }
-    var pyIsBlank: Bool { pyStrip.isEmpty }
+    public var firstIsSpace: Bool { unicodeScalars.first.map(pyIsSpace) ?? false }
+    public var pyIsBlank: Bool { pyStrip.isEmpty }
     /// `str.splitlines()` : \n, \r, \r\n, \v, \f, \x1c-\x1e, \x85,  ,  .
-    var pyLines: [String] {
+    public var pyLines: [String] {
         var out: [String] = []
         var cur = String.UnicodeScalarView()
         var prevCR = false
@@ -89,13 +89,13 @@ extension String {
         return out
     }
     /// `s[:n]` (en caractères Unicode, comme Python).
-    func pyPrefix(_ n: Int) -> String {
+    public func pyPrefix(_ n: Int) -> String {
         if n <= 0 { return "" }
         let u = unicodeScalars
         guard u.count > n else { return self }
         return String(u[u.startIndex..<u.index(u.startIndex, offsetBy: n)])
     }
-    var pyLen: Int { unicodeScalars.count }
+    public var pyLen: Int { unicodeScalars.count }
     func pyLower() -> String { lowercased() }
     func hasSuffixAny(_ suffixes: [String]) -> Bool { suffixes.contains { hasSuffix($0) } }
     func hasPrefixAny(_ prefixes: [String]) -> Bool { prefixes.contains { hasPrefix($0) } }
@@ -105,7 +105,7 @@ extension String {
 }
 
 /// Comparaison par points de code, comme le tri des `str` de Python.
-@inline(__always) func pyLess(_ a: String, _ b: String) -> Bool {
+@inline(__always) public func pyLess(_ a: String, _ b: String) -> Bool {
     var i = a.unicodeScalars.makeIterator(), j = b.unicodeScalars.makeIterator()
     while true {
         let x = i.next(), y = j.next()
@@ -119,11 +119,11 @@ extension String {
     }
 }
 
-func pySorted(_ a: [String]) -> [String] { a.sorted(by: pyLess) }
+public func pySorted(_ a: [String]) -> [String] { a.sorted(by: pyLess) }
 
 extension Sequence {
     /// Tri stable (Python `sorted`) sur une clé numérique décroissante.
-    func stableSorted(by less: (Element, Element) -> Bool) -> [Element] {
+    public func stableSorted(by less: (Element, Element) -> Bool) -> [Element] {
         enumerated().sorted { a, b in
             if less(a.element, b.element) { return true }
             if less(b.element, a.element) { return false }

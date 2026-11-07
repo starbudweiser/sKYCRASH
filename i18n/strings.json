@@ -1059,11 +1059,6 @@
   "Audit in corso…",
   "Auditoría en curso…"
  ],
- "Échec de l'audit : {msg}": [
-  "Audit failed: {msg}",
-  "Audit non riuscito: {msg}",
-  "Fallo de la auditoría: {msg}"
- ],
  "AUDIT — {verdict}": [
   "AUDIT — {verdict}",
   "AUDIT — {verdict}",
@@ -1098,11 +1093,6 @@
   "Open log",
   "Apri log",
   "Abrir log"
- ],
- "Logs (*.log *.txt)": [
-  "Logs (*.log *.txt)",
-  "Log (*.log *.txt)",
-  "Logs (*.log *.txt)"
  ],
  "Fichier introuvable.": [
   "File not found.",
@@ -1158,11 +1148,6 @@
   "Reading: {name}",
   "Lettura: {name}",
   "Lectura: {name}"
- ],
- "Erreur inattendue : {e}": [
-  "Unexpected error: {e}",
-  "Errore imprevisto: {e}",
-  "Error inesperado: {e}"
  ],
  "Sélectionner un dossier pour {game}": [
   "Select a folder for {game}",
@@ -1303,11 +1288,6 @@
   "List unavailable ({msg}). You can type the model name.",
   "Elenco non disponibile ({msg}). Puoi digitare il nome del modello.",
   "Lista no disponible ({msg}). Puedes escribir el nombre del modelo."
- ],
- "Module 'keyring' indisponible : définissez GEMINI_API_KEY dans l'environnement.": [
-  "Module 'keyring' unavailable: set GEMINI_API_KEY in the environment.",
-  "Modulo 'keyring' non disponibile: definisci GEMINI_API_KEY nell'ambiente.",
-  "Módulo 'keyring' no disponible: define GEMINI_API_KEY en el entorno."
  ],
  "Trousseau inaccessible : {e}": [
   "Keychain inaccessible: {e}",
@@ -1493,11 +1473,6 @@
   "Knowledge base: {u} source(s) updated, {f} failed.",
   "Base di conoscenza: {u} fonte/i aggiornata/e, {f} non riuscita/e.",
   "Base de conocimiento: {u} fuente(s) actualizada(s), {f} con error."
- ],
- "Mise à jour impossible : {msg}": [
-  "Update impossible: {msg}",
-  "Aggiornamento impossibile: {msg}",
-  "Actualización imposible: {msg}"
  ],
  "Réglages…": [
   "Settings…",
@@ -1728,11 +1703,6 @@
   "Current plugin list: `{p}`",
   "Elenco dei plugin attuale: `{p}`",
   "Lista de plugins actual: `{p}`"
- ],
- "Markdown (*.md)": [
-  "Markdown (*.md)",
-  "Markdown (*.md)",
-  "Markdown (*.md)"
  ],
  "Mettre à jour le dossier du jeu dans Réglages… > Général.": [
   "Update the game folder in Settings… > General.",
@@ -2129,11 +2099,6 @@
   "Jev: risposta illeggibile.",
   "Jev: respuesta ilegible."
  ],
- "Module 'keyring' indisponible : définissez TYPESAFE_API_KEY dans l'environnement.": [
-  "'keyring' module unavailable: set TYPESAFE_API_KEY in the environment.",
-  "Modulo 'keyring' non disponibile: imposta TYPESAFE_API_KEY nell'ambiente.",
-  "Módulo 'keyring' no disponible: define TYPESAFE_API_KEY en el entorno."
- ],
  "contradiction avec les faits (Jev)": [
   "contradicts the facts (Jev)",
   "contraddice i fatti (Jev)",
@@ -2153,5 +2118,95 @@
   "This month: {n} Jev request(s) · {t} tokens ({i} input, {o} output), counted by the app. The credit balance is only shown in the TypeSafe console.",
   "Questo mese: {n} richieste Jev · {t} token ({i} in ingresso, {o} in uscita), contati dall'app. Il saldo dei crediti è visibile solo nella console TypeSafe.",
   "Este mes: {n} petición(es) a Jev · {t} tokens ({i} de entrada, {o} de salida), contados por la app. El saldo de créditos solo se ve en la consola de TypeSafe."
+ ],
+ "Automatique (système)": [
+  "Automatic (system)",
+  "Automatica (sistema)",
+  "Automático (sistema)"
+ ],
+ "Coller": [
+  "Paste",
+  "Incolla",
+  "Pegar"
+ ],
+ "Copier": [
+  "Copy",
+  "Copia",
+  "Copiar"
+ ],
+ "Couper": [
+  "Cut",
+  "Taglia",
+  "Cortar"
+ ],
+ "Fenêtre": [
+  "Window",
+  "Finestra",
+  "Ventana"
+ ],
+ "Fourni en l'état, sans garantie d'aucune sorte.": [
+  "Provided as is, without warranty of any kind.",
+  "Fornito così com'è, senza garanzie di alcun tipo.",
+  "Se proporciona tal cual, sin garantía de ningún tipo."
+ ],
+ "Licence MIT. © 2026 Starbudweiser.": [
+  "MIT License. © 2026 Starbudweiser.",
+  "Licenza MIT. © 2026 Starbudweiser.",
+  "Licencia MIT. © 2026 Starbudweiser."
+ ],
+ "Masquer les autres": [
+  "Hide Others",
+  "Nascondi altri",
+  "Ocultar otros"
+ ],
+ "Réduire": [
+  "Minimize",
+  "Riduci",
+  "Minimizar"
+ ],
+ "Tout afficher": [
+  "Show All",
+  "Mostra tutto",
+  "Mostrar todo"
+ ],
+ "Tout sélectionner": [
+  "Select All",
+  "Seleziona tutto",
+  "Seleccionar todo"
+ ],
+ "Version {v} ({b})": [
+  "Version {v} ({b})",
+  "Versione {v} ({b})",
+  "Versión {v} ({b})"
+ ],
+ "Édition": [
+  "Edit",
+  "Modifica",
+  "Edición"
+ ],
+ "Analyse les logs de plantage de Skyrim SE/AE (Crash Logger, SKSE, Papyrus), classe les suspects, recoupe avec l’installation et la sauvegarde, et propose un assistant IA.": [
+  "Analyzes Skyrim SE/AE crash logs (Crash Logger, SKSE, Papyrus), ranks the suspects, cross-checks them with your installation and your save, and offers an AI assistant.",
+  "Analizza i log di crash di Skyrim SE/AE (Crash Logger, SKSE, Papyrus), classifica i sospetti, li confronta con l’installazione e il salvataggio e offre un assistente IA.",
+  "Analiza los logs de crash de Skyrim SE/AE (Crash Logger, SKSE, Papyrus), clasifica los sospechosos, los contrasta con la instalación y la partida guardada y ofrece un asistente IA."
+ ],
+ "À propos de sKYCRASH": [
+  "About sKYCRASH",
+  "Informazioni su sKYCRASH",
+  "Acerca de sKYCRASH"
+ ],
+ "Masquer sKYCRASH": [
+  "Hide sKYCRASH",
+  "Nascondi sKYCRASH",
+  "Ocultar sKYCRASH"
+ ],
+ "Quitter sKYCRASH": [
+  "Quit sKYCRASH",
+  "Esci da sKYCRASH",
+  "Salir de sKYCRASH"
+ ],
+ "Fermer": [
+  "Close",
+  "Chiudi",
+  "Cerrar"
  ]
 }

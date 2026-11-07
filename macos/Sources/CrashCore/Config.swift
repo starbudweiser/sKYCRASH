@@ -31,7 +31,7 @@ public enum Config {
     }
 
     /// Mode préversion : dossiers imposés par SKYRIM_CA_FOLDERS, config utilisateur intacte.
-    static var folderOverride: [String]? {
+    public static var folderOverride: [String]? {
         guard let o = ProcessInfo.processInfo.environment["SKYRIM_CA_FOLDERS"], !o.isEmpty else { return nil }
         return o.components(separatedBy: ":").filter { !$0.isEmpty }
     }
@@ -64,7 +64,8 @@ public enum Config {
             s["provider"] = provider
             if !model.isEmpty { s["ollama_model"] = model }
         }
-        if I18n.langs[s["language"] ?? ""] == nil { s["language"] = I18n.systemLang() }
+        // « auto » (ou valeur absente/inconnue) : langue du système, résolue à l'usage par `resolveLanguage`
+        if I18n.langs[s["language"] ?? ""] == nil { s["language"] = "auto" }
         return s
     }
 
@@ -74,10 +75,15 @@ public enum Config {
         writeConfigFile(readConfigFile().setting("settings", obj))
     }
 
-    /// Langue choisie dans les réglages, sinon celle du système (anglais si non prise en charge).
-    public static func startupLang() -> String {
-        if let l = readConfigFile()["settings"]?["language"]?.string, I18n.langs[l] != nil { return l }
+    /// Langue à afficher pour un choix mémorisé (« auto » ou fr/en/it/es) : celle du système, anglais si non prise en charge.
+    public static func resolveLanguage(_ choice: String?) -> String {
+        if let c = choice, I18n.langs[c] != nil { return c }
         return I18n.systemLang()
+    }
+
+    /// Langue du démarrage : celle des réglages, sinon celle du système.
+    public static func startupLang() -> String {
+        resolveLanguage(readConfigFile()["settings"]?["language"]?.string)
     }
 
     // MARK: logs

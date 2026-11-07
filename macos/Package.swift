@@ -12,7 +12,7 @@ let package = Package(
         // Exécutable de comparaison avec la version Python : sort en JSON le résultat complet d'une analyse
         .executableTarget(name: "crash-parity", dependencies: ["CrashCore"]),
         .executableTarget(name: "sKYCRASH", dependencies: ["CrashCore"]),
-        .testTarget(name: "CrashCoreTests", dependencies: ["CrashCore"]),
+        .testTarget(name: "CrashCoreTests", dependencies: ["CrashCore"], exclude: ["fixtures"]),
     ],
     swiftLanguageModes: [.v5]
 )

@@ -72,7 +72,12 @@ public enum Compat {
 
     // MARK: dossier du jeu
 
-    nonisolated(unsafe) static var extraRoots: [String] = []
+    nonisolated(unsafe) static var _extraRoots: [String] = []
+    static let rootsLock = NSLock()
+    static var extraRoots: [String] {
+        get { rootsLock.lock(); defer { rootsLock.unlock() }; return _extraRoots }
+        set { rootsLock.lock(); defer { rootsLock.unlock() }; _extraRoots = newValue }
+    }
 
     static func bottleRootOf(_ path: String) -> String? {
         let parts = PyFS.normpath(path).split(separator: "/", omittingEmptySubsequences: false).map(String.init)
@@ -98,7 +103,7 @@ public enum Compat {
     }
 
     public static func findGameDir(pluginDirWin: String? = nil, userDir: String = "") -> String {
-        if let root = bottleRootOf(userDir), !extraRoots.contains(root) { extraRoots.append(root) }
+        if let root = bottleRootOf(userDir) { rootsLock.lock(); if !_extraRoots.contains(root) { _extraRoots.append(root) }; rootsLock.unlock() }
         var cands: [String] = []
         if !userDir.isEmpty { cands.append(userDir) }
         if let pd = pluginDirWin, !pd.isEmpty {

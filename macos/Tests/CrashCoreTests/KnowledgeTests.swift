@@ -177,6 +177,11 @@ final class I18nTests: XCTestCase {
         }
     }
 
+    func testNoStaleKeys() {
+        let stale = Set(translations.keys).subtracting(Self.collectKeys()).sorted()
+        XCTAssertEqual(stale, [], "\(stale.count) clé(s) orphelines dans la table")
+    }
+
     func testSwitch() {
         defer { I18n.setLang("fr") }
         I18n.setLang("en"); XCTAssertEqual(L("Envoyer"), "Send")

@@ -143,7 +143,7 @@ public enum AIClient {
         var names: [String] = []
         var token = ""
         for _ in 0..<5 {
-            let enc = token.addingPercentEncoding(withAllowedCharacters: CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_.-~")) ?? token
+            let enc = token.addingPercentEncoding(withAllowedCharacters: CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_.-~/")) ?? token
             let url = "https://generativelanguage.googleapis.com/v1beta/models?pageSize=100" + (token.isEmpty ? "" : "&pageToken=\(enc)")
             let data = try postJSON(url, nil, ["x-goog-api-key": key])
             for m in data["models"]?.array ?? [] {
@@ -191,7 +191,7 @@ public enum AIClient {
         }
         if local && ctx.pyLen > 20000 { ctx = ctx.pyPrefix(20000) + "\n[...]" }
         let langSetting = settings["language"] ?? ""
-        let lang = langSetting.isEmpty ? I18n.lang : langSetting
+        let lang = I18n.langs[langSetting] != nil ? langSetting : I18n.lang
         var system = SYSTEM_PROMPT + "\n\nLANGUE DE RÉPONSE : \(I18n.langNamesFr[lang] ?? "français"). "
             + "Garde les étiquettes VERDICT, CAUSE, CONFIANCE, PREUVES, ACTIONS, MANQUE telles quelles "
             + "(en majuscules) ; écris leur contenu, y compris le niveau de CONFIANCE, dans cette langue."
