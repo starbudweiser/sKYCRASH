@@ -2,6 +2,8 @@
 
 # sKYCRASH
 
+[![Listed on OpenMacApps](https://openmacapps.com/badge.svg)](https://openmacapps.com/apps/skycrash/)
+
 **Crash log analyzer for Skyrim Special Edition on Mac (CrossOver).**  
 *Analyseur de crash logs pour Skyrim Special Edition sur Mac (CrossOver).*
 
