@@ -2,29 +2,21 @@
 
 # sKYCRASH
 
-[![Listed on OpenMacApps](https://openmacapps.com/badge.svg)](https://openmacapps.com/apps/skycrash/)
+[![Listed on OpenMacApps](https://openmacapps.com/badge.svg)](https://openmacapps.com/apps/skycrash/) [![Latest release](https://img.shields.io/github/v/release/starbudweiser/sKYCRASH)](https://github.com/starbudweiser/sKYCRASH/releases/latest) [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
-**Crash log analyzer for Skyrim Special Edition on Mac (CrossOver).**  
-*Analyseur de crash logs pour Skyrim Special Edition sur Mac (CrossOver).*
+**Crash log analyzer for Skyrim Special Edition on Mac (CrossOver).**
 
-🍏 **Native Mac app written in Swift, signed and notarized by Apple.** · *Appli Mac native écrite en Swift, signée et notarisée par Apple.*
+🇬🇧 English · 🇫🇷 [Français](#français)
 
-🇬🇧 [English](#-english) · 🇫🇷 [Français](#-français)
-
-💬 **Support & community:** [Discord](https://discord.gg/xdDVDPQsYs) · *Aide et communauté : [Discord](https://discord.gg/xdDVDPQsYs)*
-
-### About
+## About
 
 sKYCRASH analyzes Skyrim SE/AE crash logs (Crash Logger SSE, SKSE, Papyrus), cross-checks them with your installation and your last save, and ranks the suspects with their evidence. By Starbudweiser & Claude Code (Anthropic). MIT License, © 2026 Starbudweiser. Provided as is, without warranty of any kind. See **About sKYCRASH** in the app menu.
 
----
-## 🇬🇧 English
-
-### What it does
+🍏 **Native Mac app written in Swift, signed and notarized by Apple.**
 
 sKYCRASH reads your Skyrim crash reports (Crash Logger SSE, .NET Script Framework), SKSE and Papyrus logs, cross-checks them with your actual installation and your last save, and tells you which DLL, plugin, mesh or script is most likely responsible — with the evidence. An optional AI assistant answers your questions about the crash.
 
-### Features
+## Features
 
 - **Analyze logs**: quick scan of all configured log folders (the SKSE folder is always included).
 - **Deep audit**: rule engine that ranks suspects (DLLs, plugins, scripts) by category — memory, graphics, meshes, animations, saves…
@@ -40,6 +32,15 @@ sKYCRASH reads your Skyrim crash reports (Crash Logger SSE, .NET Script Framewor
 - **Purge logs**: archives old crash reports so the next crash is easy to spot.
 - Interface in **English, French, Italian and Spanish** (follows your Mac's language; can be changed in the Language menu).
 
+### Screenshots
+
+![Analyzed logs, log list and AI assistant](docs/screenshots/01_home.png)
+*Analyzed logs, log list and AI assistant*
+
+### Privacy
+
+Logs stay on your Mac. Network access is used only for the knowledge base updates (public pages from GitHub, Steam, Reddit, SKSE and CodeWeavers, HTTPS only, no account) and, if you enable them, for the Gemini AI assistant and the Jev check (the assistant's tips and the verified facts are sent to TypeSafe). API keys are stored in the macOS Keychain.
+
 ### What's new in 1.3.1
 
 - Rebuilt as a **native Swift app** (no more Python or PyInstaller): same analysis, same results (compared line by line with the previous version on the sample logs, on real crash logs and on saves), faster to start, and not flagged by antivirus scanners. Your settings, the knowledge base and the mORTEX export file are picked up as they are.
@@ -54,14 +55,9 @@ sKYCRASH reads your Skyrim crash reports (Crash Logger SSE, .NET Script Framewor
 - The first letter of the app's name now uses the colour of its logo everywhere it appears.
 - Version number aligned across the Skyrim Mac Toolkit.
 
-### Updates
+## Install
 
-The app checks once a day whether a newer release exists on GitHub, shows its notes in your language and offers to install it and relaunch (or to remind you later or skip that version). The download is checked (SHA-256, Developer ID signature, notarization) before it replaces the app, and never while an analysis is running. "Check for updates…" in the menu does the same on demand. The full history is in [CHANGELOG.md](CHANGELOG.md).
-
-### Screenshots
-
-![Analyzed logs, log list and AI assistant](docs/screenshots/01_home.png)
-*Analyzed logs, log list and AI assistant*
+**[Download the latest notarized release](https://github.com/starbudweiser/sKYCRASH/releases/latest)** · requires **macOS 15 Sequoia** or later on Apple Silicon.
 
 ### Requirements
 
@@ -80,6 +76,28 @@ A Mac with **Apple Silicon** (M1 or later), **macOS 15 Sequoia** or later. Nativ
 4. Click a log in the list to read it; ask the **AI assistant** a question, or click **Explain the crash**.
 5. Fix, test, then **Purge logs** before your next session.
 
+### Updates
+
+The app checks once a day whether a newer release exists on GitHub, shows its notes in your language and offers to install it and relaunch (or to remind you later or skip that version). The download is checked (SHA-256, Developer ID signature, notarization) before it replaces the app, and never while an analysis is running. "Check for updates…" in the menu does the same on demand. The full history is in [CHANGELOG.md](CHANGELOG.md).
+
+## Build
+
+Requires macOS 15 and the Swift 6 toolchain (Xcode or Command Line Tools). From the repository folder:
+
+```bash
+./Build_App.sh
+```
+
+The engine (`macos/Sources/CrashCore`) has its own tests: `swift test --package-path macos`.
+
+## Languages
+
+English, French, Spanish and Italian. The app follows your Mac's preferred language automatically (English if it is none of these four); it can also be changed in the Language menu.
+
+## Support
+
+💬 Help and community: [Skyrim Mac Toolkit Discord](https://discord.gg/jRS4rvynx6) · bug reports: [GitHub Issues](https://github.com/starbudweiser/sKYCRASH/issues).
+
 ### FAQ
 
 **No crash log is found.**  
@@ -94,27 +112,19 @@ Ollama is 100% local and private (`ollama pull llama3.1`). Gemini gives better a
 **What is Jev and do I need it?**  
 Jev (TypeSafe) is an optional second check on the assistant's tips. Paste a TypeSafe key in Settings… > AI to turn it on; the monthly usage is shown right below the key.
 
-### Privacy
+## License
 
-Logs stay on your Mac. Network access is used only for the knowledge base updates (public pages from GitHub, Steam, Reddit, SKSE and CodeWeavers, HTTPS only, no account) and, if you enable them, for the Gemini AI assistant and the Jev check (the assistant's tips and the verified facts are sent to TypeSafe). API keys are stored in the macOS Keychain.
-
-### Building from source
-
-Requires macOS 15 and the Swift 6 toolchain (Xcode or Command Line Tools). From the repository folder:
-
-```bash
-./Build_App.sh
-```
-
-The engine (`macos/Sources/CrashCore`) has its own tests: `swift test --package-path macos`.
-
-### License
-
-Released under the **MIT License**: free to use, modify and share. Part of the **Skyrim Mac Toolkit**, a set of modding tools built for Skyrim players on Mac.
+Released under the **MIT License**: free to use, modify and share. Part of the **Skyrim Mac Toolkit**, a set of modding tools built for Skyrim players on Mac. See [LICENSE](LICENSE).
 
 ---
 
-## 🇫🇷 Français
+## Français
+
+**Analyseur de crash logs pour Skyrim Special Edition sur Mac (CrossOver).**
+
+🍏 *Appli Mac native écrite en Swift, signée et notarisée par Apple.*
+
+💬 Aide et communauté : [Discord du Skyrim Mac Toolkit](https://discord.gg/jRS4rvynx6)
 
 ### À quoi ça sert
 
