@@ -573,3 +573,51 @@ extension View {
         }
     }
 }
+
+/// Touche de clavier (⌥, ⇥…) : symbole au-dessus, nom en `caption`, fond `control`.
+struct SocleKeycap: View {
+    let symbol: String
+    var name: String? = nil
+    var body: some View {
+        VStack(spacing: 2) {
+            Text(symbol).socle(Socle.T.bodyLg).foregroundStyle(Socle.C.textStrong)
+            if let name { Text(name).socle(Socle.T.caption).foregroundStyle(Socle.C.textMuted) }
+        }
+        .frame(minWidth: 44).padding(.horizontal, Socle.M.space2_5).padding(.vertical, 6)
+        .background(Socle.C.control, in: RoundedRectangle(cornerRadius: Socle.M.radius))
+        .accessibilityElement(children: .ignore).accessibilityLabel(name ?? symbol)
+    }
+}
+
+/// Popover d'accueil ou de confirmation (composant Socle `Popover`) : pastille de réussite, titre, ligne de touches,
+/// encart d'information et bouton principal. À plat : aucun verre, flou ni ombre.
+struct SoclePopover<Keys: View>: View {
+    let title: String
+    var noteTitle: String? = nil
+    var note: String? = nil
+    let button: String
+    let action: () -> Void
+    @ViewBuilder var keys: Keys
+
+    var body: some View {
+        VStack(spacing: Socle.M.space4) {
+            Image(systemName: "checkmark").font(.system(size: 22, weight: .bold)).foregroundStyle(.white)
+                .frame(width: 48, height: 48).background(Socle.C.successBorder, in: Circle()).accessibilityHidden(true)
+            Text(title).socle(Socle.T.display).foregroundStyle(Socle.C.textStrong)
+            HStack(spacing: Socle.M.space2) { keys }.socle(Socle.T.body).foregroundStyle(Socle.C.textMuted)
+            if let note {
+                VStack(alignment: .leading, spacing: 4) {
+                    if let noteTitle { Text(noteTitle).socle(Socle.T.labelStrong).foregroundStyle(Socle.C.accentText) }
+                    Text(note).socle(Socle.T.body).foregroundStyle(Socle.C.textMuted).fixedSize(horizontal: false, vertical: true)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading).padding(Socle.M.space3)
+                .background(Socle.C.surfaceRaised, in: RoundedRectangle(cornerRadius: Socle.M.radiusLg))
+                .overlay(RoundedRectangle(cornerRadius: Socle.M.radiusLg).stroke(Socle.C.border, lineWidth: 1))
+            }
+            Button(button.uppercased(), action: action).buttonStyle(SocleButtonStyle(.primary)).fixedSize()
+        }
+        .padding(Socle.M.space6).frame(width: 340)
+        .background(Socle.C.surface, in: RoundedRectangle(cornerRadius: Socle.M.radiusXl))
+        .overlay(RoundedRectangle(cornerRadius: Socle.M.radiusXl).stroke(Socle.C.border, lineWidth: 1))
+    }
+}
