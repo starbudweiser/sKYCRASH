@@ -452,18 +452,21 @@ public enum Audit {
     static let PSC_RE = Rx(#"([A-Za-z0-9_]+)\.psc"#, i: true)
     static let STORE_RE = Rx(#"Cannot open store for class "([^"]+)""#, i: true)
     static let BIND_RE = Rx(#"Script (\S+) cannot be bound to"#, i: true)
-    static let NATIVE_RE = Rx(#"Native function (\S+) in (?:empty )?state could find no matching function"#, i: true)
+    static let NATIVE_RE = Rx(#"Native function (\S+) in (?:empty )?state could find no matching function(?: on linked type (\w+))?"#, i: true)
     static let PAPY_NUM_RE = Rx(#"0x[0-9a-f]+|\d+"#)
     static let PAPY_STACK_RE = Rx(#"dumping stack|stack overflow|suspended stack"#, i: true)
 
     static func auditPapyrus(_ path: String, _ lines: [String], _ report: AuditReport, _ scores: Scores) {
         let src = PyFS.basename(path)
         var msgs = Counter(), scripts = Counter(), missing = Counter()
-        var unbound = Counter(), nativeUnbound = Counter()
+        var unbound = Counter(), nativeUnbound = Counter(), nativeTypes = Counter()
         for (i, l) in lines.enumerated() {
             if let mc = STORE_RE.search(l) { missing[mc.group(1)!] += 1 }
             if let mb = BIND_RE.search(l) { unbound[mb.group(1)!] += 1 }
-            if let mn = NATIVE_RE.search(l) { nativeUnbound[mn.group(1)!] += 1 }
+            if let mn = NATIVE_RE.search(l) {
+                nativeUnbound[mn.group(1)!] += 1
+                if let t = mn.group(2) { nativeTypes[t] += 1 }
+            }
             guard let m = PAPY_ERR_RE.search(l) else { continue }
             let msg = PAPY_NUM_RE.sub("#", m.group(1)!).pyStrip.pyPrefix(140)
             msgs[msg] += 1
@@ -526,11 +529,55 @@ public enum Audit {
                 }
             }
         }
+        func want(_ name: String, _ kind: ScriptQuery.Kind) {
+            if !report.extras.scriptQueries.contains(where: { $0.name.lowercased() == name.lowercased() }) {
+                report.extras.scriptQueries.append(ScriptQuery(name: name, kind: kind))
+            }
+        }
+        for (k, _) in missing.items.prefix(15) { want(k, .missing) }
+        for (k, _) in unbound.items.prefix(10) { want(k, .unbound) }
+        for (k, _) in nativeTypes.items.prefix(5) { want(k, .nativeType) }
+        for (k, _) in scripts.mostCommon(5) { want(k, .spam) }
         var extra = missing.items.prefix(15).map { L("script introuvable : {k} ({v}×)", ["k": $0.0, "v": $0.1]) }
         extra += unbound.items.prefix(10).map { L("script non lié : {k} ({v}×)", ["k": $0.0, "v": $0.1]) }
         extra += nativeUnbound.keys.prefix(10).map { L("fonction native non liée : {k}", ["k": $0]) }
         let ex = (msgs.mostCommon(15).map { "\($0.1)× \($0.0)" } + extra).joined(separator: "\n").pyPrefix(6000)
         report.excerpts[path] = ex.isEmpty ? L("(aucune erreur)") : ex
+    }
+
+    // MARK: provenance des scripts
+
+    /// Constat « Provenance des scripts » pour les scripts notés par auditPapyrus ; renvoie l'index construit.
+    static func auditScriptOrigins(_ gdir: String, _ report: AuditReport) -> ScriptOrigin.Index {
+        let queries = report.extras.scriptQueries
+        if gdir.isEmpty || queries.isEmpty { return [:] }
+        let index = ScriptOrigin.buildIndex(gdir)
+        if index.isEmpty { return index }
+        var lines: [String] = [], notes: [String] = []
+        for q in queries.prefix(25) {
+            let ps = ScriptOrigin.providers(q.name, index)
+            let file = q.name + ".pex"
+            if ps.isEmpty {
+                if q.kind != .spam { lines.append(L("{s} : introuvable dans le jeu, les mods et les archives", ["s": file])) }
+                continue
+            }
+            var line = "\(file) : " + ps.map(ScriptOrigin.label).joined(separator: ", ")
+            if ps.count > 1 { line += " — " + L("plusieurs fournisseurs : conflit possible") }
+            lines.append(line)
+            if q.kind == .missing || q.kind == .unbound {
+                notes.append(L("{s} est présent alors que le log le dit introuvable ou non lié : archive non chargée (plugin absent ou désactivé) ou mod ajouté depuis.", ["s": file]))
+            }
+            if q.kind == .nativeType, ps.contains(where: { !$0.mod.isEmpty }) {
+                notes.append(L("{s} est remplacé par un mod alors que ses fonctions natives ne sont pas liées : ce script attend un plugin SKSE absent ou d'une autre version.", ["s": file]))
+            }
+        }
+        if lines.isEmpty { return index }
+        report.findings.append(Finding(
+            SEV_INFO, "script", L("Provenance des scripts"), lines.joined(separator: "\n"), L("jeu et mods"),
+            Array(notes.prefix(5)),
+            L("Limites : instantané Wabbajack, dossier de préparation de Vortex et archives BA2 non lus ; l'ordre de priorité de MO2 n'est pas pris en compte.")))
+        report.excerpts[L("provenance des scripts")] = (lines + notes).joined(separator: "\n").pyPrefix(4000)
+        return index
     }
 
     // MARK: logs de plugins
@@ -620,6 +667,7 @@ public enum Audit {
             if !gdir.isEmpty { report.extras.gameDirFound = gdir }
         }
         if !gdir.isEmpty { Compat.auditInstall(gdir, report, scores) }
+        let scriptIndex = auditScriptOrigins(gdir, report)
 
         do {
             try Insights.analyse(report, scores, entries, gdir)
@@ -632,7 +680,11 @@ public enum Audit {
         let origins = ModOrigin.buildIndex(gdir)
         for i in report.suspects.indices {
             let name = report.suspects[i].name
-            let mods = name.lowercased().hasSuffixAny(ModOrigin.EXTS) ? ModOrigin.originOf(name, origins) : []
+            var mods = name.lowercased().hasSuffixAny(ModOrigin.EXTS) ? ModOrigin.originOf(name, origins) : []
+            let stem = ScriptOrigin.stem(name).lowercased()
+            if mods.isEmpty, report.extras.scriptQueries.contains(where: { $0.name.lowercased() == stem }) {
+                for p in ScriptOrigin.providers(name, scriptIndex) where !p.mod.isEmpty && !mods.contains(p.mod) { mods.append(p.mod) }
+            }
             if !mods.isEmpty {
                 report.suspects[i].reasons.append(L("fourni par le mod « {mod} »", ["mod": mods.prefix(3).joined(separator: ", ")]))
             }

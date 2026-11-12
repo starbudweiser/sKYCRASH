@@ -112,6 +112,12 @@ public struct TimelineEntry {
     public var src: String
 }
 
+public struct ScriptQuery: Equatable {
+    public enum Kind: Equatable { case missing, unbound, spam, nativeType }
+    public var name: String
+    public var kind: Kind
+}
+
 /// Recoupements gardés pour l'export et le dossier de diagnostic.
 public struct Extras {
     public var history: [CrashSummary]?
@@ -121,6 +127,8 @@ public struct Extras {
     public var domains: DomainsExtra?
     public var inventory: Inventory?
     public var gameDirFound: String?
+    /// Scripts cités par les logs Papyrus, à rechercher dans le jeu et les mods (cf. ScriptOrigin).
+    public var scriptQueries: [ScriptQuery] = []
     public init() {}
 }
 
