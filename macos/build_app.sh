@@ -12,7 +12,7 @@ ROOT="$(cd "$HERE/.." && pwd)"
 OUT_DIR="${1:-$ROOT}"
 APP_NAME="sKYCRASH"
 BUNDLE_ID="local.stephan.skyrimcrashanalyzer"  # inchangé d'une version à l'autre : macOS garde les autorisations et le Trousseau
-VERSION="2.1.0"
+VERSION="2.2.0"
 ICON="$ROOT/assets/icon.icns"
 DISPLAY_NAME="$APP_NAME"
 if [[ "${DEV:-0}" == 1 ]]; then BUNDLE_ID="$BUNDLE_ID.dev"; DISPLAY_NAME="$APP_NAME Dev"; fi

@@ -2,6 +2,24 @@
 
 Notes de version / release notes (EN + FR). Translations in IT and ES: see the Nexus Mods page.
 
+## 2.2.0
+
+**English**
+
+- Script origins: with Vortex or mORTEX, the mod that provides each script is now named (read from the deployment manifest) instead of "game (Data)".
+- Mod names no longer carry the Nexus download suffix (for example "Abyss-83329-3-1-6-1708252797" becomes "Abyss").
+- A suspect script with no known mod now shows the BSA archive that provides it.
+- Identical findings from Papyrus.0.log and Papyrus.1.log are merged into one, listing both logs.
+- Progress bar with percentage while the knowledge base updates, in the assistant header and under the "Update now" button, where the result is now shown.
+
+**Français**
+
+- Provenance des scripts : avec Vortex ou mORTEX, le mod qui fournit chaque script est maintenant nommé (lu dans le manifeste de déploiement) au lieu de « jeu (Data) ».
+- Les noms de mods n'ont plus le suffixe de téléchargement Nexus (par exemple « Abyss-83329-3-1-6-1708252797 » devient « Abyss »).
+- Un script suspect sans mod connu indique l'archive BSA qui le fournit.
+- Les constats identiques de Papyrus.0.log et Papyrus.1.log sont fusionnés en un seul, qui cite les deux journaux.
+- Barre de progression avec pourcentage pendant la mise à jour de la base de connaissances, dans l'en-tête de l'assistant et sous le bouton « Mettre à jour maintenant », où s'affiche désormais le résultat.
+
 ## 2.1.0
 
 **English**
