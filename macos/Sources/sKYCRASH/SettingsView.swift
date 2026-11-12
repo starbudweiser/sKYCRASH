@@ -19,6 +19,8 @@ struct SettingsView: View {
     @State private var geminiModels: [String] = []
     @State private var ollamaModels: [String] = []
     @State private var status = ""
+    @State private var kbResult = ""
+    @State private var kbFailures = ""
     @State private var busy = false
     @State private var loaded = false
     @State private var kbBusy = false
@@ -190,6 +192,23 @@ struct SettingsView: View {
                 Toggle(L("Veille automatique : mettre à jour la base de connaissances (GitHub, Steam, Reddit, SKSE)"), isOn: flag("auto_knowledge")).toggleStyle(.checkbox)
             }
             row("") { Button(L("Mettre à jour maintenant")) { refreshKnowledge() }.buttonStyle(SocleButtonStyle(.secondary)).fixedSize().disabled(kbBusy) }
+            if kbBusy, let p = model.kbProgress {
+                row("") {
+                    VStack(alignment: .leading, spacing: Socle.M.space2) {
+                        Text(L("Mise à jour de la base de connaissances…")).socle(Socle.T.body).foregroundStyle(Socle.C.textSubtle)
+                        HStack(spacing: Socle.M.space3) {
+                            ProgressView(value: p).progressViewStyle(.linear).tint(Socle.C.accent).frame(maxWidth: 300)
+                            Text("\(Int((p * 100).rounded())) %").socle(Socle.T.body).monospacedDigit()
+                                .foregroundStyle(Socle.C.textStrong).frame(minWidth: 40, alignment: .trailing)
+                        }
+                    }
+                }
+            } else if !kbResult.isEmpty {
+                row("") {
+                    Text(kbResult).socle(Socle.T.body).foregroundStyle(kbFailures.isEmpty ? Socle.C.success : Socle.C.warning)
+                        .help(kbFailures).fixedSize(horizontal: false, vertical: true)
+                }
+            }
             row("") {
                 let last = KnowledgeUpdater.status().lastRun
                 note(L("Dernière mise à jour de la base : {d}", ["d": last.map { Wall(timestamp: $0).format("%d/%m/%Y %H:%M") } ?? L("jamais")]))
@@ -255,15 +274,13 @@ struct SettingsView: View {
 
     private func refreshKnowledge() {
         kbBusy = true
-        status = L("Mise à jour de la base de connaissances…")
-        Task.detached {
-            let rep = KnowledgeUpdater.updateAll(force: true)
-            await MainActor.run {
-                kbBusy = false
-                status = rep.skipped ? L("Mise à jour déjà en cours.")
-                    : L("Base de connaissances : {u} source(s) mise(s) à jour, {f} en échec.", ["u": rep.updated.count, "f": rep.failed.count])
-                model.showKbStatus(rep)
-            }
+        kbResult = ""; kbFailures = ""
+        Task {
+            let rep = await model.updateKnowledge(force: true)
+            kbBusy = false
+            kbFailures = rep.failed.items.map { "\($0.0) : \($0.1)" }.joined(separator: "\n")
+            kbResult = rep.skipped ? L("Mise à jour déjà en cours.")
+                : L("Base de connaissances : {u} source(s) mise(s) à jour, {f} en échec.", ["u": rep.updated.count, "f": rep.failed.count])
         }
     }
 

@@ -49,6 +49,8 @@ final class AppModel {
     var chatBusy = false
     var kbStatus = ""
     var kbTooltip = ""
+    /// Avancement de la mise à jour de la base (0…1), nil hors mise à jour.
+    var kbProgress: Double?
 
     // Fenêtres de dialogue (feuilles)
     var showSettings = false
@@ -90,11 +92,23 @@ final class AppModel {
     func maybeUpdateKnowledge(_ intervalH: Double) {
         if (settings["auto_knowledge"] ?? "1") != "1" || preview { return }
         if !KnowledgeUpdater.due(intervalH: intervalH) { return }
+        Task { await updateKnowledge() }
+    }
+
+    /// Met à jour la base en arrière-plan en affichant la progression ; renvoie le rapport.
+    @discardableResult
+    func updateKnowledge(force: Bool = false) async -> KnowledgeUpdater.Report {
         kbStatus = L("Base de connaissances : mise à jour…")
-        Task.detached {
-            let rep = KnowledgeUpdater.updateAll()
-            await MainActor.run { self.showKbStatus(rep) }
-        }
+        kbProgress = 0
+        let rep = await Task.detached {
+            KnowledgeUpdater.updateAll(force: force, progress: { done, total, _ in
+                let p = total > 0 ? Double(done) / Double(total) : 1
+                Task { @MainActor in if self.kbProgress != nil { self.kbProgress = max(self.kbProgress ?? 0, p) } }
+            })
+        }.value
+        kbProgress = nil
+        showKbStatus(rep)
+        return rep
     }
 
     func showKbStatus(_ rep: KnowledgeUpdater.Report? = nil) {

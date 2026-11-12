@@ -373,7 +373,7 @@ public enum KnowledgeUpdater {
 
     /// Récupère les sources et réécrit les notes. Tolérant : une source en échec n'arrête pas les autres.
     public static func updateAll(dir: String? = nil, force: Bool = false, sources: [Source]? = nil, fetch: Fetch = httpGet,
-                                 progress: ((String) -> Void)? = nil, sleep: (Double) -> Void = { Thread.sleep(forTimeInterval: $0) }) -> Report {
+                                 progress: ((_ done: Int, _ total: Int, _ title: String) -> Void)? = nil, sleep: (Double) -> Void = { Thread.sleep(forTimeInterval: $0) }) -> Report {
         let out = dir ?? AppPaths.knowledgeDir
         var rep = Report()
         if !lock.try() { rep.skipped = true; return rep }
@@ -398,8 +398,9 @@ public enum KnowledgeUpdater {
             return rep
         }
         func st(_ ok: Bool, _ extra: [(String, J)]) -> J { .obj([("ok", .bool(ok))] + extra) }
-        for src in srcList {
-            progress?(src.title)
+        for (i, src) in srcList.enumerated() {
+            progress?(i, srcList.count, src.title)
+            defer { progress?(i + 1, srcList.count, src.title) }
             var host = ""
             do {
                 let (url, accept, parser) = try request(for: src)

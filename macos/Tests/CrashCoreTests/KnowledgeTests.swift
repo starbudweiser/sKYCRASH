@@ -59,6 +59,17 @@ final class KnowledgeTests: TempDirCase {
         XCTAssertTrue(try KnowledgeUpdater.request(for: .init("y", "reddit_rss", "CTD OR crash", "t")).0.contains("/r/skyrimmods/"))
     }
 
+    func testProgressReachesTotal() {
+        var steps: [(Int, Int)] = []
+        let flaky: KnowledgeUpdater.Fetch = { _, _, _ in throw KnowledgeUpdater.Failure.update("x") }
+        _ = KnowledgeUpdater.updateAll(dir: PyFS.join(tmp, "k"), force: true, fetch: flaky, progress: { d, t, _ in steps.append((d, t)) }, sleep: { _ in })
+        let n = KnowledgeUpdater.SOURCES.count
+        XCTAssertEqual(steps.first?.0, 0)
+        XCTAssertEqual(steps.last?.0, n)
+        XCTAssertTrue(steps.allSatisfy { $0.1 == n })
+        XCTAssertEqual(steps.map { $0.0 }, steps.map { $0.0 }.sorted())
+    }
+
     func testFullRunAndSelection() {
         let d = PyFS.join(tmp, "k")
         let rep = KnowledgeUpdater.updateAll(dir: d, force: true, fetch: fakeFetch, sleep: { _ in })

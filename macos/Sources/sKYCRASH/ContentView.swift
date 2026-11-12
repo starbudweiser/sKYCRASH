@@ -129,8 +129,15 @@ struct ContentView: View {
             HStack(spacing: Socle.M.space3) {
                 Text(L("Assistant IA")).socle(Socle.T.heading).foregroundStyle(Socle.C.textStrong)
                 Spacer(minLength: 0)
-                Text(model.kbStatus).socle(Socle.T.meta).foregroundStyle(Socle.C.textSubtle).lineLimit(1)
-                    .help(model.kbTooltip)
+                if let p = model.kbProgress {
+                    Text(L("Base de connaissances : mise à jour…")).socle(Socle.T.meta).foregroundStyle(Socle.C.textSubtle).lineLimit(1)
+                    ProgressView(value: p).progressViewStyle(.linear).tint(Socle.C.accent).frame(width: 120)
+                    Text("\(Int((p * 100).rounded())) %").socle(Socle.T.meta).monospacedDigit()
+                        .foregroundStyle(Socle.C.textStrong).frame(minWidth: 36, alignment: .trailing)
+                } else {
+                    Text(model.kbStatus).socle(Socle.T.meta).foregroundStyle(Socle.C.textSubtle).lineLimit(1)
+                        .help(model.kbTooltip)
+                }
             }
             .frame(height: Socle.M.sizeControlLg)
 
