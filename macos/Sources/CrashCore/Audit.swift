@@ -545,6 +545,24 @@ public enum Audit {
         report.excerpts[path] = ex.isEmpty ? L("(aucune erreur)") : ex
     }
 
+    /// Constats identiques venus de journaux différents (Papyrus.0 et Papyrus.1 d'une même session…) : un seul
+    /// constat, avec la liste des journaux en source.
+    static func mergeDuplicateFindings(_ report: AuditReport) {
+        var out: [Finding] = []
+        var seen: [String: Int] = [:]
+        for f in report.findings {
+            let key = [String(f.severity), f.category, f.title, f.detail, f.evidence.joined(separator: "\u{1}")].joined(separator: "\u{0}")
+            if let i = seen[key], !f.source.isEmpty {
+                let srcs = out[i].source.components(separatedBy: ", ")
+                if !srcs.contains(f.source) { out[i].source += ", " + f.source }
+            } else {
+                seen[key] = out.count
+                out.append(f)
+            }
+        }
+        report.findings = out
+    }
+
     // MARK: provenance des scripts
 
     /// Constat « Provenance des scripts » pour les scripts notés par auditPapyrus ; renvoie l'index construit.
@@ -658,6 +676,8 @@ public enum Audit {
             }
         }
 
+        mergeDuplicateFindings(report)
+
         let gdir = Compat.findGameDir(pluginDirWin: report.skseInfo?.pluginDir, userDir: gameDir)
         if !gameDir.isEmpty && !PyFS.isFile(PyFS.join(gameDir, "SkyrimSE.exe")) {
             report.findings.append(Finding(
@@ -681,12 +701,19 @@ public enum Audit {
         for i in report.suspects.indices {
             let name = report.suspects[i].name
             var mods = name.lowercased().hasSuffixAny(ModOrigin.EXTS) ? ModOrigin.originOf(name, origins) : []
+            var archives: [String] = []
             let stem = ScriptOrigin.stem(name).lowercased()
             if mods.isEmpty, report.extras.scriptQueries.contains(where: { $0.name.lowercased() == stem }) {
-                for p in ScriptOrigin.providers(name, scriptIndex) where !p.mod.isEmpty && !mods.contains(p.mod) { mods.append(p.mod) }
+                for p in ScriptOrigin.providers(name, scriptIndex) {
+                    if !p.mod.isEmpty { if !mods.contains(p.mod) { mods.append(p.mod) } }
+                    else if !p.archive.isEmpty && !archives.contains(p.archive) { archives.append(p.archive) }
+                }
             }
             if !mods.isEmpty {
-                report.suspects[i].reasons.append(L("fourni par le mod « {mod} »", ["mod": mods.prefix(3).joined(separator: ", ")]))
+                let names = mods.map(ScriptOrigin.cleanModName)
+                report.suspects[i].reasons.append(L("fourni par le mod « {mod} »", ["mod": names.prefix(3).joined(separator: ", ")]))
+            } else if !archives.isEmpty {
+                report.suspects[i].reasons.append(L("fourni par l'archive « {a} »", ["a": archives.prefix(3).joined(separator: ", ")]))
             }
         }
         for (name, role) in Compat.annotateSuspects(report) {

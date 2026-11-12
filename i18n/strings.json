@@ -2258,5 +2258,10 @@
   "{s} is overridden by a mod while its native functions are unbound: this script expects an SKSE plugin that is missing or a different version.",
   "{s} è sostituito da una mod mentre le sue funzioni native non sono collegate: questo script richiede un plugin SKSE assente o di un'altra versione.",
   "{s} lo reemplaza un mod mientras sus funciones nativas no están vinculadas: este script espera un plugin SKSE ausente o de otra versión."
+ ],
+ "fourni par l'archive « {a} »": [
+  "provided by the archive “{a}”",
+  "fornito dall'archivio «{a}»",
+  "proporcionado por el archivo «{a}»"
  ]
 }

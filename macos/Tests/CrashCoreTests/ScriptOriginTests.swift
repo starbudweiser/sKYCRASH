@@ -76,4 +76,46 @@ final class ScriptOriginTests: TempDirCase {
         XCTAssertNotNil(s)
         XCTAssertTrue(s!.reasons.contains("fourni par le mod « ModA, ModB »"), "\(s!.reasons)")
     }
+
+    func testCleanModName() {
+        XCTAssertEqual(ScriptOrigin.cleanModName("Abyss-83329-3-1-6-1708252797"), "Abyss")
+        XCTAssertEqual(ScriptOrigin.cleanModName("MikanEyes v2.5 SE-18780-2-5"), "MikanEyes v2.5 SE")
+        XCTAssertEqual(ScriptOrigin.cleanModName("Wade In Water Redone 71418 1.1.3 2026-08-24T21-06Z Ks18n0wt0"), "Wade In Water Redone")
+        XCTAssertEqual(ScriptOrigin.cleanModName("Unofficial Skyrim Special Edition Patch"), "Unofficial Skyrim Special Edition Patch")
+        XCTAssertEqual(ScriptOrigin.cleanModName("SkyUI_5_2_SE"), "SkyUI_5_2_SE")
+    }
+
+    func testDeploymentManifest() {
+        write("V/SkyrimSE.exe", "")
+        write("V/Data/Scripts/LooseScript.pex", "x")
+        write("V/Data/Scripts/Untracked.pex", "x")
+        writeBytes("V/Data/Abyss.bsa", makeBSA([("scripts", ["AbyssQuest.pex"])]))
+        write("V/Data/vortex.deployment.json", """
+        {"files":[{"relPath":"Scripts\\\\LooseScript.pex","source":"Loose Mod-1234-1-0-1700000000"},
+                  {"relPath":"Abyss.bsa","source":"Abyss-83329-3-1-6-1708252797"},
+                  {"relPath":"meshes/x.nif","source":"Other"}]}
+        """)
+        let idx = ScriptOrigin.buildIndex(PyFS.join(tmp, "V"))
+        XCTAssertEqual(ScriptOrigin.providers("LooseScript", idx).map { $0.mod }, ["Loose Mod-1234-1-0-1700000000"])
+        XCTAssertEqual(ScriptOrigin.providers("Untracked", idx).map { $0.mod }, [""])
+        let abyss = ScriptOrigin.providers("AbyssQuest", idx)
+        XCTAssertEqual(ScriptOrigin.label(abyss[0]), "mod « Abyss » [Abyss.bsa]")
+    }
+
+    func testArchiveReasonAndMergedFindings() {
+        write("G/SkyrimSE.exe", "")
+        writeBytes("G/Data/Skyshards.bsa", makeBSA([("scripts", ["DMN_SkyshardsFunctions.pex"])]))
+        let block = String(repeating: """
+        [11/03/2026 - 12:00:00AM] error: Cannot call X() on a None object, aborting function call
+        stack:
+        \t[Quest (000ABC)].DMN_SkyshardsFunctions.OnUpdate() - "DMN_SkyshardsFunctions.psc" Line 1
+
+        """, count: 6)
+        let r = Audit.auditPaths([write("Papyrus.0.log", block), write("Papyrus.1.log", "[11/02/2026 - 11:00:00PM] Papyrus log opened (PC)\n" + block)], gameDir: PyFS.join(tmp, "G"))
+        let errs = r.findings.filter { $0.title.contains("erreurs Papyrus") }
+        XCTAssertEqual(errs.count, 1, titles(r))
+        XCTAssertTrue(errs[0].source.contains("Papyrus.0.log") && errs[0].source.contains("Papyrus.1.log"), errs[0].source)
+        let s = r.suspects.first { $0.name == "DMN_SkyshardsFunctions" }
+        XCTAssertTrue(s?.reasons.contains("fourni par l'archive « Skyshards.bsa »") ?? false, "\(String(describing: s?.reasons))")
+    }
 }
