@@ -3,6 +3,8 @@
 # avec l'icône, l'identifiant de bundle habituel, les données embarquées (fiches de connaissances, veille fournie)
 # et la signature stable (_tools/sign_app.sh).
 # Usage : macos/build_app.sh [dossier de sortie]   (par défaut : racine du projet)
+#         DEV=1 macos/build_app.sh [dossier]        version de développement « sKYCRASH Dev.app » (identifiant ….dev,
+#         données dans ~/Library/Application Support/SkyrimCrashAnalyzer-dev, Trousseau à part, pas de mise à jour auto)
 set -euo pipefail
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -10,9 +12,11 @@ ROOT="$(cd "$HERE/.." && pwd)"
 OUT_DIR="${1:-$ROOT}"
 APP_NAME="sKYCRASH"
 BUNDLE_ID="local.stephan.skyrimcrashanalyzer"  # inchangé d'une version à l'autre : macOS garde les autorisations et le Trousseau
-VERSION="2.0.0"
+VERSION="2.1.0"
 ICON="$ROOT/assets/icon.icns"
-APP="$OUT_DIR/$APP_NAME.app"
+DISPLAY_NAME="$APP_NAME"
+if [[ "${DEV:-0}" == 1 ]]; then BUNDLE_ID="$BUNDLE_ID.dev"; DISPLAY_NAME="$APP_NAME Dev"; fi
+APP="$OUT_DIR/$DISPLAY_NAME.app"
 
 [[ -f "$ICON" ]] || { echo "❌ Introuvable : $ICON" >&2; exit 1; }
 [[ -d "$ROOT/data/skills" && -d "$ROOT/data/knowledge_seed" ]] || { echo "❌ data/skills ou data/knowledge_seed absent" >&2; exit 1; }
@@ -41,8 +45,8 @@ cat > "$APP/Contents/Info.plist" <<PLIST
 <plist version="1.0">
 <dict>
     <key>CFBundleIdentifier</key><string>$BUNDLE_ID</string>
-    <key>CFBundleName</key><string>$APP_NAME</string>
-    <key>CFBundleDisplayName</key><string>$APP_NAME</string>
+    <key>CFBundleName</key><string>$DISPLAY_NAME</string>
+    <key>CFBundleDisplayName</key><string>$DISPLAY_NAME</string>
     <key>CFBundleExecutable</key><string>$APP_NAME</string>
     <key>CFBundleIconFile</key><string>icon.icns</string>
     <key>CFBundlePackageType</key><string>APPL</string>

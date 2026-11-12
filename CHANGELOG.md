@@ -2,6 +2,20 @@
 
 Notes de version / release notes (EN + FR). Translations in IT and ES: see the Nexus Mods page.
 
+## 2.1.0
+
+**English**
+
+- New "Script origins" finding: for each Papyrus script named in the logs (missing, unbound, very chatty, or with unbound native functions), sKYCRASH tells which mod or BSA archive provides it, or that it is found nowhere.
+- Warns when several mods provide the same script (possible conflict) and when a mod overrides a game script whose native functions are not bound.
+- Script suspects now show the mod that provides them, like SKSE DLLs.
+
+**Français**
+
+- Nouveau constat « Provenance des scripts » : pour chaque script Papyrus cité dans les journaux (introuvable, non lié, très bavard ou aux fonctions natives non liées), sKYCRASH indique le mod ou l'archive BSA qui le fournit, ou qu'il n'est fourni nulle part.
+- Signale quand plusieurs mods fournissent le même script (conflit possible) et quand un mod remplace un script du jeu dont les fonctions natives ne sont pas liées.
+- Les scripts suspects indiquent désormais le mod qui les fournit, comme les DLL SKSE.
+
 ## 2.0.0
 
 **English**

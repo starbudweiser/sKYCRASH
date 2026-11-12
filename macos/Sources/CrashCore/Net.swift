@@ -4,10 +4,14 @@ import Foundation
 import Security
 
 public enum AppPaths {
+    /// Version de développement (identifiant en « .dev ») : données, export et Trousseau séparés de la version installée.
+    public static let isDev = (Bundle.main.bundleIdentifier ?? "").hasSuffix(".dev")
+    /// « SkyrimCrashAnalyzer », ou « SkyrimCrashAnalyzer-dev » pour la version de développement.
+    public static let dataName = isDev ? "SkyrimCrashAnalyzer-dev" : "SkyrimCrashAnalyzer"
     /// Dossier des données : ~/Library/Application Support/SkyrimCrashAnalyzer (SKYRIM_CA_APPDIR pour les essais isolés).
     public static var appDir: String {
         if let o = ProcessInfo.processInfo.environment["SKYRIM_CA_APPDIR"], !o.isEmpty { return o }
-        return NSHomeDirectory() + "/Library/Application Support/SkyrimCrashAnalyzer"
+        return NSHomeDirectory() + "/Library/Application Support/" + dataName
     }
     public static var configFile: String { PyFS.join(appDir, "config.json") }
     public static var knowledgeDir: String { PyFS.join(appDir, "knowledge") }
@@ -69,7 +73,7 @@ public enum HTTP {
 /// Clés API dans le Trousseau macOS (service « SkyrimCrashAnalyzer », comme la version Python via `keyring`).
 public enum KeyStore {
     public static var service: String {
-        ProcessInfo.processInfo.environment["SKYRIM_CA_KEYCHAIN_SERVICE"].flatMap { $0.isEmpty ? nil : $0 } ?? "SkyrimCrashAnalyzer"
+        ProcessInfo.processInfo.environment["SKYRIM_CA_KEYCHAIN_SERVICE"].flatMap { $0.isEmpty ? nil : $0 } ?? AppPaths.dataName
     }
     /// SKYRIM_CA_NO_KEYCHAIN=1 : le Trousseau n'est jamais interrogé (essais automatiques).
     static var disabled: Bool { ProcessInfo.processInfo.environment["SKYRIM_CA_NO_KEYCHAIN"] == "1" }

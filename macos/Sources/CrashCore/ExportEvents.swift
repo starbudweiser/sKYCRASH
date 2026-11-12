@@ -18,7 +18,7 @@ public enum ExportEvents {
 
     public static func exportDir() -> String {
         if let o = ProcessInfo.processInfo.environment[EXPORT_ENV], !o.isEmpty { return o }
-        return NSHomeDirectory() + "/Library/Application Support/SkyrimCrashAnalyzer/exports"
+        return NSHomeDirectory() + "/Library/Application Support/" + AppPaths.dataName + "/exports"
     }
     public static func exportPath() -> String { PyFS.join(exportDir(), FILENAME) }
 

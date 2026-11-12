@@ -39,7 +39,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         model.start()
 
         // Essais en arrière-plan : SPLASH_QUIET=1 lance l'appli (splash et fenêtre) sans prendre le focus ni passer devant le travail en cours
-        if env["SKYCRASH_NOUPDATE"] == nil {
+        if env["SKYCRASH_NOUPDATE"] == nil && !AppPaths.isDev {  // la version de dev ne se met jamais à jour seule
             UpdateEngine.shared.configure(repo: "sKYCRASH", lang: { I18n.lang })
             UpdateEngine.shared.canInstall = { [weak self] in !(self?.model.auditBusy ?? false) && !(self?.model.chatBusy ?? false) }  // jamais pendant une analyse
             UpdateEngine.shared.start()  // nouvelle version ? (au plus une fois par jour)
