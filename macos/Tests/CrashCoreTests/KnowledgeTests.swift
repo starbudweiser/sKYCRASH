@@ -166,6 +166,8 @@ final class I18nTests: XCTestCase {
             for n in names where n.hasSuffix(".swift") && n != "Strings.swift" {
                 guard let t = PyFS.readText(PyFS.join(base, n)) else { continue }
                 for m in rx.finditer(t) { keys.insert(unescape(m.group(1)!)) }
+                // Titres des sources de la veille : littéraux de Source(id, type, cible, titre), traduits par displayTitle.
+                for m in Rx(#"Source\("[^"]*",\s*"[^"]*",\s*[^,]+,\s*"((?:[^"\\]|\\.)*)""#).finditer(t) { keys.insert(unescape(m.group(1)!)) }
                 // P(n, "un", "plusieurs")
                 for m in Rx(#"(?<![A-Za-z0-9_])P\([^,]+,\s*"((?:[^"\\]|\\.)*)",\s*"((?:[^"\\]|\\.)*)""#).finditer(t) { keys.insert(unescape(m.group(2)!)) }
             }
