@@ -1171,7 +1171,7 @@
  ],
  "Fournisseur": [
   "Provider",
-  "Provider",
+  "Fornitore",
   "Proveedor"
  ],
  "Modèle Gemini": [
@@ -2263,5 +2263,175 @@
   "provided by the archive “{a}”",
   "fornito dall'archivio «{a}»",
   "proporcionado por el archivo «{a}»"
+ ],
+ "OK": [
+  "OK",
+  "OK",
+  "OK"
+ ],
+ "URL non autorisée : {host}": [
+  "URL not allowed: {host}",
+  "URL non consentito: {host}",
+  "URL no permitida: {host}"
+ ],
+ "quota ou accès refusé ({code})": [
+  "quota exceeded or access denied ({code})",
+  "quota superata o accesso negato ({code})",
+  "cuota superada o acceso denegado ({code})"
+ ],
+ "réponse trop volumineuse": [
+  "response too large",
+  "risposta troppo grande",
+  "respuesta demasiado grande"
+ ],
+ "réseau : {msg}": [
+  "network: {msg}",
+  "rete: {msg}",
+  "red: {msg}"
+ ],
+ "JSON illisible": [
+  "unreadable JSON",
+  "JSON illeggibile",
+  "JSON ilegible"
+ ],
+ "flux XML refusé (DTD)": [
+  "XML feed rejected (DTD)",
+  "feed XML rifiutato (DTD)",
+  "feed XML rechazado (DTD)"
+ ],
+ "flux RSS illisible": [
+  "unreadable RSS feed",
+  "feed RSS illeggibile",
+  "feed RSS ilegible"
+ ],
+ "type de source inconnu : {kind}": [
+  "unknown source type: {kind}",
+  "tipo di fonte sconosciuto: {kind}",
+  "tipo de fuente desconocido: {kind}"
+ ],
+ "dossier inaccessible : {err}": [
+  "folder not accessible: {err}",
+  "cartella non accessibile: {err}",
+  "carpeta inaccesible: {err}"
+ ],
+ "hôte ignoré (quota atteint)": [
+  "host skipped (quota reached)",
+  "host ignorato (quota raggiunta)",
+  "host omitido (cuota alcanzada)"
+ ],
+ "réponse invalide": [
+  "invalid response",
+  "risposta non valida",
+  "respuesta no válida"
+ ],
+ "Crash Logger SSE — versions récentes": [
+  "Crash Logger SSE — recent releases",
+  "Crash Logger SSE — versioni recenti",
+  "Crash Logger SSE — versiones recientes"
+ ],
+ "Crash Logger SSE — problèmes signalés": [
+  "Crash Logger SSE — reported issues",
+  "Crash Logger SSE — problemi segnalati",
+  "Crash Logger SSE — problemas notificados"
+ ],
+ "Community Shaders — versions récentes": [
+  "Community Shaders — recent releases",
+  "Community Shaders — versioni recenti",
+  "Community Shaders — versiones recientes"
+ ],
+ "Community Shaders — crashs signalés": [
+  "Community Shaders — reported crashes",
+  "Community Shaders — crash segnalati",
+  "Community Shaders — crashes notificados"
+ ],
+ "PapyrusExtender — versions récentes": [
+  "PapyrusExtender — recent releases",
+  "PapyrusExtender — versioni recenti",
+  "PapyrusExtender — versiones recientes"
+ ],
+ "Base Object Swapper — versions récentes": [
+  "Base Object Swapper — recent releases",
+  "Base Object Swapper — versioni recenti",
+  "Base Object Swapper — versiones recientes"
+ ],
+ "SKSE64 — versions publiées": [
+  "SKSE64 — published releases",
+  "SKSE64 — versioni pubblicate",
+  "SKSE64 — versiones publicadas"
+ ],
+ "LOOT — versions récentes": [
+  "LOOT — recent releases",
+  "LOOT — versioni recenti",
+  "LOOT — versiones recientes"
+ ],
+ "Mod Organizer 2 — versions récentes": [
+  "Mod Organizer 2 — recent releases",
+  "Mod Organizer 2 — versioni recenti",
+  "Mod Organizer 2 — versiones recientes"
+ ],
+ "Mod Organizer 2 — crashs signalés": [
+  "Mod Organizer 2 — reported crashes",
+  "Mod Organizer 2 — crash segnalati",
+  "Mod Organizer 2 — crashes notificados"
+ ],
+ "Wabbajack — versions récentes": [
+  "Wabbajack — recent releases",
+  "Wabbajack — versioni recenti",
+  "Wabbajack — versiones recientes"
+ ],
+ "SSE Engine Fixes — versions récentes": [
+  "SSE Engine Fixes — recent releases",
+  "SSE Engine Fixes — versioni recenti",
+  "SSE Engine Fixes — versiones recientes"
+ ],
+ "SSE Engine Fixes — crashs signalés": [
+  "SSE Engine Fixes — reported crashes",
+  "SSE Engine Fixes — crash segnalati",
+  "SSE Engine Fixes — crashes notificados"
+ ],
+ "Spell Perk Item Distributor (SPID) — versions récentes": [
+  "Spell Perk Item Distributor (SPID) — recent releases",
+  "Spell Perk Item Distributor (SPID) — versioni recenti",
+  "Spell Perk Item Distributor (SPID) — versiones recientes"
+ ],
+ "Keyword Item Distributor (KID) — versions récentes": [
+  "Keyword Item Distributor (KID) — recent releases",
+  "Keyword Item Distributor (KID) — versioni recenti",
+  "Keyword Item Distributor (KID) — versiones recientes"
+ ],
+ "DXMT (Direct3D 11 sur Metal, CrossOver) — versions récentes": [
+  "DXMT (Direct3D 11 on Metal, CrossOver) — recent releases",
+  "DXMT (Direct3D 11 su Metal, CrossOver) — versioni recenti",
+  "DXMT (Direct3D 11 sobre Metal, CrossOver) — versiones recientes"
+ ],
+ "DXVK (Direct3D sur Vulkan) — versions récentes": [
+  "DXVK (Direct3D on Vulkan) — recent releases",
+  "DXVK (Direct3D su Vulkan) — versioni recenti",
+  "DXVK (Direct3D sobre Vulkan) — versiones recientes"
+ ],
+ "Skyrim SE/AE — annonces de mises à jour (Steam)": [
+  "Skyrim SE/AE — update announcements (Steam)",
+  "Skyrim SE/AE — annunci di aggiornamento (Steam)",
+  "Skyrim SE/AE — anuncios de actualización (Steam)"
+ ],
+ "r/skyrimmods — fils récents sur les crashs": [
+  "r/skyrimmods — recent threads about crashes",
+  "r/skyrimmods — thread recenti sui crash",
+  "r/skyrimmods — hilos recientes sobre crashes"
+ ],
+ "r/macgaming — Skyrim sur Mac (CrossOver, GPTK)": [
+  "r/macgaming — Skyrim on Mac (CrossOver, GPTK)",
+  "r/macgaming — Skyrim su Mac (CrossOver, GPTK)",
+  "r/macgaming — Skyrim en Mac (CrossOver, GPTK)"
+ ],
+ "CrossOver — journal des versions (CodeWeavers)": [
+  "CrossOver — release notes (CodeWeavers)",
+  "CrossOver — note di rilascio (CodeWeavers)",
+  "CrossOver — notas de versión (CodeWeavers)"
+ ],
+ "SKSE — page officielle des versions": [
+  "SKSE — official releases page",
+  "SKSE — pagina ufficiale delle versioni",
+  "SKSE — página oficial de versiones"
  ]
 }

@@ -68,7 +68,7 @@ struct SettingsView: View {
             HStack(spacing: Socle.M.space3) {
                 Spacer()
                 Button(L("Annuler")) { dismiss() }.buttonStyle(SocleButtonStyle(.secondary)).fixedSize()
-                Button("OK") { apply() }.buttonStyle(SocleButtonStyle(.action)).fixedSize().keyboardShortcut(.defaultAction)
+                Button(L("OK")) { apply() }.buttonStyle(SocleButtonStyle(.action)).fixedSize().keyboardShortcut(.defaultAction)
             }
         }
         .padding(Socle.M.space5)

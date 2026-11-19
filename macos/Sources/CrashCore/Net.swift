@@ -60,7 +60,7 @@ public enum HTTP {
             throw HTTPFailure(kind: .connection(reason))
         }
         if let e = result.2 { throw HTTPFailure(kind: .connection(e.localizedDescription)) }
-        guard let http = result.1 as? HTTPURLResponse else { throw HTTPFailure(kind: .connection("réponse invalide")) }
+        guard let http = result.1 as? HTTPURLResponse else { throw HTTPFailure(kind: .connection(L("réponse invalide"))) }
         let body = result.0 ?? Data()
         var headers: [String: String] = [:]
         for (k, v) in http.allHeaderFields { headers["\(k)".lowercased()] = "\(v)" }

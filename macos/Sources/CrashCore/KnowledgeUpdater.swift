@@ -23,6 +23,8 @@ public enum KnowledgeUpdater {
 
     public struct Source {
         public let id: String, kind: String, target: String, title: String, keywords: [String]
+        /// Titre dans la langue de l'appli (affichage) ; `title`, en français, reste celui des notes de la base.
+        public var displayTitle: String { L(title) }
         init(_ id: String, _ kind: String, _ target: String, _ title: String, _ keywords: [String] = []) {
             self.id = id; self.kind = kind; self.target = target; self.title = title; self.keywords = keywords
         }
@@ -108,7 +110,7 @@ public enum KnowledgeUpdater {
 
     static func checkURL(_ url: URL?) throws {
         guard let u = url, u.scheme == "https", let h = u.host, ALLOWED_HOSTS.contains(h) else {
-            throw Failure.update("URL non autorisée : \(url?.host ?? "None")")
+            throw Failure.update(L("URL non autorisée : {host}", ["host": url?.host ?? "None"]))
         }
     }
 
@@ -133,16 +135,16 @@ public enum KnowledgeUpdater {
             switch e.kind {
             case .status(let code, _):
                 if code == 304 { return (304, Data(), etag) }
-                if code == 403 || code == 429 { throw Failure.rateLimited("quota ou accès refusé (\(code))") }
-                if code == -1 { throw Failure.update("réponse trop volumineuse") }
+                if code == 403 || code == 429 { throw Failure.rateLimited(L("quota ou accès refusé ({code})", ["code": code])) }
+                if code == -1 { throw Failure.update(L("réponse trop volumineuse")) }
                 throw Failure.update("HTTP \(code)")
-            case .connection(let m), .timeout(let m): throw Failure.update("réseau : \(m)")
+            case .connection(let m), .timeout(let m): throw Failure.update(L("réseau : {msg}", ["msg": m]))
             }
         }
     }
 
     static func json(_ body: Data) throws -> J {
-        guard let j = J.parse(data: Data(String(decoding: body, as: UTF8.self).utf8)) else { throw Failure.update("JSON illisible") }
+        guard let j = J.parse(data: Data(String(decoding: body, as: UTF8.self).utf8)) else { throw Failure.update(L("JSON illisible")) }
         return j
     }
     static func date(_ s: J?) -> String {
@@ -258,12 +260,12 @@ public enum KnowledgeUpdater {
 
     public static func parseRedditRSS(_ body: Data) throws -> [String] {
         let raw = String(decoding: body, as: UTF8.self)
-        if DTD.test(raw) { throw Failure.update("flux XML refusé (DTD)") }
+        if DTD.test(raw) { throw Failure.update(L("flux XML refusé (DTD)")) }
         let parser = XMLParser(data: Data(raw.utf8))
         parser.shouldProcessNamespaces = true
         let delegate = AtomParser()
         parser.delegate = delegate
-        guard parser.parse() else { throw Failure.update("flux RSS illisible") }
+        guard parser.parse() else { throw Failure.update(L("flux RSS illisible")) }
         var items: [String] = []
         for e in delegate.entries.prefix(25) {
             if !REDDIT_RELEVANT.test(e.title + " " + e.content) { continue }
@@ -322,7 +324,7 @@ public enum KnowledgeUpdater {
             return ("https://www.reddit.com/r/\(sub.isEmpty ? "skyrimmods" : sub)/search.rss?restrict_sr=1&sort=new&q=" + quote(query), "application/atom+xml", parseRedditRSS)
         case "crossover_changelog": return (src.target, "text/html", parseCrossoverChangelog)
         case "skse_site": return (src.target, "text/html", parseSkseSite)
-        default: throw Failure.update("type de source inconnu : \(src.kind)")
+        default: throw Failure.update(L("type de source inconnu : {kind}", ["kind": src.kind]))
         }
     }
 
@@ -394,18 +396,18 @@ public enum KnowledgeUpdater {
         var blocked = Set<String>()
         var lastCall: [String: Double] = [:]
         do { try FileManager.default.createDirectory(atPath: out, withIntermediateDirectories: true) } catch {
-            rep.failed["*"] = "dossier inaccessible : \(error.localizedDescription)"
+            rep.failed["*"] = L("dossier inaccessible : {err}", ["err": error.localizedDescription])
             return rep
         }
         func st(_ ok: Bool, _ extra: [(String, J)]) -> J { .obj([("ok", .bool(ok))] + extra) }
         for (i, src) in srcList.enumerated() {
-            progress?(i, srcList.count, src.title)
-            defer { progress?(i + 1, srcList.count, src.title) }
+            progress?(i, srcList.count, src.displayTitle)
+            defer { progress?(i + 1, srcList.count, src.displayTitle) }
             var host = ""
             do {
                 let (url, accept, parser) = try request(for: src)
                 host = URL(string: url)?.host ?? ""
-                if blocked.contains(host) { throw Failure.rateLimited("hôte ignoré (quota atteint)") }
+                if blocked.contains(host) { throw Failure.rateLimited(L("hôte ignoré (quota atteint)")) }
                 if let slow = SLOW_HOSTS[host], let lc = lastCall[host] { sleep(max(0, slow - (Date().timeIntervalSince1970 - lc))) }
                 lastCall[host] = Date().timeIntervalSince1970
                 let path = PyFS.join(out, "auto_\(src.id).md")

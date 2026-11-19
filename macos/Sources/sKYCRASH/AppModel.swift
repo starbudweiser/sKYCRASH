@@ -509,7 +509,7 @@ final class AppModel {
         let a = NSAlert()
         a.messageText = text
         a.alertStyle = .informational
-        a.addButton(withTitle: "OK")
+        a.addButton(withTitle: L("OK"))
         a.window.title = APP_NAME
         a.runCenteredOnAppWindow()
     }
@@ -518,7 +518,7 @@ final class AppModel {
         let a = NSAlert()
         a.messageText = text
         a.alertStyle = .warning
-        a.addButton(withTitle: "OK")
+        a.addButton(withTitle: L("OK"))
         a.window.title = APP_NAME
         a.runCenteredOnAppWindow()
     }
