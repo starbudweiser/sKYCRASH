@@ -16,6 +16,12 @@ sKYCRASH analyzes Skyrim SE/AE crash logs (Crash Logger SSE, SKSE, Papyrus), cro
 
 sKYCRASH reads your Skyrim crash reports (Crash Logger SSE, .NET Script Framework), SKSE and Papyrus logs, cross-checks them with your actual installation and your last save, and tells you which DLL, plugin, mesh or script is most likely responsible — with the evidence. An optional AI assistant answers your questions about the crash.
 
+## Demo
+
+A real Skyrim crash, analyzed by sKYCRASH (49 s).
+
+https://github.com/user-attachments/assets/faf18839-e348-4458-a44b-94e0e41ca2b5
+
 ## Features
 
 - **Analyze logs**: quick scan of all configured log folders (the SKSE folder is always included).
@@ -119,6 +125,12 @@ Released under the **MIT License**: free to use, modify and share. Part of the *
 ---
 
 ## Français
+
+### Démo
+
+Un vrai plantage de Skyrim, analysé par sKYCRASH (49 s).
+
+https://github.com/user-attachments/assets/faf18839-e348-4458-a44b-94e0e41ca2b5
 
 **Analyseur de crash logs pour Skyrim Special Edition sur Mac (CrossOver).**
 
