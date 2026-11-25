@@ -99,16 +99,20 @@ public enum Compat {
         guard let m = WIN_RE.match(winPath.pyStrip) else { return [] }
         let rel = SEP_RE.split(m.group(2)!)
         let drive = m.group(1)!
-        return bottles().map { PyFS.joinList([$0, drive.uppercased() == "C" ? "drive_c" : "dosdevices/\(drive.lowercased()):"] + rel) }
+        let inBottles = bottles().map { PyFS.joinList([$0, drive.uppercased() == "C" ? "drive_c" : "dosdevices/\(drive.lowercased()):"] + rel) }
+        // Z: est la racine du Mac dans Wine/CrossOver : le chemin réel passe en premier (affichage lisible, toute bouteille).
+        return drive.uppercased() == "Z" ? [PyFS.joinList(["/"] + rel)] + inBottles : inBottles
     }
 
     public static func findGameDir(pluginDirWin: String? = nil, userDir: String = "") -> String {
         if let root = bottleRootOf(userDir) { rootsLock.lock(); if !_extraRoots.contains(root) { _extraRoots.append(root) }; rootsLock.unlock() }
         var cands: [String] = []
-        if !userDir.isEmpty { cands.append(userDir) }
+        // D'abord le jeu qui a réellement tourné (dossier des plugins écrit par skse64.log), puis le réglage :
+        // une liste lancée depuis un autre dossier (modlist Wabbajack, autre bouteille) doit être auditée elle-même.
         if let pd = pluginDirWin, !pd.isEmpty {
             for p in winToHost(pd) { cands.append(PyFS.normpath(PyFS.join(p, "..", "..", ".."))) }
         }
+        if !userDir.isEmpty { cands.append(userDir) }
         for b in bottles() {
             for sub in ["Games/Skyrim Special Edition", "Program Files (x86)/Steam/steamapps/common/Skyrim Special Edition",
                         "GOG Games/Skyrim Special Edition", "Program Files (x86)/GOG Galaxy/Games/Skyrim Special Edition"] {

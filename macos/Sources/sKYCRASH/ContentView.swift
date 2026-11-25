@@ -235,6 +235,7 @@ struct ChatList: View {
     @Bindable var model: AppModel
 
     var body: some View {
+        let _ = model.tick   // redessinée au changement de langue (menu Langue)
         ScrollViewReader { proxy in
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {

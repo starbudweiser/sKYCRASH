@@ -168,6 +168,18 @@ final class CompatTests: TempDirCase {
         XCTAssertEqual(Compat.findGameDir(pluginDirWin: nil, userDir: tmp), tmp)
     }
 
+    /// Le jeu qui a réellement tourné (skse64.log, lecteur Z: de Wine) passe avant le dossier des réglages.
+    func testFindGameDirPrefersSkseLogGame() {
+        let played = PyFS.join(tmp, "Modlist")
+        let setting = PyFS.join(tmp, "Setting")
+        for d in [played, setting] { try? FileManager.default.createDirectory(atPath: d, withIntermediateDirectories: true) }
+        fakeExe(PyFS.join(played, "SkyrimSE.exe"))
+        fakeExe(PyFS.join(setting, "SkyrimSE.exe"))
+        let win = "Z:" + played.replacingOccurrences(of: "/", with: "\\") + "\\Data\\SKSE\\Plugins\\"
+        XCTAssertEqual(Compat.winToHost(win).first, PyFS.join(played, "Data", "SKSE", "Plugins", ""))
+        XCTAssertEqual(Compat.findGameDir(pluginDirWin: win, userDir: setting), played)
+    }
+
     func testCatalogRoleInSuspect() {
         let lines = Array(skseLog[0..<2]) + [
             "checking plugin C:\\x\\Plugins\\\\CompassNavigationOverhaul.dll",
