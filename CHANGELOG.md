@@ -2,6 +2,20 @@
 
 Notes de version / release notes (EN + FR). Translations in IT and ES: see the Nexus Mods page.
 
+## 2.2.1
+
+**English**
+
+- Install sheet: the audit now uses the game that actually crashed (the folder written by skse64.log) before the one in Settings. A modlist started from another folder, or another CrossOver bottle, is audited itself, and the false "game version differs from the SKSE runtime" alert is gone.
+- Paths on Wine's Z: drive are shown as real Mac paths.
+- The assistant's prompt now changes language with the Language menu.
+
+**Français**
+
+- Fiche d'installation : l'audit utilise d'abord le jeu qui a réellement planté (le dossier écrit par skse64.log), avant celui des réglages. Une modlist lancée depuis un autre dossier, ou depuis une autre bouteille CrossOver, est auditée elle-même, et la fausse alerte « version du jeu différente du runtime SKSE » disparaît.
+- Les chemins du lecteur Z: de Wine s'affichent comme de vrais chemins du Mac.
+- L'invite de l'assistant change de langue avec le menu Langue.
+
 ## 2.2.0
 
 **English**
