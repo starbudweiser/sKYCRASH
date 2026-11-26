@@ -2,6 +2,22 @@
 
 Notes de version / release notes (EN + FR). Translations in IT and ES: see the Nexus Mods page.
 
+## 2.2.2
+
+**English**
+
+- Settings folder list: hover and selection now change the background only, with no blue system highlight.
+- Correct singular and plural forms in all four languages (no more "file(s)").
+- Long log names and CrossOver bottle paths are shortened in the middle, with the full text in the tooltip.
+- An empty log list or folder list now shows a message, with a shortcut to Settings.
+
+**Français**
+
+- Liste des dossiers des réglages : le survol et la sélection changent seulement le fond, sans surbrillance bleue du système.
+- Singulier et pluriel corrects dans les quatre langues (plus de « fichier(s) »).
+- Les noms de logs et les chemins de bouteilles CrossOver trop longs sont raccourcis au milieu, le texte complet est dans l'infobulle.
+- Une liste de logs ou de dossiers vide affiche un message, avec un raccourci vers les réglages.
+
 ## 2.2.1
 
 **English**
