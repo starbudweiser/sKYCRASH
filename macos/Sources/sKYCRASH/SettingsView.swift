@@ -65,6 +65,7 @@ struct SettingsView: View {
                 .padding(.vertical, Socle.M.space2)
             }
             Text(status).socle(Socle.T.body).foregroundStyle(Socle.C.warning).frame(maxWidth: .infinity, alignment: .leading).lineLimit(3)
+                .help(status)
             HStack(spacing: Socle.M.space3) {
                 Spacer()
                 Button(L("Annuler")) { dismiss() }.buttonStyle(SocleButtonStyle(.secondary)).fixedSize()
@@ -90,7 +91,7 @@ struct SettingsView: View {
     private func row<V: View>(_ label: String, @ViewBuilder _ content: () -> V) -> some View {
         HStack(alignment: .firstTextBaseline, spacing: Socle.M.space3) {
             Text(label).socle(Socle.T.label).foregroundStyle(Socle.C.text).frame(width: 190, alignment: .leading)
-            content().frame(maxWidth: .infinity, alignment: .leading)
+            content().frame(maxWidth: .infinity, alignment: .leading).fixedSize(horizontal: false, vertical: true)
         }
     }
 
@@ -122,12 +123,7 @@ struct SettingsView: View {
             note(L("Dossiers où sKYCRASH cherche les logs de crash, SKSE et Papyrus.") + " "
                  + L("Le dossier SKSE (journal SKSE et rapports de Crash Logger) est toujours analysé, même s'il n'est pas dans la liste."))
             ForEach(folders.indices, id: \.self) { g in
-                List(selection: $selectedFolder) {
-                    ForEach(folders[g].1, id: \.self) { f in
-                        Text(f).socle(Socle.T.body).tag(f).lineLimit(1).truncationMode(.middle)
-                    }
-                }
-                .scrollContentBackground(.hidden).background(Socle.C.surface).frame(height: 260)
+                folderList(g)
                 HStack(spacing: Socle.M.space3) {
                     Button(L("Ajouter…")) { addFolder(g) }.buttonStyle(SocleButtonStyle(.secondary)).fixedSize()
                     Button(L("Retirer")) { removeFolder(g) }.buttonStyle(SocleButtonStyle(.secondary)).fixedSize().disabled(selectedFolder == nil)
@@ -135,6 +131,25 @@ struct SettingsView: View {
                 }
             }
         }
+    }
+
+    /// Liste des dossiers d'un jeu : survol et sélection en aplat neutre (sans cadre ni bleu), message si elle est vide.
+    private func folderList(_ g: Int) -> some View {
+        ScrollView {
+            LazyVStack(spacing: 0) {
+                if folders[g].1.isEmpty {
+                    Text(L("Aucun dossier configuré pour {game}.", ["game": folders[g].0]))
+                        .socle(Socle.T.body).foregroundStyle(Socle.C.textSubtle)
+                        .frame(maxWidth: .infinity, alignment: .center).padding(.vertical, Socle.M.space5)
+                }
+                ForEach(folders[g].1, id: \.self) { f in
+                    FolderRow(path: f, selected: selectedFolder == f) { selectedFolder = f }
+                }
+            }
+            .padding(4)
+        }
+        .background(Socle.C.surface, in: RoundedRectangle(cornerRadius: Socle.M.radiusMd))
+        .frame(height: 260)
     }
 
     private var ai: some View {
@@ -168,8 +183,10 @@ struct SettingsView: View {
             }
             row("") {
                 let u = JevClient.monthUsage()
-                note(L("Ce mois-ci : {n} requête(s) Jev · {t} jetons ({i} en entrée, {o} en sortie), comptés par l'appli. Le solde de crédits n'est visible que sur la console TypeSafe.",
-                       ["n": u.requests, "t": grouped(u.inputTokens + u.outputTokens), "i": grouped(u.inputTokens), "o": grouped(u.outputTokens)]))
+                note(L("Ce mois-ci : {r} · {t} ({i} en entrée, {o} en sortie), comptés par l'appli. Le solde de crédits n'est visible que sur la console TypeSafe.",
+                       ["r": P(u.requests, "{n} requête Jev", "{n} requêtes Jev"),
+                        "t": P(u.inputTokens + u.outputTokens, "{n} jeton", "{n} jetons"),
+                        "i": grouped(u.inputTokens), "o": grouped(u.outputTokens)]))
             }
             row(L("Connaissances")) {
                 Toggle(L("Utiliser les fiches de connaissances modding Skyrim (dossier skills/)"), isOn: flag("use_skills")).toggleStyle(.checkbox)
@@ -247,7 +264,7 @@ struct SettingsView: View {
         Task.detached {
             do {
                 let models = try fn()
-                await MainActor.run { busy = false; done(models); status = L("{n} modèle(s) {label} disponible(s).", ["n": models.count, "label": label]) }
+                await MainActor.run { busy = false; done(models); status = P(models.count, "{n} modèle {label} disponible.", "{n} modèles {label} disponibles.", ["label": label]) }
             } catch {
                 await MainActor.run { busy = false; status = L("Liste indisponible ({msg}). Vous pouvez saisir le nom du modèle.", ["msg": "\(error)"]) }
             }
@@ -280,7 +297,8 @@ struct SettingsView: View {
             kbBusy = false
             kbFailures = rep.failed.items.map { "\($0.0) : \($0.1)" }.joined(separator: "\n")
             kbResult = rep.skipped ? L("Mise à jour déjà en cours.")
-                : L("Base de connaissances : {u} source(s) mise(s) à jour, {f} en échec.", ["u": rep.updated.count, "f": rep.failed.count])
+                : L("Base de connaissances : {u}, {f}.", ["u": P(rep.updated.count, "{n} source mise à jour", "{n} sources mises à jour"),
+                                                       "f": L("{f} en échec", ["f": fmtInt(rep.failed.count)])])
         }
     }
 
@@ -291,6 +309,32 @@ struct SettingsView: View {
         new["game_dir"] = (new["game_dir"] ?? "").pyStrip
         model.applySettings(new, folders: folders, geminiKey: geminiKey.pyStrip, jevKey: jevKey.pyStrip)
         dismiss()
+    }
+}
+
+/// Ligne de dossier : chemin tronqué au milieu (info-bulle = chemin complet), survol et sélection en aplat neutre.
+struct FolderRow: View {
+    let path: String
+    let selected: Bool
+    let select: () -> Void
+    @State private var hover = false
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    var body: some View {
+        Button(action: select) {
+            Text(path).socle(Socle.T.body).foregroundStyle(Socle.C.text)
+                .lineLimit(1).truncationMode(.middle)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 10).frame(height: 30)
+                .background(selected ? Socle.C.surfaceSelected : (hover ? Socle.C.surfaceHover : .clear),
+                            in: RoundedRectangle(cornerRadius: 6))
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .onHover { hover = $0 }
+        .animation(reduceMotion ? nil : .easeOut(duration: 0.13), value: hover)
+        .animation(reduceMotion ? nil : .easeOut(duration: 0.13), value: selected)
+        .help(path)
     }
 }
 

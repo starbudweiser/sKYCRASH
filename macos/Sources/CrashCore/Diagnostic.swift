@@ -111,7 +111,7 @@ public enum Diagnostic {
             md += [L("## Avertissements des journaux de plugins"), ""]
             let warns = logWarnings(folder)
             for (n, name, sample) in warns {
-                md.append(L("- **{name}** : {n} ligne(s)", ["name": name, "n": n]))
+                md.append(P(n, "- **{name}** : {n} ligne", "- **{name}** : {n} lignes", ["name": name]))
                 md += sample.map { "  - `\($0.pyPrefix(200))`" }
             }
             if warns.isEmpty { md.append(L("Aucun avertissement repéré.")) }

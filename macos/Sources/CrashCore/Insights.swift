@@ -194,8 +194,8 @@ public enum Insights {
             let lines = history.filter { $0.time != nil }.map { "\(fmt($0.time)) — \($0.where.isEmpty ? "?" : $0.where)" }
             let same = history.filter { c in !c.where.isEmpty && latest != nil && c.where == latest!.where }.count
             report.findings.append(Finding(
-                SEV_INFO, "historique", L("{n} crash log(s) dans l'historique", ["n": history.count]),
-                L("Même point de plantage que le dernier : {k} fois.", ["k": same]), L("historique"), Array(lines.prefix(6))))
+                SEV_INFO, "historique", P(history.count, "{n} crash log dans l'historique", "{n} crash logs dans l'historique"),
+                P(same, "Même point de plantage que le dernier : une fois.", "Même point de plantage que le dernier : {n} fois."), L("historique"), Array(lines.prefix(6))))
             let prev = history.dropFirst().first { !$0.skse.isEmpty }
             if let latest, !latest.skse.isEmpty, let prev {
                 let added = pySorted(Array(latest.skse.subtracting(prev.skse)))
@@ -240,14 +240,14 @@ public enum Insights {
                 let when = savedAt.format("%d/%m %H:%M")
                 if !missing.isEmpty {
                     report.findings.append(Finding(
-                        SEV_WARN, "sauvegarde", L("{n} plugin(s) de la sauvegarde « {s} » ne sont plus actifs", ["n": missing.count, "s": name]),
+                        SEV_WARN, "sauvegarde", P(missing.count, "{n} plugin de la sauvegarde « {s} » n'est plus actif", "{n} plugins de la sauvegarde « {s} » ne sont plus actifs", ["s": name]),
                         L("Sauvegarde du {d} ({loc}).", ["d": when, "loc": save.location]), L("sauvegarde"), Array(missing.prefix(8)),
                         L("Réactiver ces plugins pour charger la partie, ou nettoyer la sauvegarde (ReSaver) après les avoir retirés proprement.")))
                 }
                 if !addedSinceSave.isEmpty {
                     report.findings.append(Finding(
                         addedSinceSave.count >= 10 ? SEV_WARN : SEV_INFO, "sauvegarde",
-                        L("{n} plugin(s) ajoutés depuis la sauvegarde « {s} »", ["n": addedSinceSave.count, "s": name]),
+                        P(addedSinceSave.count, "{n} plugin ajouté depuis la sauvegarde « {s} »", "{n} plugins ajoutés depuis la sauvegarde « {s} »", ["s": name]),
                         L("Sauvegarde du {d} ({loc}), {k} plugins à l'époque.", ["d": when, "loc": save.location, "k": save.allPlugins.count]),
                         L("sauvegarde"), Array(addedSinceSave.prefix(8)),
                         L("Ajouter des plugins en cours de partie (régions, météo, sons, PNJ) peut faire planter au chargement. Tester une partie neuve (coc) ; si elle tient, retirer les ajouts récents.")))
@@ -271,7 +271,7 @@ public enum Insights {
                 let labels = doms.map { L(DOMAIN_LABELS[$0.0]!) }.joined(separator: ", ")
                 var parts: [String] = []
                 if !dlls.isEmpty {
-                    parts.append(L("DLL chargées : {l}", ["l": dlls.prefix(10).map { $0.0 + ($0.1 != 0 ? L(" ({n} avertissements)", ["n": $0.1]) : "") }.joined(separator: ", ")]))
+                    parts.append(L("DLL chargées : {l}", ["l": dlls.prefix(10).map { $0.0 + ($0.1 != 0 ? P($0.1, " ({n} avertissement)", " ({n} avertissements)") : "") }.joined(separator: ", ")]))
                 }
                 if !plugs.isEmpty { parts.append(L("Plugins ajoutés depuis la sauvegarde : {l}", ["l": plugs.prefix(10).joined(separator: ", ")])) }
                 report.extras.domains = DomainsExtra(labels: labels, dlls: dlls, plugins: plugs)

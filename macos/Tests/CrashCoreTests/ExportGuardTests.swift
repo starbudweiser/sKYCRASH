@@ -129,7 +129,7 @@ final class GuardTests: TempDirCase {
         XCTAssertTrue(out.contains("1. Nettoyer la sauvegarde avec ReSaver"))
         XCTAssertTrue(out.contains("2. Désactiver DynamicMusicAndSounds.dll"))
         XCTAssertFalse(out.contains("Crashlogs"))
-        XCTAssertTrue(out.contains("3 conseil(s) retiré(s)"))
+        XCTAssertTrue(out.contains("3 conseils retirés"))
     }
 
     func testEnglishAnswer() {
@@ -182,7 +182,7 @@ final class GuardTests: TempDirCase {
         XCTAssertEqual(f.cc?.listed, 2); XCTAssertEqual(f.cc?.present, 2)
         XCTAssertEqual(f.bottle, "Bottle")
         let ctx = f.toContext()
-        XCTAssertTrue(ctx.contains("Faits vérifiés")); XCTAssertTrue(ctx.contains("Crash Logger SSE")); XCTAssertTrue(ctx.contains("2 fichier(s) présents sur 2"))
+        XCTAssertTrue(ctx.contains("Faits vérifiés")); XCTAssertTrue(ctx.contains("Crash Logger SSE")); XCTAssertTrue(ctx.contains("2 fichiers présents sur 2"))
     }
 }
 

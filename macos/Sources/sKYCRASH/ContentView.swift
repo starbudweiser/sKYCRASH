@@ -112,6 +112,14 @@ struct ContentView: View {
     private var logList: some View {
         ScrollView {
             LazyVStack(spacing: 0) {
+                if model.logRows.isEmpty {
+                    VStack(spacing: Socle.M.space3) {
+                        Text(L("Aucun log trouvé dans les dossiers configurés.")).socle(Socle.T.body).foregroundStyle(Socle.C.textSubtle)
+                            .multilineTextAlignment(.center)
+                        Button(L("Réglages…")) { model.showSettings = true }.buttonStyle(SocleButtonStyle(.secondary)).fixedSize()
+                    }
+                    .frame(maxWidth: .infinity).padding(.vertical, Socle.M.space5)
+                }
                 ForEach(model.logRows) { row in
                     LogRowView(row: row) { model.openLog(row) }
                 }
@@ -161,14 +169,21 @@ struct LogRowView: View {
     let row: LogRow
     let open: () -> Void
     @State private var hover = false
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         Button(action: open) {
             HStack(spacing: 10) {
                 Text("●").font(.system(size: 12)).foregroundStyle(row.isError ? Socle.C.danger : Socle.C.success).frame(width: 14)
                 Text(row.name).socle(Socle.T.labelStrong).foregroundStyle(Socle.C.textStrong).lineLimit(1).truncationMode(.middle)
+                    .layoutPriority(1)
                 Spacer(minLength: 8)
-                Text("\(row.game) · \(PyFS.basename(row.folder)) · \(row.when)").socle(Socle.T.meta).foregroundStyle(Socle.C.textSubtle).lineLimit(1)
+                // Jeu et dossier (nom de bouteille parfois très long) se tronquent ; la date reste toujours entière
+                Text([row.game, PyFS.basename(row.folder)].filter { !$0.isEmpty }.joined(separator: " · "))
+                    .socle(Socle.T.meta).foregroundStyle(Socle.C.textSubtle).lineLimit(1).truncationMode(.middle)
+                if !row.when.isEmpty {
+                    Text(row.when).socle(Socle.T.meta).foregroundStyle(Socle.C.textSubtle).lineLimit(1).fixedSize()
+                }
             }
             .padding(.horizontal, 10).frame(height: 36)
             .background(hover ? Socle.C.surfaceHover : .clear, in: RoundedRectangle(cornerRadius: 6))
@@ -176,6 +191,7 @@ struct LogRowView: View {
         }
         .buttonStyle(.plain)
         .onHover { hover = $0 }
+        .animation(reduceMotion ? nil : .easeOut(duration: 0.13), value: hover)
         .help(row.path)
     }
 }

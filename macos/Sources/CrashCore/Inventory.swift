@@ -140,7 +140,8 @@ extension Inventory {
             out.append(L("- Outils installés : {l}", ["l": present.map { $0 + ($0 == "Crash Logger SSE" && !cl.isEmpty ? " v\(cl)" : "") }.joined(separator: ", ")]))
         }
         if !absent.isEmpty { out.append(L("- Outils absents : {l}", ["l": absent.joined(separator: ", ")])) }
-        if let cc { out.append(L("- Creation Club : {p} fichier(s) présents sur {n} listés dans Skyrim.ccc (chargés automatiquement)", ["p": cc.present, "n": cc.listed])) }
+        if let cc { out.append(L("- Creation Club : {p} sur {n} dans la liste de Skyrim.ccc (chargés automatiquement)",
+                       ["p": P(cc.present, "{n} fichier présent", "{n} fichiers présents"), "n": fmtInt(cc.listed)])) }
         if let pl = plugins {
             out.append(L("- Plugins actifs : {a} ({f} pleins, {l} légers ESL) — limite de 254 pleins : {ok}",
                          ["a": pl.active, "f": pl.full, "l": pl.light, "ok": pl.limitOk ? L("respectée") : L("DÉPASSÉE")]))
@@ -152,7 +153,8 @@ extension Inventory {
         for (name, role) in proxies ?? [] {
             out.append(L("- {f} à la racine du jeu : {r} (ne pas le renommer ni le supprimer sans en tenir compte)", ["f": name, "r": role.isEmpty ? "?" : role]))
         }
-        var line = L("- Crash logs : {a} actif(s), {k} archivé(s) par la purge", ["a": crashLogs.active, "k": crashLogs.archived])
+        var line = L("- Crash logs : {a}, {k}", ["a": P(crashLogs.active, "{n} actif", "{n} actifs"),
+                                                   "k": P(crashLogs.archived, "{n} archivé par la purge", "{n} archivés par la purge")])
         if !crashLogs.dir.isEmpty { line += " — " + L("Crash Logger écrit dans {d}", ["d": crashLogs.dir]) }
         if let l = crashLogs.last { line += " — " + L("dernier : {d} ({w})", ["d": l.0, "w": l.1.isEmpty ? "?" : l.1]) }
         out.append(line)

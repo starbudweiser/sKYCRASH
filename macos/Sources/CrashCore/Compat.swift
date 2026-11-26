@@ -175,8 +175,8 @@ public enum Compat {
         report.skseInfo = info
         let plugins = info.checked.filter { !NON_PLUGIN_DLLS.contains($0.lowercased()) }
         if !plugins.isEmpty {
-            report.findings.append(Finding(SEV_INFO, "skse", L("{loaded} plugin(s) SKSE chargés sur {total} vérifiés",
-                                                              ["loaded": info.loaded.count, "total": plugins.count]), "", src))
+            report.findings.append(Finding(SEV_INFO, "skse", P(info.loaded.count, "{n} plugin SKSE chargé sur {total}", "{n} plugins SKSE chargés sur {total}",
+                                                              ["total": P(plugins.count, "{n} vérifié", "{n} vérifiés")]), "", src))
         }
         for dll in notLoaded(info) {
             report.findings.append(Finding(
@@ -224,7 +224,7 @@ public enum Compat {
                 let extra = files.keys.filter { !known.contains($0) }.map { files[$0]! }
                 if !extra.isEmpty {
                     report.findings.append(Finding(
-                        SEV_INFO, "skse", L("{n} DLL présentes mais absentes du log SKSE", ["n": extra.count]),
+                        SEV_INFO, "skse", P(extra.count, "{n} DLL présente mais absente du log SKSE", "{n} DLL présentes mais absentes du log SKSE"),
                         pySorted(extra).prefix(8).joined(separator: ", "), src, [],
                         L("Log ancien (jeu lancé avant l'ajout ?) ou DLL ignorées par SKSE.")))
                 }
@@ -249,7 +249,7 @@ public enum Compat {
             }
             let active = entries.filter { $0.hasPrefix("*") }.map { $0.pyLStrip("*") }
             report.findings.append(Finding(
-                SEV_INFO, "plugins", L("plugins.txt : {a} plugin(s) actifs sur {t}", ["a": active.count, "t": entries.count]), ptxt, src))
+                SEV_INFO, "plugins", P(active.count, "plugins.txt : {n} plugin actif sur {t}", "plugins.txt : {n} plugins actifs sur {t}", ["t": entries.count]), ptxt, src))
             let dataDir = PyFS.join(gameDir, "Data")
             let eslUnknown = active.filter { e in
                 let l = e.lowercased()

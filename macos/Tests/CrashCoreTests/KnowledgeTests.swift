@@ -168,8 +168,10 @@ final class I18nTests: XCTestCase {
                 for m in rx.finditer(t) { keys.insert(unescape(m.group(1)!)) }
                 // Titres des sources de la veille : littéraux de Source(id, type, cible, titre), traduits par displayTitle.
                 for m in Rx(#"Source\("[^"]*",\s*"[^"]*",\s*[^,]+,\s*"((?:[^"\\]|\\.)*)""#).finditer(t) { keys.insert(unescape(m.group(1)!)) }
-                // P(n, "un", "plusieurs")
-                for m in Rx(#"(?<![A-Za-z0-9_])P\([^,]+,\s*"((?:[^"\\]|\\.)*)",\s*"((?:[^"\\]|\\.)*)""#).finditer(t) { keys.insert(unescape(m.group(2)!)) }
+                // P(n, "un", "plusieurs") : les deux formes sont des clés
+                for m in Rx(#"(?<![A-Za-z0-9_])P\([^,]+,\s*"((?:[^"\\]|\\.)*)",\s*"((?:[^"\\]|\\.)*)""#).finditer(t) {
+                    keys.insert(unescape(m.group(1)!)); keys.insert(unescape(m.group(2)!))
+                }
             }
         }
         return keys
@@ -200,10 +202,28 @@ final class I18nTests: XCTestCase {
         I18n.setLang("en"); XCTAssertEqual(L("Envoyer"), "Send")
         I18n.setLang("it"); XCTAssertEqual(L("Envoyer"), "Invia")
         I18n.setLang("es"); XCTAssertEqual(L("Envoyer"), "Enviar")
-        XCTAssertEqual(L("{n} fichier(s) supprimé(s).", ["n": 2]).components(separatedBy: "2").count - 1, 1)
+        XCTAssertEqual(P(2, "{n} fichier supprimé.", "{n} fichiers supprimés.").components(separatedBy: "2").count - 1, 1)
         I18n.setLang("fr"); XCTAssertEqual(L("Envoyer"), "Envoyer")
         XCTAssertEqual(I18n.systemLang(["de-DE", "es-ES"]), "es")
         XCTAssertEqual(I18n.systemLang(["de-DE"]), "en")
+    }
+
+    /// Singulier / pluriel : en français 0 et 1 sont au singulier, ailleurs seul 1 ; plus de « (s) » dans la table.
+    func testPlurals() {
+        defer { I18n.setLang("fr") }
+        I18n.setLang("fr")
+        XCTAssertEqual(P(0, "{n} fichier supprimé.", "{n} fichiers supprimés."), "0 fichier supprimé.")
+        XCTAssertEqual(P(1, "{n} fichier supprimé.", "{n} fichiers supprimés."), "1 fichier supprimé.")
+        XCTAssertEqual(P(1284, "{n} fichier supprimé.", "{n} fichiers supprimés."), "1\u{00a0}284 fichiers supprimés.")
+        I18n.setLang("en")
+        XCTAssertEqual(P(0, "{n} fichier supprimé.", "{n} fichiers supprimés."), "0 files deleted.")
+        XCTAssertEqual(P(1, "{n} fichier supprimé.", "{n} fichiers supprimés."), "1 file deleted.")
+        XCTAssertEqual(P(1284, "{n} fichier supprimé.", "{n} fichiers supprimés."), "1,284 files deleted.")
+        for (k, tr) in translations {
+            let pluralMark = Rx(#"\((s|es|x)\)"#)
+            XCTAssertNil(pluralMark.search(k), "pluriel « (s) » dans la clé : \(k)")
+            for t in tr { XCTAssertNil(Rx(#"\((s|es|x)\)"#).search(t), "pluriel « (s) » dans une traduction : \(k)") }
+        }
     }
 
     func testEngineTranslated() {

@@ -178,9 +178,9 @@ public enum Audit {
             let hits = zone.filter { sig.rx.test($0) }.map { $0.pyStrip }
             if !hits.isEmpty {
                 scores.bump("[\(L(sig.cat))]", sig.weight * weight,
-                            L("{n} ligne(s) '{cat}' dans {src}", ["n": hits.count, "cat": L(sig.cat), "src": src]))
+                            P(hits.count, "{n} ligne '{cat}' dans {src}", "{n} lignes '{cat}' dans {src}", ["cat": L(sig.cat), "src": src]))
                 report.findings.append(Finding(SEV_WARN, sig.cat, L(sig.title),
-                                               L("{n} occurrence(s)", ["n": hits.count]), src, Array(hits.prefix(3)), L(sig.advice)))
+                                               P(hits.count, "{n} occurrence", "{n} occurrences"), src, Array(hits.prefix(3)), L(sig.advice)))
             }
         }
 
@@ -483,7 +483,7 @@ public enum Audit {
             report.findings.append(Finding(
                 SEV_WARN, "script", L("Contenu Creation Club manquant ou incomplet"), listOf(Array(sorted.prefix(8))), src, [],
                 L("Télécharger/réinstaller le contenu Creation Club via le jeu (Créations) ou retirer les mods qui le requièrent ; ne pas utiliser le menu Créations avec MO2/Vortex.")))
-            scores.bump(L("[creation club] contenu manquant"), 2, L("{n} script(s) CC introuvable(s) dans {src}", ["n": ccMissing.keys.count, "src": src]))
+            scores.bump(L("[creation club] contenu manquant"), 2, P(ccMissing.keys.count, "{n} script CC introuvable dans {src}", "{n} scripts CC introuvables dans {src}", ["src": src]))
         }
         if !otherMissing.isEmpty {
             let byCount = otherMissing.items.stableSorted { $0.1 > $1.1 }
@@ -503,29 +503,29 @@ public enum Audit {
         if !nativeUnbound.isEmpty {
             report.findings.append(Finding(
                 SEV_WARN, "script", L("Fonctions natives Papyrus non liées"),
-                L("{n} fonction(s) : ", ["n": nativeUnbound.total]) + nativeUnbound.keys.prefix(5).joined(separator: ", "), src, [],
+                P(nativeUnbound.total, "{n} fonction : ", "{n} fonctions : ") + nativeUnbound.keys.prefix(5).joined(separator: ", "), src, [],
                 L("Typiquement un plugin SKSE absent/incompatible ou des .pex d'un mod qui attendent une fonction native qui n'existe pas dans cette version.")))
-            scores.bump(L("[script] fonctions natives non liées"), 2, L("{n} fonction(s) native(s) dans {src}", ["n": nativeUnbound.total, "src": src]))
+            scores.bump(L("[script] fonctions natives non liées"), 2, P(nativeUnbound.total, "{n} fonction native dans {src}", "{n} fonctions natives dans {src}", ["src": src]))
         }
         let total = msgs.total
         let stacks = lines.filter { PAPY_STACK_RE.test($0) }.count
         if stacks > 0 {
             report.findings.append(Finding(
                 SEV_CRIT, "script", L("Surcharge Papyrus (piles de scripts en vidange)"),
-                L("{n} occurrence(s) — scripts trop nombreux ou en boucle.", ["n": stacks]), src, [],
+                P(stacks, "{n} occurrence — scripts trop nombreux ou en boucle.", "{n} occurrences — scripts trop nombreux ou en boucle."), src, [],
                 L("Repérer le script le plus bavard ci-dessous ; désactiver le mod ou nettoyer la sauvegarde.")))
-            scores.bump(L("[script] surcharge Papyrus"), 5, L("{n} vidange(s) de piles dans {src}", ["n": stacks, "src": src]))
+            scores.bump(L("[script] surcharge Papyrus"), 5, P(stacks, "{n} vidange de piles dans {src}", "{n} vidanges de piles dans {src}", ["src": src]))
         }
         if total > 0 {
             let top = scripts.mostCommon(5)
             if let first = top.first {
                 report.findings.append(Finding(
                     first.1 >= 20 ? SEV_WARN : SEV_INFO, "script",
-                    L("{total} erreurs Papyrus ; scripts les plus fautifs", ["total": total]),
+                    P(total, "{n} erreur Papyrus ; script le plus fautif", "{n} erreurs Papyrus ; scripts les plus fautifs"),
                     listOf(top), src, msgs.mostCommon(3).map { "\($0.1)× \($0.0)" },
                     L("Un script très bavard est un suspect fréquent de lenteurs/instabilité.")))
                 for (k, v) in top.prefix(3) where v >= 5 {
-                    scores.bump(k, min(v / 5, 5), L("{v} erreurs Papyrus ({src})", ["v": v, "src": src]))
+                    scores.bump(k, min(v / 5, 5), P(v, "{n} erreur Papyrus ({src})", "{n} erreurs Papyrus ({src})", ["src": src]))
                 }
             }
         }
@@ -625,12 +625,12 @@ public enum Audit {
                 : L("Consulter ce log et la page du mod ; mettre à jour ou retirer le plugin.")
             report.findings.append(Finding(
                 SEV_WARN, "plugin", L("Erreur critique dans le log de {stem}", ["stem": stem]),
-                L("{n} ligne(s) critique(s)", ["n": strong.count]), src, Array(strong.prefix(3)), tip))
-            scores.bump(stem, min(strong.count, 3) + (streamline ? 0 : 1), L("{n} erreur(s) critique(s) dans {src}", ["n": strong.count, "src": src]))
+                P(strong.count, "{n} ligne critique", "{n} lignes critiques"), src, Array(strong.prefix(3)), tip))
+            scores.bump(stem, min(strong.count, 3) + (streamline ? 0 : 1), P(strong.count, "{n} erreur critique dans {src}", "{n} erreurs critiques dans {src}", ["src": src]))
         } else if !weak.isEmpty {
             report.findings.append(Finding(
                 SEV_INFO, "plugin", L("Messages d'échec dans le log de {stem}", ["stem": stem]),
-                L("{n} ligne(s)", ["n": weak.count]), src, Array(weak.prefix(2)), ""))
+                P(weak.count, "{n} ligne", "{n} lignes"), src, Array(weak.prefix(2)), ""))
         }
         if !strong.isEmpty || !weak.isEmpty {
             report.excerpts[path] = (strong + weak).prefix(30).joined(separator: "\n").pyPrefix(3000)

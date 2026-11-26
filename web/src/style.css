@@ -25,13 +25,14 @@ h2 { font: 700 14px/20px var(--font-sans); }
 .dropzone.over { border-color: var(--accent); color: var(--accent-text); background: var(--surface-hover); }
 
 /* Rapport d'audit */
-.report { flex: 1; min-height: 160px; overflow: auto; white-space: pre-wrap; font: 12px/18px var(--font-mono); color: var(--text); }
+.report { flex: 1; min-height: 160px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; font: 12px/18px var(--font-mono); color: var(--text); }
 .verdict { margin-bottom: var(--space-2); font: 700 14px/20px var(--font-sans); color: var(--text-strong); }
 .sect { margin: var(--space-4) 0 var(--space-1\.5); font: 700 10px/14px var(--font-sans); letter-spacing: .05em; text-transform: uppercase; color: var(--text-subtle); }
 .suspect { display: flex; align-items: baseline; gap: var(--space-2); padding: var(--space-1\.5) var(--space-2); border-radius: var(--radius); }
 .suspect:first-of-type { background: var(--danger-bg); color: var(--danger-soft); }
-.suspect .rank, .suspect .score { color: var(--text-subtle); font-variant-numeric: tabular-nums; }
-.suspect .name { font-weight: 700; color: var(--text-strong); }
+.suspect .rank, .suspect .score { flex: none; color: var(--text-subtle); font-variant-numeric: tabular-nums; }
+.suspect .name { min-width: 0; font-weight: 700; color: var(--text-strong); overflow-wrap: anywhere; }
+.suspect .why { min-width: 0; overflow-wrap: anywhere; }
 .suspect .score { margin-left: auto; }
 .finding { padding: var(--space-2) 0; border-bottom: 1px solid var(--border-subtle); }
 .tag { display: inline-block; margin-right: var(--space-2); padding: 0 var(--space-1\.5); border-radius: var(--radius); font: 700 10px/16px var(--font-sans); }
@@ -43,19 +44,22 @@ h2 { font: 700 14px/20px var(--font-sans); }
 
 /* Fichiers chargés */
 .grid { display: flex; flex-direction: column; gap: 1px; min-height: 120px; max-height: 220px; overflow: auto; padding: var(--space-1); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
-.card { flex: none; display: flex; align-items: center; gap: var(--space-2); height: var(--size-control); padding: 0 var(--space-2); border-radius: var(--radius); cursor: pointer; transition: background-color .15s; }
-.card:hover, .card:focus-visible { background: var(--surface-hover); }
+.card { flex: none; display: flex; align-items: center; gap: var(--space-2); height: var(--size-control); padding: 0 var(--space-2); border-radius: var(--radius); cursor: pointer; transition: background-color .13s ease-out; }
+/* Survol : aplat neutre, sans cadre ; le focus clavier garde l'anneau (:focus-visible plus haut) */
+.card:hover { background: var(--surface-hover); }
+/* Liste vide : un court message, jamais une zone blanche */
+.grid .empty { margin: auto; padding: var(--space-4); text-align: center; color: var(--text-subtle); }
 .card::before { content: ""; flex: none; width: 6px; height: 6px; border-radius: var(--radius-full); background: var(--text-subtle); }
 .card.crash::before { background: var(--danger); }
 .card.skse::before { background: var(--accent); }
 .card.papyrus::before { background: var(--warning); }
 .card .n { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500; color: var(--text-strong); }
-.card .k { white-space: nowrap; font: 11px/16px var(--font-mono); color: var(--text-subtle); font-variant-numeric: tabular-nums; }
+.card .k { flex: none; white-space: nowrap; font: 11px/16px var(--font-mono); color: var(--text-subtle); font-variant-numeric: tabular-nums; }
 
 /* Assistant IA */
 .chat-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); }
 .chat-log { flex: 1; min-height: 0; overflow: auto; display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-3); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
-.msg { max-width: 92%; padding: var(--space-2) var(--space-3); border-radius: var(--radius); border: 1px solid var(--border); white-space: pre-wrap; word-break: break-word; line-height: 1.5; }
+.msg { max-width: 92%; padding: var(--space-2) var(--space-3); border-radius: var(--radius); border: 1px solid var(--border); white-space: pre-wrap; word-break: break-word; overflow-wrap: anywhere; line-height: 1.5; }
 .msg.user { align-self: flex-end; background: var(--surface-raised); border-color: var(--info-border); color: var(--text-strong); }
 .msg.assistant { align-self: flex-start; background: var(--bg-inset); }
 .msg.error { align-self: stretch; background: var(--danger-bg); border-color: var(--danger-border); color: var(--danger-soft); }

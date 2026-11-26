@@ -17,6 +17,11 @@ const OBJ_TYPE_RE = /\(([A-Za-z_][\w:]*)\*\)/g;
 const PLUGIN_LINE_RE = /^\s*\[[^\]]+\]\s+(.+?\.es[mpl])\s*$/i;
 const DLL_LINE_RE = /^\s+(\S.*?\.dll)\b/i;
 const TS_RE = /\[(?:(\d{4}-\d{2}-\d{2})[ T])?(\d{2}):(\d{2}):(\d{2})(?:[.,]\d+)?/;
+// Singulier / pluriel du français (0 et 1 au singulier) ; « {n} » reçoit le nombre formaté.
+// L'aperçu retraduit ces textes par modèle (voir tx dans index.html) : il reformate le nombre dans la langue choisie.
+export const fmtN = (n) => new Intl.NumberFormat("fr").format(n);
+export const plu = (n, un, plusieurs) => (n <= 1 ? un : plusieurs).replace("{n}", () => fmtN(n));
+
 export const WARN_RE = /\[(?:w|e|warn|warning|err|error)\]/i;
 
 const EVENTS = [
@@ -209,8 +214,8 @@ export function analyse(files, report, scores, bump, saves = []) {
 
   if (history.length) {
     const same = history.filter((c) => c.where && latest && c.where === latest.where).length;
-    push(SEV.INFO, "historique", `${history.length} crash log(s) dans l'historique`,
-      `Même point de plantage que le dernier : ${same} fois.`, "historique", history.slice(0, 6).map((c) => `${fmt(c.time)} — ${c.where || "?"}`));
+    push(SEV.INFO, "historique", plu(history.length, "{n} crash log dans l'historique", "{n} crash logs dans l'historique"),
+      plu(same, "Même point de plantage que le dernier : une fois.", "Même point de plantage que le dernier : {n} fois."), "historique", history.slice(0, 6).map((c) => `${fmt(c.time)} — ${c.where || "?"}`));
     const prev = history.slice(1).find((c) => c.skse.size);
     if (latest && latest.skse.size && prev) {
       const added = [...latest.skse].filter((d) => !prev.skse.has(d)).sort();
@@ -241,11 +246,11 @@ export function analyse(files, report, scores, bump, saves = []) {
       const missing = save.all.filter((p) => !cur.has(p.toLowerCase()));
       addedSinceSave = current.filter((p) => !inSave.has(p.toLowerCase()));
       Object.assign(ex.save, { missing, added: addedSinceSave });
-      if (missing.length) push(SEV.WARN, "sauvegarde", `${missing.length} plugin(s) de la sauvegarde « ${sname} » ne sont plus actifs`,
+      if (missing.length) push(SEV.WARN, "sauvegarde", plu(missing.length, `{n} plugin de la sauvegarde « ${sname} » n'est plus actif`, `{n} plugins de la sauvegarde « ${sname} » ne sont plus actifs`),
         `Sauvegarde du ${when} (${save.location}).`, "sauvegarde", missing.slice(0, 8),
         "Réactiver ces plugins pour charger la partie, ou nettoyer la sauvegarde (ReSaver) après les avoir retirés proprement.");
       if (addedSinceSave.length) push(addedSinceSave.length >= 10 ? SEV.WARN : SEV.INFO, "sauvegarde",
-        `${addedSinceSave.length} plugin(s) ajoutés depuis la sauvegarde « ${sname} »`,
+        plu(addedSinceSave.length, `{n} plugin ajouté depuis la sauvegarde « ${sname} »`, `{n} plugins ajoutés depuis la sauvegarde « ${sname} »`),
         `Sauvegarde du ${when} (${save.location}), ${save.all.length} plugins à l'époque.`, "sauvegarde", addedSinceSave.slice(0, 8),
         "Ajouter des plugins en cours de partie (régions, météo, sons, PNJ) peut faire planter au chargement. Tester une partie neuve (coc) ; si elle tient, retirer les ajouts récents.");
     } else {
@@ -267,7 +272,7 @@ export function analyse(files, report, scores, bump, saves = []) {
       }
       const labels = doms.map((k) => DOMAINS[k][2]).join(", ");
       const parts = [];
-      if (dlls.length) parts.push(`DLL chargées : ${dlls.slice(0, 10).map(([d, w]) => d + (w ? ` (${w} avertissements)` : "")).join(", ")}`);
+      if (dlls.length) parts.push(`DLL chargées : ${dlls.slice(0, 10).map(([d, w]) => d + (w ? plu(w, " ({n} avertissement)", " ({n} avertissements)") : "")).join(", ")}`);
       if (plugs.length) parts.push(`Plugins ajoutés depuis la sauvegarde : ${plugs.slice(0, 10).join(", ")}`);
       ex.domains = { labels, dlls, plugins: plugs };
       push(SEV.WARN, "domaine", `Objets en cause : ${labels}`,
@@ -317,7 +322,7 @@ export function buildDiagnostic(report, files, anonymize = (t) => t) {
   const warns = files.filter((f) => f.kind !== "crash").map((f) => [f.lines.filter((l) => WARN_RE.test(l)), f.name]).filter(([w]) => w.length)
     .sort((a, b) => b[0].length - a[0].length).slice(0, 20);
   md.push("", "## Avertissements des journaux de plugins", "");
-  warns.forEach(([w, n]) => md.push(`- **${n}** : ${w.length} ligne(s)`, ...w.slice(0, 2).map((x) => `  - \`${x.trim().slice(0, 200)}\``)));
+  warns.forEach(([w, n]) => md.push(`- **${n}** : ${plu(w.length, "{n} ligne", "{n} lignes")}`, ...w.slice(0, 2).map((x) => `  - \`${x.trim().slice(0, 200)}\``)));
   if (!warns.length) md.push("Aucun avertissement repéré.");
   const latest = ex.history?.[0];
   if (latest) {

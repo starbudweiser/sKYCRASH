@@ -81,10 +81,10 @@ final class InsightsTests: TempDirCase {
         let r = Audit.auditPaths([latest, older, sps, dms], gameDir: game)
         let t = titles(r)
         XCTAssertTrue(t.contains("Plantage 11 s après le chargement d'une sauvegarde"), t)
-        XCTAssertTrue(t.contains("2 crash log(s) dans l'historique"))
+        XCTAssertTrue(t.contains("2 crash logs dans l'historique"))
         XCTAssertTrue(t.contains("DLL SKSE modifiées depuis le plantage du 14/10 02:07:54"))
-        XCTAssertTrue(t.contains("1 plugin(s) de la sauvegarde « RHYS » ne sont plus actifs"))
-        XCTAssertTrue(t.contains("2 plugin(s) ajoutés depuis la sauvegarde « RHYS »"))
+        XCTAssertTrue(t.contains("1 plugin de la sauvegarde « RHYS » n'est plus actif"))
+        XCTAssertTrue(t.contains("2 plugins ajoutés depuis la sauvegarde « RHYS »"))
         XCTAssertTrue(t.contains("Objets en cause : son et musique, régions et météo"))
         let dom = r.findings.first { $0.category == "domaine" }!
         XCTAssertTrue(dom.detail.contains("DynamicMusicAndSounds.dll (3 avertissements)"))
@@ -101,7 +101,7 @@ final class InsightsTests: TempDirCase {
         XCTAssertTrue(md.contains("chargement d'une sauvegarde (SPS.log)"))
         XCTAssertTrue(md.contains("- Removed.esp"))
         XCTAssertTrue(md.contains("POSSIBLE RELEVANT OBJECTS:"))
-        XCTAssertTrue(md.contains("**DynamicMusicAndSounds.log** : 3 ligne(s)"))
+        XCTAssertTrue(md.contains("**DynamicMusicAndSounds.log** : 3 lignes"))
     }
 
     func testPurgeArchivesCrashLogs() {

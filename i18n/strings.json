@@ -734,11 +734,6 @@
   "plugin legato all'eccezione SKSE ({src})",
   "plugin vinculado a la excepción de SKSE ({src})"
  ],
- "plugins.txt : {a} plugin(s) actifs sur {t}": [
-  "plugins.txt: {a} active plugin(s) out of {t}",
-  "plugins.txt: {a} plugin attivi su {t}",
-  "plugins.txt: {a} plugin(s) activos de {t}"
- ],
  "point de crash dans {src}": [
   "crash point in {src}",
   "punto di crash in {src}",
@@ -824,75 +819,15 @@
   "{label} al {pct} % al momento del crash ({src})",
   "{label} al {pct} % en el momento del fallo ({src})"
  ],
- "{loaded} plugin(s) SKSE chargés sur {total} vérifiés": [
-  "{loaded} SKSE plugin(s) loaded out of {total} checked",
-  "{loaded} plugin SKSE caricati su {total} verificati",
-  "{loaded} plugin(s) SKSE cargados de {total} verificados"
- ],
- "{n} DLL présentes mais absentes du log SKSE": [
-  "{n} DLL(s) present but absent from the SKSE log",
-  "{n} DLL presenti ma assenti dal log SKSE",
-  "{n} DLL presentes pero ausentes del log de SKSE"
- ],
- "{n} erreur(s) critique(s) dans {src}": [
-  "{n} critical error(s) in {src}",
-  "{n} errore/i critico/i in {src}",
-  "{n} error(es) crítico(s) en {src}"
- ],
- "{n} fonction(s) : ": [
-  "{n} function(s): ",
-  "{n} funzione/i: ",
-  "{n} función(es): "
- ],
- "{n} fonction(s) native(s) dans {src}": [
-  "{n} native function(s) in {src}",
-  "{n} funzione/i nativa/e in {src}",
-  "{n} función(es) nativa(s) en {src}"
- ],
- "{n} ligne(s)": [
-  "{n} line(s)",
-  "{n} riga/e",
-  "{n} línea(s)"
- ],
- "{n} ligne(s) '{cat}' dans {src}": [
-  "{n} '{cat}' line(s) in {src}",
-  "{n} riga/e '{cat}' in {src}",
-  "{n} línea(s) '{cat}' en {src}"
- ],
- "{n} ligne(s) critique(s)": [
-  "{n} critical line(s)",
-  "{n} riga/e critica/che",
-  "{n} línea(s) crítica(s)"
- ],
  "{n} modules chargés (dont ~{p} plugins .dllplugin).": [
   "{n} modules loaded (including ~{p} .dllplugin plugins).",
   "{n} moduli caricati (di cui ~{p} plugin .dllplugin).",
   "{n} módulos cargados (de ellos ~{p} plugins .dllplugin)."
  ],
- "{n} occurrence(s)": [
-  "{n} occurrence(s)",
-  "{n} occorrenza/e",
-  "{n} aparición(es)"
- ],
- "{n} occurrence(s) — scripts trop nombreux ou en boucle.": [
-  "{n} occurrence(s) — too many scripts or looping.",
-  "{n} occorrenza/e — troppi script o in loop.",
-  "{n} aparición(es): demasiados scripts o en bucle."
- ],
  "{n} plugins .esp/.esm actifs (limite {max} hors ESL)": [
   "{n} active .esp/.esm plugins (limit {max} excluding ESL)",
   "{n} plugin .esp/.esm attivi (limite {max} esclusi ESL)",
   "{n} plugins .esp/.esm activos (límite {max} sin contar ESL)"
- ],
- "{n} script(s) CC introuvable(s) dans {src}": [
-  "{n} CC script(s) not found in {src}",
-  "{n} script CC non trovato/i in {src}",
-  "{n} script(s) de CC no encontrado(s) en {src}"
- ],
- "{n} vidange(s) de piles dans {src}": [
-  "{n} stack dump(s) in {src}",
-  "{n} svuotamento/i di stack in {src}",
-  "{n} volcado(s) de pila en {src}"
  ],
  "{n}× dans la pile d'appels ({src})": [
   "{n}× in the call stack ({src})",
@@ -903,16 +838,6 @@
   "{n}× in the STACK ({src})",
   "{n}× nello STACK ({src})",
   "{n}× en el STACK ({src})"
- ],
- "{total} erreurs Papyrus ; scripts les plus fautifs": [
-  "{total} Papyrus errors; most faulty scripts",
-  "{total} errori Papyrus; script più problematici",
-  "{total} errores de Papyrus; scripts más defectuosos"
- ],
- "{v} erreurs Papyrus ({src})": [
-  "{v} Papyrus errors ({src})",
-  "{v} errori Papyrus ({src})",
-  "{v} errores de Papyrus ({src})"
  ],
  "Épuisement de mémoire (RAM/VRAM/heap)": [
   "Memory exhaustion (RAM/VRAM/heap)",
@@ -1114,11 +1039,6 @@
   "Nessun file di log da eliminare.",
   "No hay archivos de log que eliminar."
  ],
- "Supprimer définitivement {n} fichier(s) log ?": [
-  "Permanently delete {n} log file(s)?",
-  "Eliminare definitivamente {n} file di log?",
-  "¿Eliminar definitivamente {n} archivo(s) de log?"
- ],
  "Dossiers concernés :": [
   "Affected folders:",
   "Cartelle interessate:",
@@ -1133,11 +1053,6 @@
   "Cancel",
   "Annulla",
   "Cancelar"
- ],
- "{n} fichier(s) supprimé(s).": [
-  "{n} file(s) deleted.",
-  "{n} file eliminato/i.",
-  "{n} archivo(s) eliminado(s)."
  ],
  "Échecs :": [
   "Failures:",
@@ -1278,11 +1193,6 @@
   "Fetching {label} models…",
   "Recupero dei modelli {label}…",
   "Obteniendo modelos de {label}…"
- ],
- "{n} modèle(s) {label} disponible(s).": [
-  "{n} {label} model(s) available.",
-  "{n} modello/i {label} disponibile/i.",
-  "{n} modelo(s) de {label} disponible(s)."
  ],
  "Liste indisponible ({msg}). Vous pouvez saisir le nom du modèle.": [
   "List unavailable ({msg}). You can type the model name.",
@@ -1469,11 +1379,6 @@
   "Aggiornamento già in corso.",
   "Actualización ya en curso."
  ],
- "Base de connaissances : {u} source(s) mise(s) à jour, {f} en échec.": [
-  "Knowledge base: {u} source(s) updated, {f} failed.",
-  "Base di conoscenza: {u} fonte/i aggiornata/e, {f} non riuscita/e.",
-  "Base de conocimiento: {u} fuente(s) actualizada(s), {f} con error."
- ],
  "Réglages…": [
   "Settings…",
   "Impostazioni…",
@@ -1559,11 +1464,6 @@
   "Chiave API Gemini assente: inseriscila in Impostazioni… > IA.",
   "Falta la clave API de Gemini: introdúcela en Ajustes… > IA."
  ],
- " ({n} avertissements)": [
-  " ({n} warnings)",
-  " ({n} avvisi)",
-  " ({n} advertencias)"
- ],
  "# Dossier de diagnostic {app}": [
   "# {app} diagnostic file",
   "# Fascicolo diagnostico {app}",
@@ -1598,11 +1498,6 @@
   "## Save and current plugins",
   "## Salvataggio e plugin attuali",
   "## Partida guardada y plugins actuales"
- ],
- "- **{name}** : {n} ligne(s)": [
-  "- **{name}**: {n} line(s)",
-  "- **{name}**: {n} riga/e",
-  "- **{name}**: {n} línea(s)"
  ],
  "Ajouter des plugins en cours de partie (régions, météo, sons, PNJ) peut faire planter au chargement. Tester une partie neuve (coc) ; si elle tient, retirer les ajouts récents.": [
   "Adding plugins mid-playthrough (regions, weather, sounds, NPCs) can crash on load. Test a new game (coc); if it holds, remove the recent additions.",
@@ -1708,11 +1603,6 @@
   "Update the game folder in Settings… > General.",
   "Aggiorna la cartella del gioco in Impostazioni… > Generale.",
   "Actualiza la carpeta del juego en Ajustes… > General."
- ],
- "Même point de plantage que le dernier : {k} fois.": [
-  "Same crash point as the last one: {k} time(s).",
-  "Stesso punto di crash dell'ultimo: {k} volta/e.",
-  "Mismo punto de crash que el último: {k} vez/veces."
  ],
  "Objets en cause : {d}": [
   "Objects involved: {d}",
@@ -1884,21 +1774,6 @@
   "suono e musica",
   "sonido y música"
  ],
- "{n} crash log(s) dans l'historique": [
-  "{n} crash log(s) in the history",
-  "{n} crash log nello storico",
-  "{n} crash log(s) en el historial"
- ],
- "{n} plugin(s) ajoutés depuis la sauvegarde « {s} »": [
-  "{n} plugin(s) added since the save “{s}”",
-  "{n} plugin aggiunti dal salvataggio «{s}»",
-  "{n} plugin(s) añadidos desde la partida «{s}»"
- ],
- "{n} plugin(s) de la sauvegarde « {s} » ne sont plus actifs": [
-  "{n} plugin(s) from the save “{s}” are no longer active",
-  "{n} plugin del salvataggio «{s}» non sono più attivi",
-  "{n} plugin(s) de la partida «{s}» ya no están activos"
- ],
  "| Date | Point de plantage | Durée de jeu | Objets en cause |": [
   "| Date | Crash point | Play time | Objects involved |",
   "| Data | Punto di crash | Durata di gioco | Oggetti coinvolti |",
@@ -1919,11 +1794,6 @@
   "Gli altri log vengono eliminati: azione irreversibile.",
   "Los demás logs se eliminan: acción irreversible."
  ],
- "Les {k} rapport(s) de plantage sont archivés dans « {dir} » : l'historique les garde.": [
-  "The {k} crash report(s) are archived in “{dir}”: the history keeps them.",
-  "I {k} rapporti di crash vengono archiviati in «{dir}»: lo storico li conserva.",
-  "Los {k} informe(s) de crash se archivan en «{dir}»: el historial los conserva."
- ],
  "Plus tard": [
   "Later",
   "Più tardi",
@@ -1933,11 +1803,6 @@
   "Use this folder",
   "Usa questa cartella",
   "Usar esta carpeta"
- ],
- "{n} rapport(s) de plantage archivé(s).": [
-  "{n} crash report(s) archived.",
-  "{n} rapporto/i di crash archiviato/i.",
-  "{n} informe(s) de crash archivado(s)."
  ],
  "Base de connaissances : mise à jour…": [
   "Knowledge base: updating…",
@@ -1956,7 +1821,7 @@
  ],
  "{f} en échec": [
   "{f} failed",
-  "{f} non riuscite",
+  "{f} in errore",
   "{f} con error"
  ],
  "## Faits vérifiés sur l'installation (lus sur le disque : ne pas les remettre en cause)": [
@@ -1964,25 +1829,10 @@
   "## Fatti verificati sull'installazione (letti dal disco: non metterli in dubbio)",
   "## Hechos verificados de la instalación (leídos del disco: no los pongas en duda)"
  ],
- "(sKYCRASH : {n} conseil(s) retiré(s), déjà en place ou vérifié : {l}.)": [
-  "(sKYCRASH: {n} tip(s) removed, already in place or verified: {l}.)",
-  "(sKYCRASH: {n} consiglio/i rimosso/i, già presente o verificato: {l}.)",
-  "(sKYCRASH: {n} consejo(s) eliminado(s), ya presente o verificado: {l}.)"
- ],
  "- Address Library pour cette version : {b}": [
   "- Address Library for this version: {b}",
   "- Address Library per questa versione: {b}",
   "- Address Library para esta versión: {b}"
- ],
- "- Crash logs : {a} actif(s), {k} archivé(s) par la purge": [
-  "- Crash logs: {a} active, {k} archived by the purge",
-  "- Crash log: {a} attivi, {k} archiviati dalla pulizia",
-  "- Crash logs: {a} activo(s), {k} archivado(s) por la purga"
- ],
- "- Creation Club : {p} fichier(s) présents sur {n} listés dans Skyrim.ccc (chargés automatiquement)": [
-  "- Creation Club: {p} file(s) present out of {n} listed in Skyrim.ccc (loaded automatically)",
-  "- Creation Club: {p} file presenti su {n} elencati in Skyrim.ccc (caricati automaticamente)",
-  "- Creation Club: {p} archivo(s) presentes de {n} listados en Skyrim.ccc (cargados automáticamente)"
  ],
  "- Jeu : SkyrimSE.exe {v}": [
   "- Game: SkyrimSE.exe {v}",
@@ -2113,11 +1963,6 @@
   "View balance ↗",
   "Vedi il saldo ↗",
   "Ver el saldo ↗"
- ],
- "Ce mois-ci : {n} requête(s) Jev · {t} jetons ({i} en entrée, {o} en sortie), comptés par l'appli. Le solde de crédits n'est visible que sur la console TypeSafe.": [
-  "This month: {n} Jev request(s) · {t} tokens ({i} input, {o} output), counted by the app. The credit balance is only shown in the TypeSafe console.",
-  "Questo mese: {n} richieste Jev · {t} token ({i} in ingresso, {o} in uscita), contati dall'app. Il saldo dei crediti è visibile solo nella console TypeSafe.",
-  "Este mes: {n} petición(es) a Jev · {t} tokens ({i} de entrada, {o} de salida), contados por la app. El saldo de créditos solo se ve en la consola de TypeSafe."
  ],
  "Automatique (système)": [
   "Automatic (system)",
@@ -2433,5 +2278,385 @@
   "SKSE — official releases page",
   "SKSE — pagina ufficiale delle versioni",
   "SKSE — página oficial de versiones"
+ ],
+ "plugins.txt : {n} plugin actif sur {t}": [
+  "plugins.txt: {n} active plugin out of {t}",
+  "plugins.txt: {n} plugin attivo su {t}",
+  "plugins.txt: {n} plugin activo de {t}"
+ ],
+ "plugins.txt : {n} plugins actifs sur {t}": [
+  "plugins.txt: {n} active plugins out of {t}",
+  "plugins.txt: {n} plugin attivi su {t}",
+  "plugins.txt: {n} plugins activos de {t}"
+ ],
+ "{n} plugin SKSE chargé sur {total}": [
+  "{n} SKSE plugin loaded out of {total}",
+  "{n} plugin SKSE caricato su {total}",
+  "{n} plugin SKSE cargado de {total}"
+ ],
+ "{n} plugins SKSE chargés sur {total}": [
+  "{n} SKSE plugins loaded out of {total}",
+  "{n} plugin SKSE caricati su {total}",
+  "{n} plugins SKSE cargados de {total}"
+ ],
+ "{n} vérifié": [
+  "{n} checked",
+  "{n} verificato",
+  "{n} verificado"
+ ],
+ "{n} vérifiés": [
+  "{n} checked",
+  "{n} verificati",
+  "{n} verificados"
+ ],
+ "{n} DLL présente mais absente du log SKSE": [
+  "{n} DLL present but absent from the SKSE log",
+  "{n} DLL presente ma assente dal log SKSE",
+  "{n} DLL presente pero ausente del log de SKSE"
+ ],
+ "{n} DLL présentes mais absentes du log SKSE": [
+  "{n} DLLs present but absent from the SKSE log",
+  "{n} DLL presenti ma assenti dal log SKSE",
+  "{n} DLL presentes pero ausentes del log de SKSE"
+ ],
+ "{n} erreur critique dans {src}": [
+  "{n} critical error in {src}",
+  "{n} errore critico in {src}",
+  "{n} error crítico en {src}"
+ ],
+ "{n} erreurs critiques dans {src}": [
+  "{n} critical errors in {src}",
+  "{n} errori critici in {src}",
+  "{n} errores críticos en {src}"
+ ],
+ "{n} fonction : ": [
+  "{n} function: ",
+  "{n} funzione: ",
+  "{n} función: "
+ ],
+ "{n} fonctions : ": [
+  "{n} functions: ",
+  "{n} funzioni: ",
+  "{n} funciones: "
+ ],
+ "{n} fonction native dans {src}": [
+  "{n} native function in {src}",
+  "{n} funzione nativa in {src}",
+  "{n} función nativa en {src}"
+ ],
+ "{n} fonctions natives dans {src}": [
+  "{n} native functions in {src}",
+  "{n} funzioni native in {src}",
+  "{n} funciones nativas en {src}"
+ ],
+ "{n} ligne": [
+  "{n} line",
+  "{n} riga",
+  "{n} línea"
+ ],
+ "{n} lignes": [
+  "{n} lines",
+  "{n} righe",
+  "{n} líneas"
+ ],
+ "{n} ligne '{cat}' dans {src}": [
+  "{n} '{cat}' line in {src}",
+  "{n} riga '{cat}' in {src}",
+  "{n} línea '{cat}' en {src}"
+ ],
+ "{n} lignes '{cat}' dans {src}": [
+  "{n} '{cat}' lines in {src}",
+  "{n} righe '{cat}' in {src}",
+  "{n} líneas '{cat}' en {src}"
+ ],
+ "{n} ligne critique": [
+  "{n} critical line",
+  "{n} riga critica",
+  "{n} línea crítica"
+ ],
+ "{n} lignes critiques": [
+  "{n} critical lines",
+  "{n} righe critiche",
+  "{n} líneas críticas"
+ ],
+ "{n} occurrence": [
+  "{n} occurrence",
+  "{n} occorrenza",
+  "{n} aparición"
+ ],
+ "{n} occurrences": [
+  "{n} occurrences",
+  "{n} occorrenze",
+  "{n} apariciones"
+ ],
+ "{n} occurrence — scripts trop nombreux ou en boucle.": [
+  "{n} occurrence — too many scripts or looping.",
+  "{n} occorrenza — troppi script o in loop.",
+  "{n} aparición: demasiados scripts o en bucle."
+ ],
+ "{n} occurrences — scripts trop nombreux ou en boucle.": [
+  "{n} occurrences — too many scripts or looping.",
+  "{n} occorrenze — troppi script o in loop.",
+  "{n} apariciones: demasiados scripts o en bucle."
+ ],
+ "{n} script CC introuvable dans {src}": [
+  "{n} CC script not found in {src}",
+  "{n} script CC non trovato in {src}",
+  "{n} script de CC no encontrado en {src}"
+ ],
+ "{n} scripts CC introuvables dans {src}": [
+  "{n} CC scripts not found in {src}",
+  "{n} script CC non trovati in {src}",
+  "{n} scripts de CC no encontrados en {src}"
+ ],
+ "{n} vidange de piles dans {src}": [
+  "{n} stack dump in {src}",
+  "{n} svuotamento di stack in {src}",
+  "{n} volcado de pila en {src}"
+ ],
+ "{n} vidanges de piles dans {src}": [
+  "{n} stack dumps in {src}",
+  "{n} svuotamenti di stack in {src}",
+  "{n} volcados de pila en {src}"
+ ],
+ "Supprimer définitivement {n} fichier log ?": [
+  "Permanently delete {n} log file?",
+  "Eliminare definitivamente {n} file di log?",
+  "¿Eliminar definitivamente {n} archivo de log?"
+ ],
+ "Supprimer définitivement {n} fichiers log ?": [
+  "Permanently delete {n} log files?",
+  "Eliminare definitivamente {n} file di log?",
+  "¿Eliminar definitivamente {n} archivos de log?"
+ ],
+ "{n} fichier supprimé.": [
+  "{n} file deleted.",
+  "{n} file eliminato.",
+  "{n} archivo eliminado."
+ ],
+ "{n} fichiers supprimés.": [
+  "{n} files deleted.",
+  "{n} file eliminati.",
+  "{n} archivos eliminados."
+ ],
+ "{n} modèle {label} disponible.": [
+  "{n} {label} model available.",
+  "{n} modello {label} disponibile.",
+  "{n} modelo de {label} disponible."
+ ],
+ "{n} modèles {label} disponibles.": [
+  "{n} {label} models available.",
+  "{n} modelli {label} disponibili.",
+  "{n} modelos de {label} disponibles."
+ ],
+ "Base de connaissances : {u}, {f}.": [
+  "Knowledge base: {u}, {f}.",
+  "Base di conoscenza: {u}, {f}.",
+  "Base de conocimiento: {u}, {f}."
+ ],
+ "{n} source mise à jour": [
+  "{n} source updated",
+  "{n} fonte aggiornata",
+  "{n} fuente actualizada"
+ ],
+ "{n} sources mises à jour": [
+  "{n} sources updated",
+  "{n} fonti aggiornate",
+  "{n} fuentes actualizadas"
+ ],
+ "- **{name}** : {n} ligne": [
+  "- **{name}**: {n} line",
+  "- **{name}**: {n} riga",
+  "- **{name}**: {n} línea"
+ ],
+ "- **{name}** : {n} lignes": [
+  "- **{name}**: {n} lines",
+  "- **{name}**: {n} righe",
+  "- **{name}**: {n} líneas"
+ ],
+ "Même point de plantage que le dernier : une fois.": [
+  "Same crash point as the last one: once.",
+  "Stesso punto di crash dell'ultimo: una volta.",
+  "Mismo punto de crash que el último: una vez."
+ ],
+ "Même point de plantage que le dernier : {n} fois.": [
+  "Same crash point as the last one: {n} times.",
+  "Stesso punto di crash dell'ultimo: {n} volte.",
+  "Mismo punto de crash que el último: {n} veces."
+ ],
+ "{n} crash log dans l'historique": [
+  "{n} crash log in the history",
+  "{n} crash log nello storico",
+  "{n} crash log en el historial"
+ ],
+ "{n} crash logs dans l'historique": [
+  "{n} crash logs in the history",
+  "{n} crash log nello storico",
+  "{n} crash logs en el historial"
+ ],
+ "{n} plugin ajouté depuis la sauvegarde « {s} »": [
+  "{n} plugin added since the save “{s}”",
+  "{n} plugin aggiunto dal salvataggio «{s}»",
+  "{n} plugin añadido desde la partida «{s}»"
+ ],
+ "{n} plugins ajoutés depuis la sauvegarde « {s} »": [
+  "{n} plugins added since the save “{s}”",
+  "{n} plugin aggiunti dal salvataggio «{s}»",
+  "{n} plugins añadidos desde la partida «{s}»"
+ ],
+ "{n} plugin de la sauvegarde « {s} » n'est plus actif": [
+  "{n} plugin from the save “{s}” is no longer active",
+  "{n} plugin del salvataggio «{s}» non è più attivo",
+  "{n} plugin de la partida «{s}» ya no está activo"
+ ],
+ "{n} plugins de la sauvegarde « {s} » ne sont plus actifs": [
+  "{n} plugins from the save “{s}” are no longer active",
+  "{n} plugin del salvataggio «{s}» non sono più attivi",
+  "{n} plugins de la partida «{s}» ya no están activos"
+ ],
+ "Le rapport de plantage est archivé dans « {dir} » : l'historique le garde.": [
+  "The crash report is archived in “{dir}”: the history keeps it.",
+  "Il rapporto di crash viene archiviato in «{dir}»: lo storico lo conserva.",
+  "El informe de crash se archiva en «{dir}»: el historial lo conserva."
+ ],
+ "Les {n} rapports de plantage sont archivés dans « {dir} » : l'historique les garde.": [
+  "The {n} crash reports are archived in “{dir}”: the history keeps them.",
+  "I {n} rapporti di crash vengono archiviati in «{dir}»: lo storico li conserva.",
+  "Los {n} informes de crash se archivan en «{dir}»: el historial los conserva."
+ ],
+ "{n} rapport de plantage archivé.": [
+  "{n} crash report archived.",
+  "{n} rapporto di crash archiviato.",
+  "{n} informe de crash archivado."
+ ],
+ "{n} rapports de plantage archivés.": [
+  "{n} crash reports archived.",
+  "{n} rapporti di crash archiviati.",
+  "{n} informes de crash archivados."
+ ],
+ "(sKYCRASH : {n} conseil retiré, déjà en place ou vérifié : {l}.)": [
+  "(sKYCRASH: {n} tip removed, already in place or verified: {l}.)",
+  "(sKYCRASH: {n} consiglio rimosso, già presente o verificato: {l}.)",
+  "(sKYCRASH: {n} consejo eliminado, ya presente o verificado: {l}.)"
+ ],
+ "(sKYCRASH : {n} conseils retirés, déjà en place ou vérifiés : {l}.)": [
+  "(sKYCRASH: {n} tips removed, already in place or verified: {l}.)",
+  "(sKYCRASH: {n} consigli rimossi, già presenti o verificati: {l}.)",
+  "(sKYCRASH: {n} consejos eliminados, ya presentes o verificados: {l}.)"
+ ],
+ "- Crash logs : {a}, {k}": [
+  "- Crash logs: {a}, {k}",
+  "- Crash log: {a}, {k}",
+  "- Crash logs: {a}, {k}"
+ ],
+ "{n} actif": [
+  "{n} active",
+  "{n} attivo",
+  "{n} activo"
+ ],
+ "{n} actifs": [
+  "{n} active",
+  "{n} attivi",
+  "{n} activos"
+ ],
+ "{n} archivé par la purge": [
+  "{n} archived by the purge",
+  "{n} archiviato dalla pulizia",
+  "{n} archivado por la purga"
+ ],
+ "{n} archivés par la purge": [
+  "{n} archived by the purge",
+  "{n} archiviati dalla pulizia",
+  "{n} archivados por la purga"
+ ],
+ "- Creation Club : {p} sur {n} dans la liste de Skyrim.ccc (chargés automatiquement)": [
+  "- Creation Club: {p} out of {n} in the Skyrim.ccc list (loaded automatically)",
+  "- Creation Club: {p} su {n} nell'elenco di Skyrim.ccc (caricati automaticamente)",
+  "- Creation Club: {p} de {n} en la lista de Skyrim.ccc (cargados automáticamente)"
+ ],
+ "{n} fichier présent": [
+  "{n} file present",
+  "{n} file presente",
+  "{n} archivo presente"
+ ],
+ "{n} fichiers présents": [
+  "{n} files present",
+  "{n} file presenti",
+  "{n} archivos presentes"
+ ],
+ "Ce mois-ci : {r} · {t} ({i} en entrée, {o} en sortie), comptés par l'appli. Le solde de crédits n'est visible que sur la console TypeSafe.": [
+  "This month: {r} · {t} ({i} input, {o} output), counted by the app. The credit balance is only shown in the TypeSafe console.",
+  "Questo mese: {r} · {t} ({i} in ingresso, {o} in uscita), contati dall'app. Il saldo dei crediti è visibile solo nella console TypeSafe.",
+  "Este mes: {r} · {t} ({i} de entrada, {o} de salida), contados por la app. El saldo de créditos solo se ve en la consola de TypeSafe."
+ ],
+ "{n} requête Jev": [
+  "{n} Jev request",
+  "{n} richiesta Jev",
+  "{n} petición a Jev"
+ ],
+ "{n} requêtes Jev": [
+  "{n} Jev requests",
+  "{n} richieste Jev",
+  "{n} peticiones a Jev"
+ ],
+ "{n} jeton": [
+  "{n} token",
+  "{n} token",
+  "{n} token"
+ ],
+ "{n} jetons": [
+  "{n} tokens",
+  "{n} token",
+  "{n} tokens"
+ ],
+ "{n} erreur Papyrus ; script le plus fautif": [
+  "{n} Papyrus error; most faulty script",
+  "{n} errore Papyrus; script più problematico",
+  "{n} error de Papyrus; script más defectuoso"
+ ],
+ "{n} erreurs Papyrus ; scripts les plus fautifs": [
+  "{n} Papyrus errors; most faulty scripts",
+  "{n} errori Papyrus; script più problematici",
+  "{n} errores de Papyrus; scripts más defectuosos"
+ ],
+ "{n} erreur Papyrus ({src})": [
+  "{n} Papyrus error ({src})",
+  "{n} errore Papyrus ({src})",
+  "{n} error de Papyrus ({src})"
+ ],
+ "{n} erreurs Papyrus ({src})": [
+  "{n} Papyrus errors ({src})",
+  "{n} errori Papyrus ({src})",
+  "{n} errores de Papyrus ({src})"
+ ],
+ " ({n} avertissement)": [
+  " ({n} warning)",
+  " ({n} avviso)",
+  " ({n} advertencia)"
+ ],
+ " ({n} avertissements)": [
+  " ({n} warnings)",
+  " ({n} avvisi)",
+  " ({n} advertencias)"
+ ],
+ "Aucun log trouvé dans les dossiers configurés.": [
+  "No logs found in the configured folders.",
+  "Nessun log trovato nelle cartelle configurate.",
+  "No se encontró ningún log en las carpetas configuradas."
+ ],
+ "Aucun dossier configuré pour {game}.": [
+  "No folder configured for {game}.",
+  "Nessuna cartella configurata per {game}.",
+  "Ninguna carpeta configurada para {game}."
+ ],
+ "… et {n} autre dossier": [
+  "… and {n} more folder",
+  "… e {n} altra cartella",
+  "… y {n} carpeta más"
+ ],
+ "… et {n} autres dossiers": [
+  "… and {n} more folders",
+  "… e altre {n} cartelle",
+  "… y {n} carpetas más"
  ]
 }

@@ -186,12 +186,12 @@ function h(t, n, m, h, g) {
   for (let [n, r, i, a, o] of c) {
     let s = _.filter((e) => n.test(e)).map((e) => e.trim());
     s.length &&
-      (p(h, `[${r}]`, o * y, `${s.length} ligne(s) '${r}' dans ${t}`),
+      (p(h, `[${r}]`, o * y, XINS.plu(s.length, `{n} ligne '${r}' dans ${t}`, `{n} lignes '${r}' dans ${t}`)),
       m.findings.push({
         sev: e.WARN,
         cat: r,
         title: i,
-        detail: `${s.length} occurrence(s)`,
+        detail: XINS.plu(s.length, `{n} occurrence`, `{n} occurrences`),
         source: t,
         evidence: s.slice(0, 3),
         tip: a,
@@ -277,7 +277,7 @@ function _(t, n, r, i) {
       sev: e.CRIT,
       cat: `script`,
       title: `Surcharge Papyrus (piles de scripts en vidange)`,
-      detail: `${c} occurrence(s)`,
+      detail: XINS.plu(c, `{n} occurrence — scripts trop nombreux ou en boucle.`, `{n} occurrences — scripts trop nombreux ou en boucle.`),
       source: t,
       evidence: [],
       tip: `Repérer le script le plus bavard ; nettoyer la sauvegarde.`,
@@ -286,7 +286,7 @@ function _(t, n, r, i) {
       i,
       `[script] surcharge Papyrus`,
       5,
-      `${c} vidange(s) de piles dans ${t}`,
+      XINS.plu(c, `{n} vidange de piles dans ${t}`, `{n} vidanges de piles dans ${t}`),
     )),
     Object.keys(s).length &&
       (r.findings.push({
@@ -310,7 +310,7 @@ function _(t, n, r, i) {
     (r.findings.push({
       sev: u[0][1] >= 20 ? e.WARN : e.INFO,
       cat: `script`,
-      title: `${l} erreurs Papyrus ; scripts les plus fautifs`,
+      title: XINS.plu(l, `{n} erreur Papyrus ; script le plus fautif`, `{n} erreurs Papyrus ; scripts les plus fautifs`),
       detail: u.map(([e, t]) => `${e} (${t}×)`).join(`, `),
       source: t,
       evidence: f(a, 3).map(([e, t]) => `${t}× ${e}`),
@@ -325,7 +325,7 @@ function _(t, n, r, i) {
             i,
             e,
             Math.min(Math.floor(n / 5), 5),
-            `${n} erreurs Papyrus (${t})`,
+            XINS.plu(n, `{n} erreur Papyrus (${t})`, `{n} erreurs Papyrus (${t})`),
           ),
       )),
     (r.excerpts[t] =
@@ -753,7 +753,7 @@ function XCP(src, ln, t, n) {
     t.findings.push({
       sev: 1,
       cat: `skse`,
-      title: `${ld.size} plugin(s) SKSE chargés sur ${pl.length} vérifiés`,
+      title: XINS.plu(ld.size, `{n} plugin SKSE chargé sur ${XINS.plu(pl.length, `{n} vérifié`, `{n} vérifiés`)}`, `{n} plugins SKSE chargés sur ${XINS.plu(pl.length, `{n} vérifié`, `{n} vérifiés`)}`),
       detail: ``,
       source: src,
       evidence: [],
@@ -869,7 +869,7 @@ function XPA(src, ln, t, n) {
       n,
       `[creation club] contenu manquant`,
       2,
-      `${cc.length} script(s) CC introuvable(s) dans ${src}`,
+      XINS.plu(cc.length, `{n} script CC introuvable dans ${src}`, `{n} scripts CC introuvables dans ${src}`),
     ));
   ot.length &&
     (t.findings.push({
@@ -912,7 +912,7 @@ function XPA(src, ln, t, n) {
       sev: 2,
       cat: `script`,
       title: `Fonctions natives Papyrus non liées`,
-      detail: `${nk.length} fonction(s) : ${nk.slice(0, 5).join(`, `)}`,
+      detail: XINS.plu(nk.length, `{n} fonction : `, `{n} fonctions : `) + nk.slice(0, 5).join(`, `),
       source: src,
       evidence: [],
       tip: `Typiquement un plugin SKSE absent/incompatible ou des .pex d'un mod qui attendent une fonction native qui n'existe pas dans cette version.`,
@@ -921,7 +921,7 @@ function XPA(src, ln, t, n) {
       n,
       `[script] fonctions natives non liées`,
       2,
-      `${nk.length} fonction(s) native(s) dans ${src}`,
+      XINS.plu(nk.length, `{n} fonction native dans ${src}`, `{n} fonctions natives dans ${src}`),
     ));
 }
 function XOT(src, ln, t, n) {
@@ -952,7 +952,7 @@ function XOT(src, ln, t, n) {
       sev: 2,
       cat: `plugin`,
       title: `Erreur critique dans le log de ${st}`,
-      detail: `${sg.length} ligne(s) critique(s)`,
+      detail: XINS.plu(sg.length, `{n} ligne critique`, `{n} lignes critiques`),
       source: src,
       evidence: sg.slice(0, 3),
       tip: sl
@@ -963,7 +963,7 @@ function XOT(src, ln, t, n) {
       n,
       st,
       Math.min(sg.length, 3) + (sl ? 0 : 1),
-      `${sg.length} erreur(s) critique(s) dans ${src}`,
+      XINS.plu(sg.length, `{n} erreur critique dans ${src}`, `{n} erreurs critiques dans ${src}`),
     );
     t.excerpts[src] = sg.slice(0, 30).join(`\n`).slice(0, 3e3);
   }
@@ -1468,9 +1468,10 @@ function F(e) {
         (r.title = s.name),
         t.append(r);
     }),
+    t.children.length || t.append(M(`div`, `empty`, `Aucun fichier chargé.`)),
     (E(`btn-audit`).disabled = !O.length),
     (E(`btn-export`).disabled = !O.length),
-    I(`${O.length} fichier(s) chargé(s). Lancez l'audit.`);
+    I(XINS.plu(O.length, `{n} fichier chargé. Lancez l'audit.`, `{n} fichiers chargés. Lancez l'audit.`));
 }
 function XFMT(el, tx) {
   const AL = {
@@ -1629,11 +1630,12 @@ function L() {
       (e.append(M(`div`, `sect`, `Suspects classés`)),
       k.suspects.forEach(([t, n, r], i) => {
         let a = M(`div`, `suspect`);
-        (a.style.animationDelay = `${i * 40}ms`),
+        // pas d'entrée en cascade : le rapport se relit souvent, il s'affiche d'un bloc
+        (a.title = t),
           a.append(
             M(`span`, `rank`, `${i + 1}.`),
             M(`span`, `name`, t),
-            M(`span`, ``, r[0] || ``),
+            ...(r[0] ? [M(`span`, `why`, r[0])] : []),
             M(`span`, `score`, `score ${n}`),
           ),
           e.append(a);
@@ -1643,11 +1645,10 @@ function L() {
       .sort((e, t) => t.sev - e.sev)
       .forEach((n, r) => {
         let i = M(`div`, `finding`);
-        i.style.animationDelay = `${r * 30}ms`;
         let a = M(`div`);
         a.append(
           M(`span`, `tag s${n.sev}`, t[n.sev]),
-          document.createTextNode(`${n.title} — ${n.source}`),
+          document.createTextNode(n.source ? `${n.title} — ${n.source}` : n.title),
         ),
           i.append(a),
           n.detail && i.append(M(`div`, `evi`, n.detail)),
@@ -1708,8 +1709,8 @@ E(`btn-sample`).addEventListener(`click`, () => F(b.map((e) => ({ ...e })))),
     if (!O.length) return I(`Aucun fichier log à supprimer.`);
     let c = O.filter((e) => m(e.name, e.text.split(/\r?\n/, 60)) === `crash`).length;
     confirm(
-      `Supprimer définitivement ${O.length - c} fichier(s) log ?` +
-        (c ? ` Les ${c} rapport(s) de plantage sont archivés dans « sKYCRASH-archive » : l'historique les garde.` : ``) +
+      XINS.plu(O.length - c, `Supprimer définitivement {n} fichier log ?`, `Supprimer définitivement {n} fichiers log ?`) +
+        (c ? ` ` + XINS.plu(c, `Le rapport de plantage est archivé dans « sKYCRASH-archive » : l'historique le garde.`, `Les {n} rapports de plantage sont archivés dans « sKYCRASH-archive » : l'historique les garde.`) : ``) +
         ` (simulation dans la preview)`,
     ) && ((XSAVES = []), F([]), I(`Logs purgés.`));
   }),

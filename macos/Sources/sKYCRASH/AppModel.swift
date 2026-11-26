@@ -329,9 +329,12 @@ final class AppModel {
         let alert = NSAlert()
         alert.alertStyle = .warning
         alert.window.title = L("Purger les logs")
-        alert.messageText = L("Supprimer définitivement {n} fichier(s) log ?", ["n": logs.count - crashes])
-        alert.informativeText = L("Dossiers concernés :") + "\n" + dirs.joined(separator: "\n") + "\n\n"
-            + (crashes > 0 ? L("Les {k} rapport(s) de plantage sont archivés dans « {dir} » : l'historique les garde.", ["k": crashes, "dir": Insights.ARCHIVE_DIR]) + "\n" : "")
+        alert.messageText = P(logs.count - crashes, "Supprimer définitivement {n} fichier log ?", "Supprimer définitivement {n} fichiers log ?")
+        // Liste plafonnée à 8 dossiers : une alerte à 40 chemins de bouteille CrossOver dépasserait l'écran
+        let shown = dirs.prefix(8).joined(separator: "\n")
+        let more = dirs.count > 8 ? "\n" + P(dirs.count - 8, "… et {n} autre dossier", "… et {n} autres dossiers") : ""
+        alert.informativeText = L("Dossiers concernés :") + "\n" + shown + more + "\n\n"
+            + (crashes > 0 ? P(crashes, "Le rapport de plantage est archivé dans « {dir} » : l'historique le garde.", "Les {n} rapports de plantage sont archivés dans « {dir} » : l'historique les garde.", ["dir": Insights.ARCHIVE_DIR]) + "\n" : "")
             + L("Les autres logs sont supprimés : action irréversible.")
         let yes = alert.addButton(withTitle: L("Supprimer"))
         yes.hasDestructiveAction = true
@@ -340,8 +343,8 @@ final class AppModel {
         let (deleted, archived, errors) = Config.purgeLogs(folders)
         analyzeLogs()
         knownCrashes = crashNames()
-        var msg = L("{n} fichier(s) supprimé(s).", ["n": deleted])
-        if archived > 0 { msg += " " + L("{n} rapport(s) de plantage archivé(s).", ["n": archived]) }
+        var msg = P(deleted, "{n} fichier supprimé.", "{n} fichiers supprimés.")
+        if archived > 0 { msg += " " + P(archived, "{n} rapport de plantage archivé.", "{n} rapports de plantage archivés.") }
         if errors.isEmpty { info(msg) } else { warn(msg + "\n\n" + L("Échecs :") + "\n" + errors.prefix(10).joined(separator: "\n")) }
     }
 

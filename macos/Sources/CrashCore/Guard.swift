@@ -64,8 +64,9 @@ public enum Guard {
         var result = fixed.joined(separator: "\n")
         if facts.tool("crashlogger") { result = CRASHLOGS_DIR.sub("SKSE/", result) }
         if !removed.isEmpty {
-            result += "\n\n" + L("(sKYCRASH : {n} conseil(s) retiré(s), déjà en place ou vérifié : {l}.)",
-                                 ["n": removed.count, "l": removed.map { L($0) }.joined(separator: ", ")])
+            result += "\n\n" + P(removed.count, "(sKYCRASH : {n} conseil retiré, déjà en place ou vérifié : {l}.)",
+                                 "(sKYCRASH : {n} conseils retirés, déjà en place ou vérifiés : {l}.)",
+                                 ["l": removed.map { L($0) }.joined(separator: ", ")])
         }
         return (result, removed)
     }
